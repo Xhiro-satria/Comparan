@@ -7,11 +7,13 @@
     $id_user = $_SESSION["id_user"];        // Mengambil ID user dari session yang sedang aktif
     $sql = "SELECT id_cart FROM cart WHERE id_user = '$id_user'";
     $result = $connect->query($sql);
+
     $cart = $result->fetch_assoc();         // Mengambil hasil query dalam bentuk array asosiatif
     $id_cart = $cart["id_cart"];            // Menyimpan ID keranjang ke dalam variabel
 
     $items    = tampilKeranjang($connect, $id_cart);    // Mengambil daftar barang yang ada di dalam keranjang
     $vouchers = voucherSaya($connect, $id_user);        // Mengambil daftar voucher yang dimiliki oleh user tersebut
+
 
     $total = 0;
     foreach ($items as $item) {
@@ -114,10 +116,10 @@
                     <label>Pilih Voucher (opsional):</label><br>
                     <?php foreach ($vouchers as $v): ?>
                         <input type="checkbox"
-                               name="id_vouchers[]"
-                               value="<?= $v["id"] ?>"
-                               data-nilai="<?= $v["nilai"] ?>"
-                               onchange="hitungDiskon()">
+                            name="id_vouchers[]"
+                            value="<?= $v["id"] ?>"
+                            data-nilai="<?= $v["nilai"] ?>"
+                            onchange="hitungDiskon()">
                         <?= $v["nama"] ?> — Potongan Rp <?= number_format($v["nilai"], 0, ',', '.') ?><br>
                     <?php endforeach; ?>
                     <br>

@@ -17,7 +17,7 @@
 @font-face {font-family: 'Aesthetic'; src: url('../fonts/Aesthetic Moment  Italic Personal Used.ttf');}
 @font-face {font-family: 'Alpazhet'; src: url('../fonts/Alphazet-SemiBold.ttf');}
 @font-face {font-family: 'Belgiano'; src: url('../fonts/Belgiano Serif 2.ttf');}
-@font-face {font-family: 'Bulter'; src: url('../fonts/Butler-Free-SBd.otf');}
+@font-face {font-family: 'Butler'; src: url('../fonts/Butler-Free-SBd.otf');}
 /* FONT FAMILY */
 
 /* ANIMATION */
@@ -244,7 +244,7 @@
 .containerShowProfile{
     width: 20%;
     /* height: 100%; */
-    padding: 3rem 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
     margin: 3.5rem 2rem;
     border-radius: 20px;
     display: flex;

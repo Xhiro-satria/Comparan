@@ -3,6 +3,7 @@ require_once "server.php";
 require_once "function/user_function.php";
 
 $pesan = "";
+$check = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nama     = $_POST["name"];
@@ -12,7 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $id = tambahUser($connect, $nama, $username, $password, $email);
 
-    if ($id) {
+    if ($id === "email_sudah_ada") {
+        $check = true;
+        $_SESSION['cek_email'] = $check;
+        $pesan = "Email sudah digunakan!";
+        // header("Location: add_user.php");
+    } elseif ($id) {
         $pesan = "Registrasi berhasil!";
         header("Location: home.php");
         exit();
@@ -69,6 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <!-- new -->
     <div class="container-fluid m-0 p-0" style="background-color: #00000054;">
+        <?php if($check): ?>
+            <h5 class="fixed-top bg-danger text-light fw-lighter text-center fs-6 p-1"><?= $pesan ?></h5>
+        <?php endif; ?>
         <div class="row align-items-center text-center p-0 m-0 vh-100">
             <div class="kolom-kiri col-12 col-md-7 h-100 px-5 pt-3 d-flex flex-column justify-content-between">
                 <div class="kiri">
@@ -92,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <a href="login.php" class="signInButton col p-2 rounded-pill">Sign In</a>
                                 <a href="#" class="signUpButton col p-2 rounded-pill">Sign Up</a>
                             </div>
-                            <form action="" method="POST">
+                            <form action="add_user.php" method="POST">
                                 <div class="mt-4 text-start w-100 px-5">
                                     <label for="exampleFormControlInput1" class="form-label fw-semibold">Username</label>
                                     <input type="text" class="form-control rounded-4 px-4 p-2" id="username" name="username" placeholder="Input your username" required>

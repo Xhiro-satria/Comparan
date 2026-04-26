@@ -8,14 +8,14 @@
 
     // Proteksi Login
     if (!isset($_SESSION["id_user"])) {
+        
         header("Location: login.php");
-        exit;
+        exit();
     }
     // Mengambil ID user yang sedang login dari data session
     $id_user = $_SESSION["id_user"];        //Agar fungsi tahu data milik siapa yang harus diambil.
     $dataUser = tampilDataUser($connect, $id_user);
     $produk = tampilSemuaProduk($connect, $id_user);
-    $user = tampilDataUser($connect, $id_user);
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +32,9 @@
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* .gambuar{
+            
+        } */
     </style>
 </head>
 <body class="bodyHome mx-4 m-0 p-0" style="background-color: rgb(215, 231, 192);">
@@ -52,45 +55,60 @@
                             <a class="nav-link rounded-end-pill px-3" href="#shop">Shop</a>
                         </div>
                     </div>
-                    <div class="col-1 text-lg-end">
+                    <div class="col-1 text-lg-end p-0">
                         <div class="d-flex justify-content-between">
                             <a class="nav-link d-flex align-items-center" aria-disabled="true" href="cart.php" id="navbarNavAltMarkup">
                                 <i class="cartIcon bi bi-cart d-flex align-items-center fs-2"></i>
                             </a>
                             <span class="d-flex align-items-center">|</span>
-                            <div onclick="bukaProfil(
+                            <div id="buka_profil" onclick="bukaProfil(
                                 '<?= $dataUser['nama'] ?>',
                                 '<?= $dataUser['username'] ?>',
                                 '<?= $dataUser['poin'] ?>',
                                 '<?= $dataUser['email'] ?>'
                             )">
-                                <i class="bi bi-person-circle d-flex align-items-center fs-2" style="cursor: pointer;"></i>
+                                <div class="fotoProfileNav w-100 d-flex justify-content-center align-items-center">
+                                    <?php if ($dataUser["foto_profile"]): ?>
+                                        <div style="width: 40px; height: 40px; border-radius:100%; overflow: hidden;">
+                                            <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" style="width: 100%; height: 100%; object-fit: cover;"
+                                            class="gambuar d-flex align-items-center fs-2 justify-content-center">
+                                        </div>
+                                    <?php else: ?>
+                                        <i class="bi bi-person-circle d-flex align-items-center fs-2" style="cursor: pointer;"></i>
+                                    <?php endif; ?>    
+                                </div>
                             </div>
                             
                             <!-- Profile Open -->
                             <div class="overlay1 position-fixed" id="overlay1" onclick="tutupModal()">
                                 <div class="containerShowProfile">
                                     <div class="showProfile row m-0 mb-auto">
-                                        <?php if ($user["foto_profile"]): ?>
-                                            <img src="uploads/profil/<?= $user["foto_profile"] ?>" 
-                                                style="width:100px; border-radius:100%; margin-left: 90px" class="d-flex align-items-center fs-2 justify-content-center mb-3">
-                                        <?php else: ?>
-                                            <img src="uploads/profil/default.png" 
-                                                style="width:100px; border-radius:100%; margin-left: 90px" class="d-flex align-items-center fs-2 justify-content-center mb-3">
-                                        <?php endif; ?>    
-                                    <!-- <i class="bi bi-person-circle d-flex align-items-center fs-2 justify-content-center mb-3"></i> -->
+                                        <div class="fotoProfile w-100 d-flex justify-content-center align-items-center">
+                                            <?php if ($dataUser["foto_profile"]): ?>
+                                                <div style="width: 100px; height: 100px; border-radius:100%; overflow: hidden; box-shadow: 0 0 20px #00000050;">
+                                                    <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" 
+                                                    style="width:100%; height: 100%; object-fit: cover;" class="d-flex align-items-center fs-2 justify-content-center mb-3">
+                                                </div>
+                                                <?php else: ?>
+                                                <div style="width: 100px; height: 100px; border-radius:100%; overflow: hidden; box-shadow: 0 0 20px #00000050;">
+                                                    <img src="uploads/profil/default.png" 
+                                                    style="width:100%; height: 100%; object-fit: cover;" class="d-flex align-items-center fs-2 justify-content-center mb-3">
+                                                </div>
+                                            <?php endif; ?>    
+                                        </div>
+                                        <div class="editProfile w-100 d-flex justify-content-center align-items-center">
+                                            <a href="profil.php" class="p-1 px-2 rounded-3" style="border: solid 1.5px black; font-size: 12px;">Edit Profil</a>
+                                        </div>
+                                                <!-- <i class="bi bi-person-circle d-flex align-items-center fs-2 justify-content-center mb-3"></i> -->
                                         <p><b><span id="p-nama" style="text-transform: capitalize;"></span></b><br><i>@<span id="p-username"></span></i></p>
                                         <p class="m-0"><i class="bi bi-c-circle"></i> <span id="p-poin"></span><br><span class="m-0"><i class="bi bi-envelope-at"> <span id="p-email" style="font-style: none;"></span></i></span></p>
-                                        <a href="profil.php"><i class="bi bi-bag"></i> EditProfil</a>
                                         <hr>
                                         <a href="my_product.php"><i class="bi bi-bag"></i> My Product</a>
                                         <a href="riwayat_order.php"><i class="bi bi-clock-history"></i> Order History</a>
                                         <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
                                         <hr>
-                                        <a href="logout.php" class="text-center">
-                                            <button class="btn border-dark">Sign Out</button>
-                                        </a>
+                                        <a href="logout.php"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
                                     </div>
                                 </div>
                             </div>

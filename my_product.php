@@ -11,6 +11,12 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+        <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
     <title>Produk Saya</title>
     <style>
         body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
@@ -74,54 +80,62 @@
         form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
     </style>
 </head>
-<body>
-
-    <h2>Koleksi Produk Saya</h2>
-    <a href="add_product.php" style="text-decoration:none; background:#2ecc71; color:white; padding:10px 15px; border-radius:5px;">+ Tambah Produk</a>
-    <br><br>
-
-    <?php if (count($produk) === 0): ?>
-        <p>Belum ada produk yang terdaftar.</p>
-    <?php else: ?>
-        <div class="grid">
-            <?php foreach ($produk as $p): ?>
-                <div class="card">
-                    <img src="uploads/produk/<?= $p['gambar'] ?>">
-                    <div class="card-body">
-                        <span class="card-title"><?= htmlspecialchars($p['nama_produk']) ?></span>
-                        <div class="card-price">Rp <?= number_format($p['harga'], 0, ',', '.') ?></div>
-                        <small>Stok: <?= $p['stok'] ?></small>
-                    </div>
-                    
-                    <div class="tombol-group">
-                        <button class="btn-read" onclick="bukaModal(
-                            '<?= $p['gambar'] ?>', 
-                            '<?= addslashes($p['nama_produk']) ?>', 
-                            '<?= $p['harga'] ?>', 
-                            '<?= $p['stok'] ?>', 
-                            '<?= $p['kategori'] ?>', 
-                            '<?= $p['status'] ?>', 
-                            '<?= addslashes($p['deskripsi']) ?>'
-                        )">Detail</button>
-
-                        <button class="btn-edit" onclick="bukaEdit(
-                            '<?= $p['id_produk'] ?>', 
-                            '<?= addslashes($p['nama_produk']) ?>', 
-                            '<?= $p['harga'] ?>', 
-                            '<?= $p['stok'] ?>', 
-                            '<?= $p['kategori'] ?>', 
-                            '<?= addslashes($p['deskripsi']) ?>'
-                        )">Edit</button>
-
-                        <button class="btn-delete"
-                            onclick="hapus('<?= $p['id_produk'] ?>')">
-                            Hapus
-                        </button>
-                    </div>
+<body style="background-color: rgb(215, 231, 192);">
+    <div class="w-100 d-flex justify-content-center align-content-center">
+        <h2 style="font-family: 'Voguella'; color: #6FB400; margin: 20px 0px 50px; font-weight: bold;">My Products <i class="bi bi-bag-heart-fill"></i></h2>
+    </div>
+    <hr>
+    <div class="m-5">
+        <?php if (count($produk) === 0): ?>
+            <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                <p style="font-family: 'Safira'; font-size: 24px; color: red;">You haven't uploaded any products yet</p>
+                <div class="container-fluid w-100 text-center px-5">
+                    <a href="add_product.php" class="buttonCheckout" style="text-decoration: none; padding: 10px 15px; border-radius: 50px;">+ Tambah Produk</a>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+            </div>
+            <?php else: ?>
+                <div class="container-fluid w-100 text-start">
+                    <a href="add_product.php" class="buttonCheckout" style="text-decoration: none; padding: 10px 15px; border-radius: 50px;">+ Tambah Produk</a>
+                </div>
+                <div class="grid mt-5">
+                    <?php foreach ($produk as $p): ?>
+                    <div class="card rounded-5">
+                        <div class="card-body">
+                            <img src="uploads/produk/<?= $p['gambar'] ?> " class="rounded-4">
+                            <span class="card-title my-2" style="text-transform: capitalize;"><?= htmlspecialchars($p['nama_produk']) ?></span>
+                            <div class="card-price">Rp <?= number_format($p['harga'], 0, ',', '.') ?></div>
+                            <small>Stok: <?= $p['stok'] ?></small>
+                            <div class="tombol-group">
+                                <button class="btn-read" onclick="bukaModal(
+                                    '<?= $p['gambar'] ?>', 
+                                    '<?= addslashes($p['nama_produk']) ?>', 
+                                    '<?= $p['harga'] ?>', 
+                                    '<?= $p['stok'] ?>', 
+                                    '<?= $p['kategori'] ?>', 
+                                    '<?= $p['status'] ?>', 
+                                    '<?= addslashes($p['deskripsi']) ?>'
+                                )">Detail</button>
+        
+                                <button class="btn-edit" onclick="bukaEdit(
+                                    '<?= $p['id_produk'] ?>', 
+                                    '<?= addslashes($p['nama_produk']) ?>', 
+                                    '<?= $p['harga'] ?>', 
+                                    '<?= $p['stok'] ?>', 
+                                    '<?= $p['kategori'] ?>', 
+                                    '<?= addslashes($p['deskripsi']) ?>'
+                                )">Edit</button>
+        
+                                <button class="btn-delete"
+                                    onclick="hapus('<?= $p['id_produk'] ?>')">
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <div class="overlay" id="modal-detail" onclick="tutupSemuaModal()">
         <div class="modal" onclick="event.stopPropagation()">
