@@ -80,10 +80,12 @@
     }
 
     function detailOrder($connect, $id_order){
-        $sql = "SELECT order_items.*, products.nama_produk, products.gambar 
-                                FROM order_items 
-                                JOIN products ON order_items.id_produk = products.id_produk 
-                                WHERE order_items.id_order = '$id_order'";
+        $sql = "SELECT order_items.*, products.nama_produk, products.gambar,
+                            orders.tanggal_order, orders.alamat_pengiriman
+                            FROM order_items 
+                            JOIN products ON order_items.id_produk = products.id_produk
+                            JOIN orders ON order_items.id_order = orders.id_order
+                            WHERE order_items.id_order = '$id_order'";
         $result = $connect->query($sql);
         
         return $result->fetch_all(MYSQLI_ASSOC);

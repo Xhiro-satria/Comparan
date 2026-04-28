@@ -108,7 +108,7 @@
                                         <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
                                         <hr>
-                                        <a href="logout.php"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
+                                        <a href="#" onclick="konfirmasiSignOut(); return false;"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
                                     </div>
                                 </div>
                             </div>
@@ -118,6 +118,19 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal Konfirmasi -->
+    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Logout</h5>
+            <p>Apakah kamu yakin ingin keluar?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="logout.php" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Ya, Logout</a>
+                <button onclick="tutupLogout()" class="btn btn-primary">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <section id="dashboard" class="bg-black rounded-4 m-1 mx-4 d-flex justify-content-center align-items-center">
         <div class="col position-relative">
             <video autoplay muted loop class="w-100 rounded-4 z-2" style="height: 640px; object-fit: cover; display: block;">
@@ -380,6 +393,13 @@
             return;
         }
         window.location.href = "checkout.php?id_produk=" + idProdukDipilih + "&jumlah=" + jumlah;
+    }
+    function konfirmasiSignOut() {
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+
+    function tutupLogout() {
+        document.getElementById("overlay-logout").style.display = "none";
     }
 </script>
 </body>

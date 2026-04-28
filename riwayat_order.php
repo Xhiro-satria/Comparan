@@ -133,6 +133,8 @@
                                     <b class="d-block">${item.nama_produk}</b>
                                     <small class="text-muted">Harga: Rp ${parseInt(item.harga_satuan).toLocaleString("id-ID")}</small><br>
                                     <small class="text-muted">Jumlah: ${item.jumlah}</small><br>
+                                    <small class="text-muted">Tanggal: ${item.tanggal_order}</small><br>
+                                    <small class="text-muted">Alamat: ${item.alamat_pengiriman}</small><br>
                                     <b class="text-success">Subtotal: Rp ${parseInt(item.subtotal).toLocaleString("id-ID")}</b>
                                 </div>
                             </div>`;

@@ -20,6 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voucher Saya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <style>
         :root {
             --primary: #6FB400; 
@@ -199,14 +200,25 @@
                             <span class="ticket-cost">Biaya: <?= $v["poin_diperlukan"] ?> Poin</span>
                         </div>
                         <div class="ticket-right">
-                            <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" 
-                                class="btn-tukar"
-                                onclick="return confirm('Tukar voucher ini?')">TUKAR</a>
+                            <a href="#" 
+                                class="btn-tukar" onclick="konfirmasiTukar(<?= $v['id_voucher'] ?>); return false;">TUKAR</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+
+        <!-- Modal Konfirmasi -->
+    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Tukar Voucher</h5>
+            <p>Apakah kamu yakin ingin menukar Voucher ini?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn btn-primary" >Ya, Tukar</a>
+                <button onclick="tutupLogout()" class="btn btn-danger">Batal</button>
+            </div>
+        </div>
+    </div>
 
         <div class="section">
             <h3>🎁 Voucher Saya</h3>
@@ -228,6 +240,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function konfirmasiTukar(id_voucher) {
+        // Set the voucher ID in the modal
+        document.getElementById("overlay-logout").setAttribute("data-voucher-id", id_voucher);
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+
+    function tutupLogout() {
+        document.getElementById("overlay-logout").style.display = "none";
+    }
+</script>
 
 </body>
 </html>
