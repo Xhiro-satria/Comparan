@@ -188,9 +188,10 @@
                     <?php if (count($vouchers) === 0): ?>
                         <tr><td colspan="5" class="text-center py-5 text-muted">Belum ada voucher aktif.</td></tr>
                     <?php else: ?>
+                        <?php $i = 1 ?>
                         <?php foreach ($vouchers as $v): ?>
                             <tr>
-                                <td class="text-center text-muted fw-bold">#<?= $v["id_voucher"] ?></td>
+                                <td class="text-center text-muted fw-bold"><?= $i ?></td>
                                 <td class="fw-semibold"><?= htmlspecialchars($v["nama"]) ?></td>
                                 <td class="text-success fw-bold">Rp <?= number_format($v["nilai"], 0, ',', '.') ?></td>
                                 <td><span class="badge-poin"><?= $v["poin_diperlukan"] ?> Pts</span></td>
@@ -201,6 +202,7 @@
                                         <i class="bi bi-trash3"></i> Hapus
                                     </a>
                                 </td>
+                                <?php $i++ ?>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
