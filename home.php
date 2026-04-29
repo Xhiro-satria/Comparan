@@ -15,7 +15,14 @@
     // Mengambil ID user yang sedang login dari data session
     $id_user = $_SESSION["id_user"];        //Agar fungsi tahu data milik siapa yang harus diambil.
     $dataUser = tampilDataUser($connect, $id_user);
-    $produk = tampilSemuaProduk($connect, $id_user);
+
+    $keyword = $_GET["keyword"] ?? "";
+
+    if($keyword){
+        $produk = searchProduk($connect, $id_user, $keyword);
+    }else {
+        $produk = tampilSemuaProduk($connect, $id_user);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +39,6 @@
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* .gambuar{
-            
-        } */
     </style>
 </head>
 <body class="bodyHome mx-4 m-0 p-0" style="background-color: rgb(215, 231, 192);">
@@ -232,6 +236,11 @@
         </div>
     </section class="bg-black">
     
+   
+
+<?php if ($keyword): ?>
+    <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
+<?php endif; ?>
 
     <section id="shop" class="mx-4">
         <!-- <div class="w-100 text-center">
@@ -243,7 +252,23 @@
                 <p class="heroSubtitle mb-4">Choose the best seeds for a greener future. Every seed you plant brings new life to the world.</p>
             </div>
         </div>
-        <h1 class="ourProduct text-start mx-3 mt-5 mb-5" style="font-family: 'Aesthetic'; color: #75b800; font-style:italic;"><u>Our products✦</u></h1>
+        <div class="d-flex ">
+            <h1 class="ourProduct text-start mx-3 mt-5 mb-5" style="font-family: 'Aesthetic'; color: #75b800; font-style:italic;"><u>Our products✦</u></h1>
+            <!-- <form method="GET">
+                <input type="text" 
+                    name="keyword" 
+                    value="<?= $keyword ?>" 
+                    placeholder="Cari produk...">
+                <button type="submit">Cari</button>
+                <?php if ($keyword): ?>
+                    <a href="home.php">Reset</a>
+                <?php endif; ?>
+            </form><br>
+
+            <?php if ($keyword): ?>
+                <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
+            <?php endif; ?> -->
+        </div>
         <?php if (count($produk) === 0): ?>
             <p>Belum ada produk tersedia.</p>
             <?php else: ?>
@@ -319,11 +344,7 @@
             </div>
         </div>
     </section>
-
-
-
-
-        
+    
     </div>
 
 </div>

@@ -30,8 +30,15 @@
                 setcookie("username", "", time() - 3600, "/");
                 setcookie("password", "", time() - 3600, "/");
             }
-            header("Location: home.php");
-            exit();
+
+            if($user["role"] === "admin"){
+                header("Location: admin/index.php");
+                exit();
+            }else {
+                header("Location: home.php");
+                exit();
+            }
+
         } else {
             $check = true;
             // $pesan = "Login gagal. Periksa username dan password.";
