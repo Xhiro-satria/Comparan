@@ -57,6 +57,15 @@
         }
     }
 
+    function searchProduk($connect, $id_user, $keyword){
+        $sql = "SELECT * FROM products 
+                    WHERE id_user != '$id_user' 
+                    AND status = 'open' 
+                    AND nama_produk LIKE '%$keyword%'";
+        $result = $connect->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     // Fungsi buat hapus produk
     function hapusProduk($connect, $id_produk) {
         $sql = "DELETE FROM products WHERE id_produk = '$id_produk'";

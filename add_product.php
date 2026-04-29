@@ -3,6 +3,11 @@
     require_once 'server.php';
     require_once 'function/product_function.php';
 
+    if(!isset($_SESSION["id_user"])){
+        header("Location: login.php");
+        exit();
+    }
+
     $pesan = "";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {

@@ -9,6 +9,7 @@
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $username = $_POST["username"];
         $password = $_POST["password"];
+        $ingatSaya = $_POST["ingatSaya"] ?? 0 ;
         
         //panggil fungsi loginUser untuk memeriksa kredensial
         $user = loginUser($connect, $username, $password);
@@ -21,8 +22,23 @@
             $_SESSION["role"] = $user["role"];
             $_SESSION["poin"] = $user["poin"];
             $_SESSION["email"] = $user["email"];
-            header("Location: home.php");
-            exit();
+
+            if($ingatSaya){
+                setcookie("username", $username, time() + (30 * 24 * 60 * 60), "/");
+                setcookie("password", $_POST["password"], time() + (30 * 24 * 60 * 60), "/");
+            }else {
+                setcookie("username", "", time() - 3600, "/");
+                setcookie("password", "", time() - 3600, "/");
+            }
+
+            if($user["role"] === "admin"){
+                header("Location: admin/index.php");
+                exit();
+            }else {
+                header("Location: home.php");
+                exit();
+            }
+
         } else {
             $check = true;
             // $pesan = "Login gagal. Periksa username dan password.";
@@ -41,13 +57,13 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Sign In</title>
     <style>
-    body{
-        background-color: black;
-        background-image: url(assets/backgroundd.jpeg);
-        background-repeat: none;
-        margin: 0;
-        height: 100vh;
-    }
+        body{
+            background-color: black;
+            background-image: url(assets/backgroundd.jpeg);
+            background-repeat: none;
+            margin: 0;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +104,7 @@
                                     <input type="password" class="form-control rounded-4 px-4 p-2" id="password" name="password" placeholder="Input your password" required>
                                 </div>
                                 <div class="form-check text-start mx-5 mt-3">
-                                    <input class="form-check-input" type="checkbox" name="rememberMe" id="checkDefault1">
+                                    <input class="form-check-input" type="checkbox" name="ingatSaya" id="checkDefault1" value="1">
                                     <label class="form-check-label" for="checkDefault1">Remember me</label>
                                 </div>
                                 <div class="px-5 mt-3">

@@ -15,7 +15,14 @@
     // Mengambil ID user yang sedang login dari data session
     $id_user = $_SESSION["id_user"];        //Agar fungsi tahu data milik siapa yang harus diambil.
     $dataUser = tampilDataUser($connect, $id_user);
-    $produk = tampilSemuaProduk($connect, $id_user);
+
+    $keyword = $_GET["keyword"] ?? "";
+
+    if($keyword){
+        $produk = searchProduk($connect, $id_user, $keyword);
+    }else {
+        $produk = tampilSemuaProduk($connect, $id_user);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +39,6 @@
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* .gambuar{
-            
-        } */
     </style>
 </head>
 <body class="bodyHome mx-4 m-0 p-0" style="background-color: rgb(215, 231, 192);">
@@ -108,7 +112,7 @@
                                         <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
                                         <hr>
-                                        <a href="logout.php"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
+                                        <a href="#" onclick="konfirmasiSignOut(); return false;"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
                                     </div>
                                 </div>
                             </div>
@@ -118,6 +122,19 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal Konfirmasi -->
+    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Logout</h5>
+            <p>Apakah kamu yakin ingin keluar?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="logout.php" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Ya, Logout</a>
+                <button onclick="tutupLogout()" class="btn btn-primary">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <section id="dashboard" class="bg-black rounded-4 m-1 mx-4 d-flex justify-content-center align-items-center">
         <div class="col position-relative">
             <video autoplay muted loop class="w-100 rounded-4 z-2" style="height: 640px; object-fit: cover; display: block;">
@@ -219,6 +236,11 @@
         </div>
     </section class="bg-black">
     
+   
+
+<?php if ($keyword): ?>
+    <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
+<?php endif; ?>
 
     <section id="shop" class="mx-4">
         <!-- <div class="w-100 text-center">
@@ -230,7 +252,23 @@
                 <p class="heroSubtitle mb-4">Choose the best seeds for a greener future. Every seed you plant brings new life to the world.</p>
             </div>
         </div>
-        <h1 class="ourProduct text-start mx-3 mt-5 mb-5" style="font-family: 'Aesthetic'; color: #75b800; font-style:italic;"><u>Our products✦</u></h1>
+        <div class="d-flex ">
+            <h1 class="ourProduct text-start mx-3 mt-5 mb-5" style="font-family: 'Aesthetic'; color: #75b800; font-style:italic;"><u>Our products✦</u></h1>
+            <!-- <form method="GET">
+                <input type="text" 
+                    name="keyword" 
+                    value="<?= $keyword ?>" 
+                    placeholder="Cari produk...">
+                <button type="submit">Cari</button>
+                <?php if ($keyword): ?>
+                    <a href="home.php">Reset</a>
+                <?php endif; ?>
+            </form><br>
+
+            <?php if ($keyword): ?>
+                <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
+            <?php endif; ?> -->
+        </div>
         <?php if (count($produk) === 0): ?>
             <p>Belum ada produk tersedia.</p>
             <?php else: ?>
@@ -306,11 +344,7 @@
             </div>
         </div>
     </section>
-
-
-
-
-        
+    
     </div>
 
 </div>
@@ -380,6 +414,13 @@
             return;
         }
         window.location.href = "checkout.php?id_produk=" + idProdukDipilih + "&jumlah=" + jumlah;
+    }
+    function konfirmasiSignOut() {
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+
+    function tutupLogout() {
+        document.getElementById("overlay-logout").style.display = "none";
     }
 </script>
 </body>

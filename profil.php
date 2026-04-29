@@ -3,6 +3,11 @@
     require_once "server.php";
     require_once "function/user_function.php";
 
+    if(!isset($_SESSION["id_user"])){
+        header("Location: login.php");
+        exit();
+    }
+
     $id_user = $_SESSION["id_user"];
     $user = tampilDataUser($connect, $id_user);
     $pesan   = $_GET["pesan"] ?? "";

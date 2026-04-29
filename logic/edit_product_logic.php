@@ -16,7 +16,6 @@
         $tempFile = $_FILES["gambar"]["tmp_name"];
         move_uploaded_file($tempFile, "../uploads/produk/" . $gambar);
     }
-
     editProduk($connect, $id_produk, $nama_produk, $harga, $stok, $deskripsi, $kategori, $gambar);
 
     header("Location: ../my_product.php");
