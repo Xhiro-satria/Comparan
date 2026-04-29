@@ -101,7 +101,6 @@
             text-decoration: underline;
         }
 
-        /* Warna Gradasi Spesifik */
         .bg-gradient-primary { background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); }
         .bg-gradient-success { background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%); }
         .bg-gradient-warning { background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%); }
@@ -122,7 +121,7 @@
             <h2>Dashboard Admin</h2>
             <p class="text-muted">Selamat datang kembali, admin! Berikut ringkasan hari ini.</p>
         </div>
-        <a href="../logout.php" class="btn btn-danger btn-logout">
+        <a href="#" class="btn btn-danger btn-logout"  onclick="konfirmasiSignOut(); return false;">
             <i class="bi bi-box-arrow-right me-2"></i>Logout
         </a>
     </div>
@@ -160,7 +159,7 @@
                     <i class="bi bi-ticket-perforated card-icon"></i>
                     <div class="stat-label">Total Voucher</div>
                     <div class="stat-value"><?= number_format($total_voucher ?? 0) ?></div>
-                    <a href="voucher.php" class="text-white card-link">
+                    <a href="voucher.php" class="text-white card-link"">
                         Lihat Voucher <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
@@ -169,6 +168,25 @@
     </div>
 </div>
 
+    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Logout</h5>
+            <p>Apakah kamu yakin ingin keluar?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="../logout.php" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Ya, Logout</a>
+                <button onclick="tutupLogout();" class="btn btn-primary">Batal</button>
+            </div>
+        </div>
+    </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function tutupLogout() {
+        document.getElementById("overlay-logout").style.display = "none";
+    }
+    function konfirmasiSignOut() {
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+</script>
 </body>
 </html>

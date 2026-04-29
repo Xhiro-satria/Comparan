@@ -162,9 +162,9 @@
                                 <?php $i++; ?>
                                 <td class="text-center">
                                     <?php if ($u["role"] !== "admin"): ?>
-                                        <a href="../logic/hapus_user_logic.php?id_user=<?= $u["id_user"] ?>"
-                                           onclick="return confirm('Yakin ingin menghapus user ini?')"
-                                           class="btn btn-danger btn-sm btn-delete">
+                                        <a href="#"
+                                            onclick="konfirmasiHapus(); return false;"
+                                            class="btn btn-danger btn-sm btn-delete">
                                             <i class="bi bi-trash3 me-1"></i> Hapus
                                         </a>
                                     <?php else: ?>
@@ -180,6 +180,25 @@
     </div>
 </div>
 
+    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Hapus</h5>
+            <p>Apakah kamu yakin ingin Hapus user ini ?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="../logic/hapus_user_logic.php?id_user=<?= $u["id_user"] ?>" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Hapus</a>
+                <button onclick="tutupHapus();" class="btn btn-primary">Batal</button>
+            </div>
+        </div>
+    </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function tutupHapus() {
+        document.getElementById("overlay-logout").style.display = "none";
+    }
+    function konfirmasiHapus() {
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+</script>
 </body>
 </html>

@@ -195,9 +195,9 @@
                                 <td class="text-success fw-bold">Rp <?= number_format($v["nilai"], 0, ',', '.') ?></td>
                                 <td><span class="badge-poin"><?= $v["poin_diperlukan"] ?> Pts</span></td>
                                 <td class="text-center">
-                                    <a href="../logic/hapus_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>"
-                                       onclick="return confirm('Hapus voucher ini?')"
-                                       class="btn btn-outline-danger btn-sm border-0">
+                                    <a href="#"
+                                        onclick="konfirmasiHapus(); return false;"
+                                        class="btn btn-outline-danger btn-sm border-0">
                                         <i class="bi bi-trash3"></i> Hapus
                                     </a>
                                 </td>
@@ -210,6 +210,25 @@
     </div>
 </div>
 
+<div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
+            <h5>Konfirmasi Hapus</h5>
+            <p>Apakah kamu yakin ingin Hapus Voucher ini ?</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <a href="../logic/hapus_vocher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Hapus</a>
+                <button onclick="tutupHapus();" class="btn btn-primary">Batal</button>
+            </div>
+        </div>
+    </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function tutupHapus() {
+        document.getElementById("overlay-logout").style.display = "none";
+    }
+    function konfirmasiHapus() {
+        document.getElementById("overlay-logout").style.display = "block";
+    }
+</script>
 </body>
 </html>
