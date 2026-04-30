@@ -3,24 +3,38 @@
     require_once 'server.php';
     require_once 'function/cart_function.php';
     require_once 'function/voucher_function.php';
+    require_once 'function/product_function.php';
 
-    if(!isset($_SESSION["id_user"])){
-        header("Location: login.php");
-        exit();
-    }
-
-    $id_user = $_SESSION["id_user"];
-    $sql = "SELECT id_cart FROM cart WHERE id_user = '$id_user'";
-    $result = $connect->query($sql);
-    // Ambil id_cart berdasarkan id_user
-    $cart = $result->fetch_assoc();
-    $id_cart = $cart["id_cart"];
-
-    $items = tampilKeranjang($connect, $id_cart);
+    $id_user  = $_SESSION["id_user"];
     $vouchers = voucherSaya($connect, $id_user);
 
+    // Cek apakah dari beli sekarang atau dari cart
+    if (isset($_SESSION["beli_sekarang"])) {
+        $id_produk = $_SESSION["beli_sekarang"]["id_produk"];
+        $jumlah    = $_SESSION["beli_sekarang"]["jumlah"];
+
+        $result  = $connect->query("SELECT * FROM products WHERE id_produk = '$id_produk'");
+        $produk  = $result->fetch_assoc();
+
+        $items = [[
+            "id_produk"    => $id_produk,
+            "nama_produk"  => $produk["nama_produk"],
+            "harga"        => $produk["harga"],
+            "jumlah"       => $jumlah,
+            "gambar"       => $produk["gambar"],
+        ]];
+
+        $dari_cart = false;
+    } else {
+        $result  = $connect->query("SELECT id_cart FROM cart WHERE id_user = '$id_user'");
+        $cart    = $result->fetch_assoc();
+        $id_cart = $cart["id_cart"];
+        $items   = tampilKeranjang($connect, $id_cart);
+        $dari_cart = true;
+    }
+
     $total = 0;
-    foreach($items as $item){
+    foreach ($items as $item) {
         $total += $item["harga"] * $item["jumlah"];
     }
 ?>

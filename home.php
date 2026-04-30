@@ -408,12 +408,9 @@
     }
 
     function beliSekarang() {
-        let jumlah = document.getElementById("m-jumlah").value;
-        if(parseInt(jumlah) > stokTersedia) {
-            alert("Maaf, stok tidak mencukupi!");
-            return;
-        }
-        window.location.href = "checkout.php?id_produk=" + idProdukDipilih + "&jumlah=" + jumlah;
+        let jumlah     = document.getElementById("m-jumlah").value;
+        let id_produk  = idProdukDipilih;
+        window.location.href = "logic/beli_sekarang_logic.php?id_produk=" + id_produk + "&jumlah=" + jumlah;
     }
     function konfirmasiSignOut() {
         document.getElementById("overlay-logout").style.display = "block";
