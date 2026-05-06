@@ -39,14 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Sign Up</title>
     <style>
     body{
-        background-color: black;
+        background-color: var(--black);
         background-image: url(assets/backgroundd.jpeg);
         background-repeat: none;
         margin: 0;
         height: 100vh;
     }
+
+    .container-fluid{ background-color: var(--overlay-dark); }
+    
     .signUpButton{
-        background-color: #6FB400;
+        background-color: var(--primary-main);
         color: white;
         transition: .3s all ease-in-out;
         text-decoration: none;
@@ -54,27 +57,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     .signUpButton:hover{
-        background-color: #629f00;
-        color: white;
+        background-color: var(--primary-dark);
+        color: var(--white);
     }
 
     .signInButton{
-        background-color: #ffffff;
+        background-color: var(--white);
         transition: .3s all ease-in-out;
-        color: #629f00;
+        color: var(--primary-main);
         text-decoration: none;
         font-weight: 500;
     }
 
     .signInButton:hover{
-        background-color: #6FB400;
+        background-color: var(--primary-main);
         color: white;
     }
     </style>
 </head>
 <body>
     <!-- new -->
-    <div class="container-fluid m-0 p-0" style="background-color: #00000054;">
+    <div class="container-fluid m-0 p-0">
         <?php if($check): ?>
             <h5 class="fixed-top bg-danger text-light fw-lighter text-center fs-6 p-1"><?= $pesan ?></h5>
         <?php endif; ?>
@@ -82,10 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="kolom-kiri col-12 col-md-7 h-100 px-5 pt-3 d-flex flex-column justify-content-between">
                 <div class="kiri">
                     <div class="d-flex justify-content-start mb-4 mt-3 align-items-center">
-                        <img src="assets/logo-fix.png" class="logo" alt="" style="width: 200px;">
-                        <!-- <h5 class="mx-2 m-0" style="font-size: 32px; color: #5d9601;">COMPARAN</h5> -->
+                        <img src="assets/logo-fix.png" class="logo" alt="Logo Comparan">
                     </div>
-                    <h1 class="tagline text-start mt-3 fw-medium">Welcome back!<br><span class="taglineSpan fw-medium" style="font-family: 'Voguella'; font-style: italic; font-size: 50px; color: #84d31e;">Ready to grow?</span><br>Let's get started with us!</h1>
+                    <h1 class="tagline text-start mt-3 fw-medium">Hello Newbie!<br><span class="taglineSpan fw-medium">Ready to grow?</span><br>Let's join with us!</h1>
                 </div>
                 <div>
                     <h4 class="taglineBottom text-center fw-medium">-make the world a better place. Small actions grow into meaningful change-</h4>
@@ -119,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <input type="password" class="form-control rounded-4 px-4 p-2" id="password" name="password" placeholder="Input your password" required>
                                 </div>
                                 <div class="px-5 mt-4">
-                                    <button type="submit" value="Add User" class="loginButton w-100">Add User</button>
+                                    <button type="submit" value="Add User" class="loginButton w-100">Create Account</button>
                                 </div>
                             </form>
                         </div>

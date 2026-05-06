@@ -25,9 +25,9 @@
         //paggil fungsi tambah produk
         $id_produk = tambahProduk($connect, $id_user, $nama_produk, $harga, $stok, $deskripsi, $kategori, $gambar);
         if ($id_produk) {
-            $pesan = "Produk berhasil ditambahkan.";
+            $pesan = "Berhasil";
         } else {
-            $pesan = "Gagal menambahkan produk.";
+            $pesan = "Gagal";
         }
     } 
 ?>
@@ -47,43 +47,47 @@
     <title>Document</title>
     <style>
         /* *{outline: solid red 2px;} */
+
+        body{
+            background-color: var(--hover-soft);
+        }
+
         .form-control, label{
-            font-family: 'Ethereal Medium';
-            letter-spacing: 1px;
+            font-family: 'Inter';
             font-size: 14px;
         }
+
+        .containerProfil{ height: 100vh; width: 100%; }
+
+        .card-body p, .card-body p span a{ color: var(--primary-main); }
+
+        .buttonCheckout{ font-family: 'safira'; }
     </style>
 </head>
-<body style="background-color: rgb(215, 231, 192);">
-    <div class="containerProfil d-flex justify-content-center align-items-center" style="height: 100vh; width: 100%;">
+<body>
+    <div class="containerProfil d-flex justify-content-center align-items-center">
         <div class="card w-25 p-4 pt-1 rounded-5 shadow">
             <div class="card-body d-flex flex-column align-items-center">
                 <a href="my_product.php" class=" w-100 text-end text-decoration-none text-black"><i class="bi bi-x-lg"></i></a>
-                <h2 class="profile mb-3" style="font-family: 'Aesthetic'; color: #5d9300;">Add Product</h2>
-                <?php if ($pesan === "berhasil"): ?>
-                    <p class="mb-2" style="color: #5d9300;">Add Product Success! <span><a href="home.php" class="fw-bold" style="color: #5d9300;">Back to home?</a></span></p>
+                <h2 class="judul-form profile mb-3">Add Product</h2>
+                <?php if ($pesan === "Berhasil"): ?>
+                    <p class="mb-2">Add Product Success! <span><a href="my_product.php" class="fw-bold">See Your Product</a></span></p>
+                <?php elseif ($pesan === "Gagal") : ?>
+                        <p class="mb-2">Add Product Failed!</p>
                 <?php endif; ?>
-                <!-- Data Diri -->
-            
-                <!-- <h6 class="editProfile mb-5" style="font-family: 'Voguella', sans-serif;">Edit Profil</h6> -->
+                
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <!-- <label >Product Name</label>     -->
-                    <input type="text" class="form-control mb-3" name="nama_produk" placeholder="Product Name">
-                    <!-- <label >Price</label>     -->
-                    <input type="number" class="form-control mb-3" name="harga" placeholder="Price">
-                    <!-- <label >Stock</label>     -->
-                    <input type="number" class="form-control mb-3" name="stok" placeholder="Stock">
-                    <!-- <label >Category</label>     -->
-                    <input type="text" class="form-control mb-3" name="kategori" placeholder="Category">
-                    <!-- <label >Description</label>     -->
-                    <textarea type="text" class="form-control mb-3" name="deskripsi" placeholder="Description"></textarea>
+                    <input type="text" class="form-control mb-3" name="nama_produk" placeholder="Product Name" required>
+                    <input type="number" class="form-control mb-3" name="harga" placeholder="Price" required>
+                    <input type="number" class="form-control mb-3" name="stok" placeholder="Stock" required>
+                    <input type="text" class="form-control mb-3" name="kategori" placeholder="Category" required>
+                    <textarea type="text" class="form-control mb-3" name="deskripsi" placeholder="Description" required></textarea>
                     <label class="w-100 text-center">Add Product Image</label>    
-                    <input type="file" class="form-control mb-3" name="gambar">
+                    <input type="file" class="form-control mb-3" name="gambar" required>
                     <button type="submit" class="buttonCheckout btn form-control ">Add Product</button>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
 </html>

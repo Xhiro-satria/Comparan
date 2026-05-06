@@ -9,7 +9,7 @@
         if ($result->num_rows > 0) {
             return "email_sudah_ada";
         }
-       
+    
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);          //hashing (BCRYPT) agar tidak tersimpan dalam teks biasa
 
         $sql = "INSERT INTO users (nama, username, password, role, poin, email) VALUES ('$nama', '$username', '$passwordHash', 'user', 0, '$email')";

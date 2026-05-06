@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Profil</title>
     <style>
+        body{ background-color: var(--hover-soft); }
+
+        .containerProfil{ height: 100vh; width: 100vw; }
+
+        .pesan, .pesan a{ color: var(--primary-main); }
+
         .foto {
             width: 100px;
             height: 100px;
@@ -31,28 +37,24 @@
             object-fit: cover;
         }
 
-        .form-control, label{
-            font-family: 'Belgiano', sans-serif;
-            /* letter-spacing: 3px; */
-        }
+        .form-control, label{ font-family: 'Inter', sans-serif; }
 
-        /* .profile, .editProfile{
-            font-family: 'Aesthetic';
-        } */
+        .buttonCheckout{ font-family: 'Safira';}
     </style>
 </head>
-<body style="background-color: rgb(215, 231, 192);">
-    <div class="containerProfil d-flex justify-content-center align-items-center" style="height: 100vh; width: 100vw;">
+<body>
+    <div class="containerProfil d-flex justify-content-center align-items-center">
         <div class="card w-25 p-4 pt-1 rounded-5 shadow">
             <div class="card-body d-flex flex-column align-items-center">
                 <a href="home.php" class=" w-100 text-end text-decoration-none text-black"><i class="bi bi-x-lg"></i></a>
-                <h2 class="profile mb-5" style="font-family: 'Aesthetic'; color: #5d9300;">Edit Profile</h2>
+                <h2 class="profile judul-form mb-4">Edit Profile</h2>
                 <?php if ($pesan === "berhasil"): ?>
-                    <p class="mb-2" style="color: #5d9300;">Profil berhasil diupdate! <span><a href="home.php" class="fw-bold" style="color: #5d9300;">Back to home?</a></span></p>
+                    <p class="pesan mb-2">Profile updated successfully!
+                        <a href="home.php" class="fw-bold">Back to home?</a>
+                    </p>
                 <?php endif; ?>
+
                 <!-- Data Diri -->
-            
-                <!-- <h6 class="editProfile mb-5" style="font-family: 'Voguella', sans-serif;">Edit Profil</h6> -->
                 <form method="POST" action="logic/edit_profil_logic.php" enctype="multipart/form-data">
                     <label >Change Name</label>    
                     <input type="text" class="form-control mb-4" name="nama" value="<?= $user["nama"] ?>" placeholder="Name">
