@@ -30,36 +30,241 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Comparan</title>
-
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
+    <title>Home</title>
     <style>
+        .bodyHome, nav{ background-color: var(--hover-soft); }
+
+        .logoNav{ width: 120px; }
+
+        .containerFotoProfilNav{
+            width: 40px;
+            height: 40px;
+            border-radius:100%;
+            overflow: hidden;
+        }
+
+        .containerFotoProfilNav img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bi-person-circle{ cursor: pointer; }
+
+        .fotoProfilContent{
+            width: 100px;
+            height: 100px;
+            border-radius:100%;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--overlay-dark);
+        }
+
+        .fotoProfilContent img{
+            width:100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .editProfile a{
+            /* border: solid 1.75px var(--black); */
+            background-color: var(--soft-black);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        #p-nama{ text-transform: capitalize; }
+
+        #p-email{ font-style: none; }
+
+        .videoDash{
+            height: 640px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .reasonChoose{ font-family: 'Alphazet', sans-serif; color: var(--primary-main); }
+        
+        .vision span{ color: var(--yellow); }
+
+        .ourProduct{
+            margin: 16px !important;
+            font-family: 'Aesthetic';
+            color: var(--primary-main);
+            font-style: italic;
+        }
+
+        .carousel-right {
+            display: grid;
+            grid-auto-flow: column; /* isi ke samping */
+            grid-template-rows: repeat(2, auto); /* 2 baris */
+            grid-auto-columns: 210px;
+            gap: 16px;
+            overflow-x: auto; /* scroll aktif */
+        }
+
+        /* .carousel-right{
+            display: flex;
+            overflow-x: auto;
+        } */
+
+        .productBody b, .productHarga{
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+
+        #m-pemilik{ text-transform: capitalize; }
+
+        .spesifikasi, .buyOptionItems label{ font-family: 'Belgiano', sans-serif; color: var(--primary-dark); }
+
+        .buttonQantity{ color: var(--primary-dark); border: 2px solid var(--primary-dark); }
+
+        #overlay-logout{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-dark-more);
+            z-index: 9999;
+        }
+
+        .containerConfirm{
+            background: var(--white);
+            width: 300px;
+            margin: 200px auto;
+            padding: 20px;  
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .btn-outline-success{ border: solid 1px var(--primary-main); color: var(--primary-main); }
+
+        .btn-outline-success:hover{ background-color:  var(--primary-dark); border: solid 1px var(--primary-dark);  }
+
+        .footer-comparan {
+            background-color: var(--soft-black);
+            color: var(--card-bg);
+            padding: 60px 0 20px 0;
+            margin-top: 80px;
+            border-top: 5px solid var(--primary-accent);
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+
+        .footer-brand .logoNav {
+
+            width: 150px;
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--card-bg);
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            font-family: 'Alphazet', sans-serif;
+            color: var(--primary-main);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--card-bg);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);;    
+            padding-left: 5px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            text-align: center;
+            line-height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-main);
+            color: var(--white);
+        }
+
+        .newsletter-form .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .newsletter-form .form-control:focus {
+            box-shadow: none;
+            border-color: var(--primary-main);
+        }
+
+        .newsletter-form .btn-subscribe {
+            background-color: var(--primary-main);
+            color: var(--white);
+            border: none;
+        }
+
+        .newsletter-form .btn-subscribe:hover { background-color: var(--primary-dark); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 13px;
+            color: var(--gray);
+        }
     </style>
 </head>
-<body class="bodyHome mx-4 m-0 p-0" style="background-color: rgb(215, 231, 192);">
-    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: rgb(215, 231, 192);">
+<body class="bodyHome mx-4 m-0 p-0">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center mx-3" href="#">
-                <img src="assets/logo-fix.png" alt="logo" class="logoNav" style="width: 120px;">
+                <img src="assets/logo-fix.png" alt="Logo Comparan" class="logoNav">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="row w-100 align-items-center">
-                    <div class="col-11 d-flex justify-content-center">
+                <div class="bungkusKananKiri row w-100 align-items-between">
+                    <div class="navKiri col-11 d-flex justify-content-center">
                         <div class="containerItemNav navbar-nav d-flex justify-content-center">
                             <a class="nav-link rounded-start-pill px-3" aria-current="page" href="#">Dashboard</a>
                             <a class="nav-link px-3" href="#about">About</a>
                             <a class="nav-link rounded-end-pill px-3" href="#shop">Shop</a>
                         </div>
                     </div>
-                    <div class="col-1 text-lg-end p-0">
+                    <div class="navKanan col-1 text-lg-end p-0">
                         <div class="d-flex justify-content-between">
                             <a class="nav-link d-flex align-items-center" aria-disabled="true" href="cart.php" id="navbarNavAltMarkup">
                                 <i class="cartIcon bi bi-cart d-flex align-items-center fs-2"></i>
@@ -73,12 +278,11 @@
                             )">
                                 <div class="fotoProfileNav w-100 d-flex justify-content-center align-items-center">
                                     <?php if ($dataUser["foto_profile"]): ?>
-                                        <div style="width: 40px; height: 40px; border-radius:100%; overflow: hidden;">
-                                            <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" style="width: 100%; height: 100%; object-fit: cover;"
-                                            class="gambuar d-flex align-items-center fs-2 justify-content-center">
+                                        <div class="containerFotoProfilNav">
+                                            <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" class="d-flex align-items-center fs-2 justify-content-center">
                                         </div>
                                     <?php else: ?>
-                                        <i class="bi bi-person-circle d-flex align-items-center fs-2" style="cursor: pointer;"></i>
+                                        <i class="bi bi-person-circle d-flex align-items-center fs-2"></i>
                                     <?php endif; ?>    
                                 </div>
                             </div>
@@ -89,23 +293,20 @@
                                     <div class="showProfile row m-0 mb-auto">
                                         <div class="fotoProfile w-100 d-flex justify-content-center align-items-center">
                                             <?php if ($dataUser["foto_profile"]): ?>
-                                                <div style="width: 100px; height: 100px; border-radius:100%; overflow: hidden; box-shadow: 0 0 20px #00000050;">
-                                                    <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" 
-                                                    style="width:100%; height: 100%; object-fit: cover;" class="d-flex align-items-center fs-2 justify-content-center mb-3">
+                                                <div class="fotoProfilContent">
+                                                    <img src="uploads/profil/<?= $dataUser["foto_profile"]?>" class="d-flex align-items-center fs-2 justify-content-center mb-3">
                                                 </div>
                                                 <?php else: ?>
-                                                <div style="width: 100px; height: 100px; border-radius:100%; overflow: hidden; box-shadow: 0 0 20px #00000050;">
-                                                    <img src="uploads/profil/default.png" 
-                                                    style="width:100%; height: 100%; object-fit: cover;" class="d-flex align-items-center fs-2 justify-content-center mb-3">
+                                                <div class="fotoProfilContent">
+                                                    <img src="uploads/profil/default.png" class="d-flex align-items-center fs-2 justify-content-center mb-3">
                                                 </div>
                                             <?php endif; ?>    
                                         </div>
                                         <div class="editProfile w-100 d-flex justify-content-center align-items-center">
-                                            <a href="profil.php" class="p-1 px-2 rounded-3" style="border: solid 1.5px black; font-size: 12px;">Edit Profil</a>
+                                            <a href="profil.php" class="p-1 px-2 rounded-3">Edit Profil</a>
                                         </div>
-                                                <!-- <i class="bi bi-person-circle d-flex align-items-center fs-2 justify-content-center mb-3"></i> -->
-                                        <p><b><span id="p-nama" style="text-transform: capitalize;"></span></b><br><i>@<span id="p-username"></span></i></p>
-                                        <p class="m-0"><i class="bi bi-c-circle"></i> <span id="p-poin"></span><br><span class="m-0"><i class="bi bi-envelope-at"> <span id="p-email" style="font-style: none;"></span></i></span></p>
+                                        <p><b><span id="p-nama"></span></b><br><i>@<span id="p-username"></span></i></p>
+                                        <p class="m-0"><i class="bi bi-c-circle"></i> <span id="p-poin"></span><br><span class="m-0"><i class="bi bi-envelope-at"> <span id="p-email"></span></i></span></p>
                                         <hr>
                                         <a href="my_product.php"><i class="bi bi-bag"></i> My Product</a>
                                         <a href="riwayat_order.php"><i class="bi bi-clock-history"></i> Order History</a>
@@ -124,20 +325,20 @@
     </nav>
 
     <!-- Modal Konfirmasi -->
-    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
-        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
-            <h5>Konfirmasi Logout</h5>
-            <p>Apakah kamu yakin ingin keluar?</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <a href="logout.php" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Ya, Logout</a>
-                <button onclick="tutupLogout()" class="btn btn-primary">Batal</button>
+    <div id="overlay-logout">
+        <div class="containerConfirm">
+            <h5>Logout Confirmation</h5>
+            <p>Do you want to logout?</p>
+            <div class="d-flex justify-content-center">
+                <a href="logout.php" class="btn btn-outline-danger mx-1">Yes</a>
+                <button onclick="tutupLogout()" class="btn btn-outline-success mx-1">Cancel</button>
             </div>
         </div>
     </div>
 
     <section id="dashboard" class="bg-black rounded-4 m-1 mx-4 d-flex justify-content-center align-items-center">
         <div class="col position-relative">
-            <video autoplay muted loop class="w-100 rounded-4 z-2" style="height: 640px; object-fit: cover; display: block;">
+            <video autoplay muted loop class="videoDash w-100 rounded-4 z-2">
                 <source src="assets/Animasi_Foto_Menjadi_Video_Tangan copy.mp4" type="video/mp4">
             </video>
             <div class="dashText position-absolute top-50 start-50 translate-middle z-1">
@@ -151,7 +352,7 @@
         <div class="row px-0 w-100 justify-content-center">
             <div class="row-100 px-0">
                 <a href="#about" class="aboutTitle btn text-light fw-semibold">About Comparan</a>
-                <h2 class="taglineAboutContent  text-start">Solution for your <span  style="font-family: Belgiano; font-style: italic; letter-spacing: -1px; color: black;">sustainable</span> living</h2>
+                <h2 class="taglineAboutContent  text-start">Solution for your <span>sustainable</span> living</h2>
                 <div class="row w-100 m-0 my-4">
                     <div class="kolomKiri col-12 col-md-6 m-0">
                         <video autoplay muted loop class="vidKemasBibit opacity-100 rounded-4 p-0">
@@ -161,15 +362,15 @@
                     <div class="kolomKanan col-12 col-md-6 m-0">
                         <h3 class="titleKemas text-start m-0">Help you live sustainably</h3>
                         <h4 class="subTitleKemas text-start">"E-<span class="comparanMeans">Co</span>mmerce <span class="comparanMeans">P</span>encint<span class="comparanMeans">a</span> Tandu<span class="comparanMeans">ran</span>"<hr></h4>
-                        <p class="explainComparan text-start">We call it "<span style="font-family: 'Alphazet', sans-serif; color: #5d9300; font-weight: 600;">COMPARAN</span>", an online platform for plant lovers who care about nature and sustainability. It provides a variety of plant seedlings and eco-friendly products to support a greener lifestyle. Through this platform, users can easily purchase plants while also contributing to environmental conservation and supporting local farmers.  We provide eco-friendly products and solutions to help you live a more sustainable lifestyle.</p>
+                        <p class="explainComparan text-start">We call it "<span>COMPARAN</span>", an online platform for plant lovers who care about nature and sustainability. It provides a variety of plant seedlings and eco-friendly products to support a greener lifestyle. Through this platform, users can easily purchase plants while also contributing to environmental conservation and supporting local farmers.  We provide eco-friendly products and solutions to help you live a more sustainable lifestyle.</p>
                     </div>
                 </div>
             </div>
             <!-- this is card -->
-            <h3 class="text-center mt-5 mb-3 fw-semibold" style="font-family: 'Alphazet', sans-serif; color:#5d9300;">Why Choose Comparan?</h3>
+            <h3 class="reasonChoose text-center mt-5 mb-3 fw-semibold">Why Choose Comparan?</h3>
             <div class="row px-0 w-100 justify-content-center">
 
-                <div class="iconCard col-12 col-md-4 mb-3 border-0" style="padding-left: 0;">
+                <div class="iconCard col-12 col-md-4 mb-3 border-0">
 
                     <div class="row g-0">
                         <div class="iconBody card-body text-start">
@@ -189,7 +390,7 @@
                     </div>
                 </div>
 
-                <div class="iconCard col-12 col-md-4 mb-3 border-0" style=" padding-right: 0;">
+                <div class="iconCard col-12 col-md-4 mb-3 border-0">
 
                     <div class="row g-0">
                         <div class="iconBody card-body text-start">
@@ -203,7 +404,7 @@
             
             <!-- this is vision -->
             <div class="w-100 mt-5 mt-md-5">
-                <h2 class="vision text-center">We have vision to <span style="color: #b5bc00;">Save The Earth</span></h2>
+                <h2 class="vision text-center">We have vision to <span>Save The Earth</span></h2>
             </div>
             <div class="containerCard row px-0 w-100 m-0 my-4 justify-content-between">
                 <div class="col-6 col-md-3 visionCard bg-transparent border-0 rounded- m-0 px-5" >
@@ -232,15 +433,14 @@
                 </div>
                 <!-- card end -->
             </div>
-            <!-- <h3>Let's see, choose, buy our plant, and get <span style="color: ;">an exclusive voucher</span>!</h3> -->
         </div>
     </section class="bg-black">
     
-   
 
-<?php if ($keyword): ?>
-    <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
-<?php endif; ?>
+
+    <?php if ($keyword): ?>
+        <p>Hasil pencarian untuk: <b><?= $keyword ?></b></p>
+    <?php endif; ?>
 
     <section id="shop" class="mx-4">
         <!-- <div class="w-100 text-center">
@@ -248,12 +448,12 @@
         </div> -->
         <div class="heroShop text-center d-flex align-items-center justify-content-center mt-4 rounded-4">
             <div class="heroContent">
-                <h1 class="heroTitle display-4 fw-bold">Everything starts with <span style="color: #cbf485;">Small steps</span></h1>
-                <p class="heroSubtitle mb-4">Choose the best seeds for a greener future. Every seed you plant brings new life to the world.</p>
+                <h1 class="heroTitle display-4 fw-bold">Everything starts with <span>Small steps</span></h1>
+                <!-- <p class="heroSubtitle mb-4">Choose the best seeds for a greener future. Every seed you plant brings new life to the world.</p> -->
             </div>
         </div>
         <div class="d-flex ">
-            <h1 class="ourProduct text-start mx-3 mt-5 mb-5" style="font-family: 'Aesthetic'; color: #75b800; font-style:italic;"><u>Our products✦</u></h1>
+            <h1 class="ourProduct text-start mx-3 mt-5 mb-5"><u>Our products✦</u></h1>
             <!-- <form method="GET">
                 <input type="text" 
                     name="keyword" 
@@ -272,13 +472,13 @@
         <?php if (count($produk) === 0): ?>
             <p>Belum ada produk tersedia.</p>
             <?php else: ?>
-                <?php if (count($produk) <= 18) {?>
+                <?php if (count($produk) > 12 ) {?>
                 <div class="row m-0 w-100 justify-content-start">
                     <?php foreach ($produk as $p): ?>
                         <div class="productCard col-6 col-md-2">
                             <div class="productBody card-body">
                                 <img src="uploads/produk/<?= $p["gambar"] ?>">
-                                <b class="mt-2" style="text-transform: capitalize;"><?= $p["nama_produk"] ?></b>
+                                <b class="mt-2"><?= $p["nama_produk"] ?></b>
                                 <div class="productHarga mb-3">
                                     Rp<?= number_format($p["harga"], 0, ',', '.') ?>
                                 </div>
@@ -298,10 +498,36 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-                <?php } else { ?>
-                    XXXXXXXX
-                <?php } ?>
                 </div>
+
+                <!-- scroll kanan ketika item kurang dari 12 -->
+                <?php } else { ?>
+                <div class="carousel-right m-0 justify-content-start">
+                    <?php foreach ($produk as $p): ?>
+                        <div class="productCard">
+                            <div class="productBody card-body">
+                                <img src="uploads/produk/<?= $p["gambar"] ?>">
+                                <b class="mt-2"><?= $p["nama_produk"] ?></b>
+                                <div class="productHarga mb-3">
+                                    Rp<?= number_format($p["harga"], 0, ',', '.') ?>
+                                </div>
+                                <button class="showDetails w-100 rounded-pill" onclick="bukaModal(
+                                '<?= $p['gambar'] ?>',
+                                '<?= $p['nama_pemilik'] ?>',
+                                '<?= htmlspecialchars(addslashes($p['nama_produk'])) ?>',
+                                '<?= $p['harga'] ?>',
+                                '<?= $p['stok'] ?>',
+                                '<?= $p['kategori'] ?>',
+                                '<?= htmlspecialchars(addslashes(preg_replace('/\s+/', ' ', $p['deskripsi']))) ?>',
+                                '<?= $p['status'] ?>',
+                                '<?= $p['id_produk'] ?>'
+                                )">
+                                show details
+                                </button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php } ?>
             <?php endif; ?>
     
         <!-- Modal -->
@@ -314,23 +540,22 @@
                 <div class="modalCol col-7 p-3 d-flex justify-content-between">
                     <div class="productInfo">
                         <b id="m-nama";"></b> 
-                        <h5 class="pemilik"><span id="m-namaPemilik" style="text-transform: capitalize;"></span>'s product</h5>
+                        <h5 class="pemilik"><span id="m-namaPemilik"></span>'s product</h5>
                         <div class="hargaProduct">
                             Rp<span id="m-harga"></span>
                         </div>
                         <hr>
-                        <i class="fw-semibold fs-4" style="font-family: 
-                        'Belgiano', sans-serif; color: #456f00;">Spesifications</i>
+                        <i class="spesifikasi fw-semibold fs-4">Spesifications</i>
                         <h5 class="productData"><i class="bi bi-tree"></i> Category  : <span id="m-kategori"></span></h5>
                         <h5 class="productData"><i class="bi bi-check-circle"></i> Status : <span id="m-status"></span></h5>
                         <h5 class="productData"><i class="bi bi-bookmark"></i> Description : <br><span id="m-deskripsi"></span></h5>
                     </div>
                     <div class="buyOption mx-2">
                         <div class="buyOptionItems col">
-                            <label class="fw-semibold mb-2 fs-5" style="color: #456f00; font-family: 'Belgiano', sans-serif;">Set quantity</label>
+                            <label class="fw-semibold mb-2 fs-5">Set quantity</label>
                             <div class="buttonQuantity">
                                 <button type="button" class="btn-qty" onclick="hitungJumlah(-1)">-</button>
-                                <input type="number" id="m-jumlah" class="text-center bg-transparent rounded-2" value="1" min="1" style="color:#406700; border: 2px solid #406700;">
+                                <input type="number" id="m-jumlah" class="text-center bg-transparent rounded-2" value="1" min="1">
                                 <button type="button" class="btn-qty " onclick="hitungJumlah(1)">+</button>
                             </div>
                             <h5 class="productStock mb-3">Stock : <span id="m-stok"></span></h5>
@@ -344,10 +569,65 @@
             </div>
         </div>
     </section>
-    
-    </div>
 
-</div>
+    <footer class="footer-comparan">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <img src="assets/logo-fix.png" alt="Logo Comparan" class="logoNav">
+                        <p class="footer-text mt-3">
+                            "E-Commerce Pencinta Tanduran"<br>
+                            Penyedia bibit tanaman dan produk ramah lingkungan untuk mendukung gaya hidup yang lebih hijau dan berkelanjutan.
+                        </p>
+                        <div class="social-icons mt-4">
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-tiktok"></i></a>
+                            <a href="#"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h4 class="footer-title">Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="bi bi-chevron-right fs-6"></i> Dashboard</a></li>
+                        <li><a href="#shop"><i class="bi bi-chevron-right fs-6"></i> Shop Products</a></li>
+                        <li><a href="#about"><i class="bi bi-chevron-right fs-6"></i> About Comparan</a></li>
+                        <li><a href="profil.php"><i class="bi bi-chevron-right fs-6"></i> My Account</a></li>
+                        <li><a href="voucher.php"><i class="bi bi-chevron-right fs-6"></i> My Vouchers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h4 class="footer-title">Customer Care</h4>
+                    <ul class="footer-links">
+                        <li><a href="faq.php"><i class="bi bi-question-circle"></i> FAQ & Help Center</a></li>
+                        <li><a href="#"><i class="bi bi-box-seam"></i> Shipping & Delivery</a></li>
+                        <li><a href="#"><i class="bi bi-arrow-counterclockwise"></i> Return Policy</a></li>
+                        <li><a href="#"><i class="bi bi-shield-check"></i> Terms & Privacy</a></li>
+                        <li><a href=""><i class="bi bi-headset"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="footer-title">Join The Movement</h4>
+                    <p class="footer-text">Subscribe for gardening tips, eco-friendly news, and special offers!</p>
+                    <form class="newsletter-form d-flex mt-3">
+                        <input type="email" class="form-control rounded-start-2 rounded-end-0" placeholder="Email address" aria-label="Email address" required>
+                        <button class="btn btn-subscribe rounded-end-2 rounded-start-0" type="submit"><i class="bi bi-send-fill"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="row footer-bottom">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    &copy; 2026 Comparan. All Rights Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    Nurture, Nature, Restore The Earth <i class="bi bi-globe-americas"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 <script>
     let idProdukDipilih = null;
     let stokTersedia    = 0;
@@ -412,6 +692,7 @@
         let id_produk  = idProdukDipilih;
         window.location.href = "logic/beli_sekarang_logic.php?id_produk=" + id_produk + "&jumlah=" + jumlah;
     }
+
     function konfirmasiSignOut() {
         document.getElementById("overlay-logout").style.display = "block";
     }
@@ -420,5 +701,6 @@
         document.getElementById("overlay-logout").style.display = "none";
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

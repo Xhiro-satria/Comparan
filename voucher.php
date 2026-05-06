@@ -24,41 +24,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
     <title>Voucher Saya</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <style>
-        :root {
-            --primary: #6FB400; 
-            --success: #629f00; 
-            --danger: #ef4444;  
-            --bg: rgb(215, 231, 192); 
-            --text: #1e293b;
-        }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+            font-family: 'Alphazet', sans-serif;
+            background-color: var(--hover-soft);
             color: var(--text);
             margin: 0;
             padding: 20px;
         }
-
-        /* Tombol Kembali Tetap di Kanan Atas */
-        .btn-kembali {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: white;
-            color: var(--text);
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-
         .container {
             max-width: 1100px;
             margin: 60px auto 0 auto;
@@ -66,17 +47,20 @@
 
         /* Header Poin Full Width */
         .poin-card {
-            background: linear-gradient(135deg, var(--primary) 0%, #a0d000 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
+            color: var(--white);
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 20px -5px rgba(111, 180, 0, 0.3);
+            box-shadow: 0 10px 20px -5px var(--low-green);
             margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 20px;
         }
+
+        .poin-card span{ font-weight: bold; font-size: 20px; }
+
         .poin-card b { font-size: 30px; }
 
         /* Grid Layout Utama */
@@ -96,31 +80,34 @@
         /* Gaya Tiket */
         .ticket {
             display: flex;
-            background: white;
+            background: var(--bg-soft);
             margin-bottom: 15px;
             border-radius: 12px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            opacity: 0.95;  
         }
-
+        
         .ticket::before, .ticket::after {
             content: '';
             position: absolute;
             left: 75%;
             width: 20px;
             height: 20px;
-            background: var(--bg);
+            background: var(--hover-soft);
             border-radius: 50%;
             z-index: 2;
         }
-        .ticket::before { top: -10px; }
-        .ticket::after { bottom: -10px; }
+        
+        .ticket::before { top: -10px; box-shadow: 0 0px 10px rgba(0,0,0,0.05);}
 
+        .ticket::after { bottom: -10px; box-shadow: 0 0px 10px rgba(0,0,0,0.05);}
+    
         .ticket-left {
             padding: 15px;
             flex: 1;
             border-right: 2px dashed var(--bg);
+            box-shadow: 0 0px 10px rgba(0,0,0,0.05);
         }
 
         .ticket-right {
@@ -128,15 +115,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fafafa;
+            background: var(--bg-soft);
+            box-shadow: 0 0px 10px rgba(0,0,0,0.05);
         }
 
-        .ticket-name { font-weight: bold; font-size: 16px; display: block; }
-        .ticket-val { color: var(--primary); font-weight: bold; font-size: 14px; }
-        .ticket-cost { font-size: 11px; color: #64748b; margin-top: 5px; display: block; }
+        .ticket-name {
+            font-family: 'Belgiano';
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: block; 
+        }
+
+        .ticket-val {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .ticket-cost {
+            font-size: 11px;
+            color: var(--soft-black);
+            margin-top: 5px;
+            display: block;
+        }
 
         .btn-tukar {
-            background-color: var(--primary);
+            background-color: var(--primary-main);
             color: white;
             text-decoration: none;
             padding: 6px 10px;
@@ -155,7 +160,7 @@
         }
 
         .alert {
-            grid-column: span 2; 
+            grid-column: span 2;
             padding: 12px;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -163,21 +168,30 @@
         }
         @media (max-width: 850px) { .alert { grid-column: span 1; } }
 
-        .alert-success { background: #dcfce7; color: #15803d; }
-        .alert-danger { background: #fee2e2; color: #b91c1c; }
+        .alert-success { background: var(--hover-success); color: var(--primary-accent); }
+
+        .alert-danger { background: var(--white); color: var(--red); }
 
         h3 { 
+            font-family: 'Belgiano';
             font-size: 18px; 
             margin-top: 0; 
             margin-bottom: 20px; 
             padding-bottom: 10px;
             border-bottom: 2px solid rgba(0,0,0,0.05);
         }
+        
+        p{
+            text-align: start;
+            font-family: 'Belgiano';
+            font-size: 18px;
+            color: var(--red);
+        }
     </style>
 </head>
 <body>
 
-<a href="home.php" class="btn-kembali">← Kembali</a>
+<a href="home.php" class="btn-kembali btn-danger"><i class="bi bi-arrow-left"></i> Back to Home</a>
 
 <div class="container">
     <div class="poin-card">

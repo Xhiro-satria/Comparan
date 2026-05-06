@@ -30,58 +30,122 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Keranjang</title>
+        <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cart</title>
     <style>
+        body{
+            background-color: var(--hover-soft);
+            margin: 20px;
+        }
         .item {
-            border: 1px solid #ccc;
-            padding: 10px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 10px 20px;
             margin-bottom: 10px;
             display: flex;
             gap: 10px;
             align-items: center;
+            box-shadow: 0 0 10px var(--glow-green);
         }
         .item img {
             width: 80px;
             height: 80px;
             object-fit: cover;
         }
-        .overlay {
+        .overlayy {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: var(--overlay-dark);
         }
-        .modal {
+        .modal-content {
             background: white;
             width: 400px;
+            max-height: 540px;
             margin: 80px auto;
             padding: 20px;
+            border-radius: 24px;
+            overflow-y: auto;
+        }
+        
+        .tutup { float: right; cursor: pointer; font-size: 20px; }
+        button{
+            background-color: var(--primary-main);
+            padding: 6px 12px;
+            border: none;
             border-radius: 8px;
+            color: var(--text-light);
         }
-        .tutup {
-            float: right;
-            cursor: pointer;
-            font-size: 20px;
+
+        .button2{
+            background-color: var(--red);
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-light);
+            text-decoration: none;
         }
+
+        h2{
+            font-family: 'Safira';
+            font-weight: bold;
+            font-size: 36px;
+            color: var(--primary-main);
+            margin: 50px 0px 25px;
+        }
+
+        .emptyCart{
+            font-family: 'Belgiano';
+            font-size: 18px;
+            color: var(--red);
+        }
+
+        .bungkusData{ flex:1; }
+
+        .bungkusData b{ text-transform: capitalize; }
+
+        form{ font-family: 'Inter', sans-serif; }
     </style>
 </head>
 <body>
-    <h2>Keranjang Belanja</h2>
-    <a href="home.php">← Kembali</a><br><br>
+    <a href="home.php" class="btn-kembali"><i class="bi bi-arrow-left"></i> Back to Home</a>
+    <div class="w-100 d-flex justify-content-center align-items-center">
+        <h2>Your Seedlings <i class="bi bi-cart"></i></h2>
+    </div>
 
     <?php if (count($items) === 0): ?>
-        <p>Keranjang kosong.</p>
+        <hr>
+        <p class="emptyCart my-4 text-center">Your cart is empty <i class="bi bi-emoji-frown"></i></p>
     <?php else: ?>
 
         <?php foreach ($items as $item): ?>
             <div class="item">
                 <img src="uploads/produk/<?= $item["gambar"] ?>">
-                <div style="flex:1;">
+                <div class="bungkusData">
                     <b><?= $item["nama_produk"] ?></b><br>
-                    Harga   : Rp <?= number_format($item["harga"], 0, ',', '.') ?><br>
-                    Jumlah  : <?= $item["jumlah"] ?><br>
-                    Subtotal: Rp <?= number_format($item["harga"] * $item["jumlah"], 0, ',', '.') ?>
+                    <table>
+                        <tr>
+                            <td>Price per item</td>
+                            <td>‎ ‎  :</td>
+                            <td>‎ Rp<?= number_format($item["harga"], 0, ',', '.') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Quantity</td>
+                            <td>‎ ‎  :</td>
+                            <td>‎ <?= $item["jumlah"] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>‎ ‎  :</td>
+                            <td>‎ Rp<?= number_format($item["harga"] * $item["jumlah"], 0, ',', '.') ?></td>
+                        </tr>
+                    </table>
                 </div>
                 <div>
                     <button onclick="bukaModal(
@@ -89,22 +153,22 @@
                         '<?= $item['id_produk'] ?>',
                         '<?= $item['jumlah'] ?>',
                         '<?= $item['harga'] * $item['jumlah'] ?>'
-                    )">Beli</button>
-                    <a href="logic/hapus_item.php?id_item=<?= $item["id_item"] ?>">Hapus</a>
+                    )">checkout</button>
+                    <a href="logic/hapus_item.php?id_item=<?= $item["id_item"] ?>" class="button2">delete</a>
                 </div>
             </div>
         <?php endforeach; ?>
 
-        <b>Total Semua: Rp <?= number_format($total, 0, ',', '.') ?></b><br><br>
-        <button onclick="bukaModalSemua()">Checkout Semua</button>
+        <b>Total All Items : Rp<?= number_format($total, 0, ',', '.') ?></b><br><br>
+        <button onclick="bukaModalSemua()">Checkout All Items</button>
 
     <?php endif; ?>
 
     <!-- Modal Checkout -->
-    <div class="overlay" id="overlay" onclick="tutupModal()">
-        <div class="modal" onclick="event.stopPropagation()">
-            <span class="tutup" onclick="tutupModal()">✕</span>
-            <h3>Checkout</h3>
+    <div class="overlayy" id="overlayy" onclick="tutupModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="tutup text-end" onclick="tutupModal()">✕</span>
+            <h3 class="judul-form my-3 text-center">Checkout</h3>
 
             <form method="POST" action="logic/checkout_logic.php">
                 <input type="hidden" name="id_item" id="m-id-item">
@@ -112,28 +176,29 @@
                 <input type="hidden" name="jumlah" id="m-jumlah">
                 <input type="hidden" name="total" id="m-total">
                 <input type="hidden" name="checkout_semua" id="m-semua" value="0">
+                <input type="hidden" name="dari_cart" id="m-cart" value="0">
 
-                <p>Total: Rp <span id="m-tampil-total"></span></p>
-
-                <input type="text" name="alamat" placeholder="Alamat Pengiriman" required><br><br>
+                <p>Total : Rp<span id="m-tampil-total"></span></p>
 
                 <?php if (count($vouchers) > 0): ?>
-                    <label>Pilih Voucher (opsional):</label><br>
+                    <label>Choose Vouchers (optional) : </label><br>
                     <?php foreach ($vouchers as $v): ?>
                         <input type="checkbox"
                             name="id_vouchers[]"
                             value="<?= $v["id"] ?>"
                             data-nilai="<?= $v["nilai"] ?>"
                             onchange="hitungDiskon()">
-                        <?= $v["nama"] ?> — Potongan Rp <?= number_format($v["nilai"], 0, ',', '.') ?><br>
+                        <?= $v["nama"] ?> — Rp<?= number_format($v["nilai"], 0, ',', '.') ?> Discount Voucher<br>
                     <?php endforeach; ?>
                     <br>
                 <?php endif; ?>
 
-                <p>Diskon      : Rp <span id="m-diskon">0</span></p>
-                <p>Total Bayar : Rp <span id="m-total-bayar"></span></p>
+                <p>Discount      : Rp <span id="m-diskon">0</span></p>
+                <p>Total Payment : Rp <span id="m-total-bayar"></span></p>
 
-                <button type="submit">Bayar</button>
+                <input type="text" class="form-control" name="alamat" placeholder="Shipping Address" required><br>
+
+                <button type="submit">Buy</button>
             </form>
         </div>
     </div>
@@ -148,6 +213,7 @@
         document.getElementById("m-id-produk").value       = id_produk;
         document.getElementById("m-jumlah").value          = jumlah;
         document.getElementById("m-total").value           = total;
+        document.getElementById("m-cart").value           = 1;
         document.getElementById("m-semua").value           = 0;
         document.getElementById("m-tampil-total").innerText = totalModal.toLocaleString("id-ID");
         document.getElementById("m-total-bayar").innerText  = totalModal.toLocaleString("id-ID");
@@ -157,7 +223,7 @@
             cb.checked = false;
         });
 
-        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlayy").style.display = "block";
     }
 
     function bukaModalSemua() {
@@ -166,6 +232,7 @@
         document.getElementById("m-id-produk").value       = "";
         document.getElementById("m-jumlah").value          = "";
         document.getElementById("m-total").value           = totalSemua;
+        document.getElementById("m-cart").value           = 0;
         document.getElementById("m-semua").value           = 1;
         document.getElementById("m-tampil-total").innerText = totalSemua.toLocaleString("id-ID");
         document.getElementById("m-total-bayar").innerText  = totalSemua.toLocaleString("id-ID");
@@ -175,11 +242,11 @@
             cb.checked = false;
         });
 
-        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlayy").style.display = "block";
     }
 
     function tutupModal() {
-        document.getElementById("overlay").style.display = "none";
+        document.getElementById("overlayy").style.display = "none";
     }
 
     function hitungDiskon() {
