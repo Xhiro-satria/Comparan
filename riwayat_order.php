@@ -112,7 +112,7 @@
         const konten = document.getElementById("konten-item");
         const overlay = document.getElementById("overlay");
         
-        konten.innerHTML = "<p>Loading detail...</p>";
+        konten.innerHTML = "<p class='text-center'>Loading detail...</p>";
         overlay.style.display = "block";
 
         fetch("logic/detail_order_logic.php?id_order=" + id_order)
@@ -126,16 +126,29 @@
                     html = "<p class='text-center'>Tidak ada item.</p>";
                 } else {
                     data.forEach(item => {
+                        // Logika Tombol Status
+                        let tombol = "";
+                        if (item.status === "dikirim") {
+                            tombol = `<a href="logic/terima_produk_logic.php?id_item=${item.id_item}&id_order=${item.id_order}" 
+                                         class="btn btn-success btn-sm mt-2"
+                                         onclick="return confirm('Konfirmasi terima produk ini?')">
+                                         Konfirmasi Terima
+                                      </a>`;
+                        } else if (item.status === "selesai") {
+                            tombol = `<span class="badge bg-primary mt-2">Selesai</span>`;
+                        } else {
+                            tombol = `<span class="badge bg-secondary mt-2">Menunggu Kurir</span>`;
+                        }
+
                         html += `
                             <div style="display:flex; gap:15px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:15px;">
                                 <img src="uploads/produk/${item.gambar}" width="80" height="80" style="object-fit:cover; border-radius:8px;">
-                                <div>
+                                <div style="flex:1;">
                                     <b class="d-block">${item.nama_produk}</b>
                                     <small class="text-muted">Harga: Rp ${parseInt(item.harga_satuan).toLocaleString("id-ID")}</small><br>
                                     <small class="text-muted">Jumlah: ${item.jumlah}</small><br>
-                                    <small class="text-muted">Tanggal: ${item.tanggal_order}</small><br>
-                                    <small class="text-muted">Alamat: ${item.alamat_pengiriman}</small><br>
-                                    <b class="text-success">Subtotal: Rp ${parseInt(item.subtotal).toLocaleString("id-ID")}</b>
+                                    <b class="text-success d-block">Subtotal: Rp ${parseInt(item.subtotal).toLocaleString("id-ID")}</b>
+                                    ${tombol}
                                 </div>
                             </div>`;
                     });
@@ -150,6 +163,14 @@
 
     function tutupModal() {
         document.getElementById("overlay").style.display = "none";
+    }
+
+    // Menutup modal jika klik di luar area modal (overlay)
+    window.onclick = function(event) {
+        const overlay = document.getElementById("overlay");
+        if (event.target == overlay) {
+            tutupModal();
+        }
     }
 </script>
 

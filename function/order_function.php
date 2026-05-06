@@ -79,15 +79,53 @@
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    function detailOrder($connect, $id_order){
-        $sql = "SELECT order_items.*, products.nama_produk, products.gambar,
-                            orders.tanggal_order, orders.alamat_pengiriman
-                            FROM order_items 
-                            JOIN products ON order_items.id_produk = products.id_produk
-                            JOIN orders ON order_items.id_order = orders.id_order
-                            WHERE order_items.id_order = '$id_order'";
-        $result = $connect->query($sql);
-        
+    function detailOrder($connect, $id_order) {
+    $result = $connect->query("SELECT order_items.*, products.nama_produk, products.gambar,
+                                orders.tanggal_order, orders.alamat_pengiriman
+                                FROM order_items
+                                JOIN products ON order_items.id_produk = products.id_produk
+                                JOIN orders ON order_items.id_order = orders.id_order
+                                WHERE order_items.id_order = '$id_order'");
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+    function pesananMasuk($connect, $id_user) {
+        $result = $connect->query("SELECT order_items.*, products.nama_produk, products.gambar,
+                                    orders.tanggal_order, orders.alamat_pengiriman, orders.status as status_order,
+                                    users.nama as nama_pembeli
+                                    FROM order_items
+                                    JOIN products ON order_items.id_produk = products.id_produk
+                                    JOIN orders ON order_items.id_order = orders.id_order
+                                    JOIN users ON orders.id_user = users.id_user
+                                    WHERE products.id_user = '$id_user'
+                                    ORDER BY orders.tanggal_order DESC");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    function jumlahPesananMasuk($connect, $id_user) {
+        $result = $connect->query("SELECT COUNT(*) as total FROM order_items
+                                JOIN products ON order_items.id_produk = products.id_produk
+                                JOIN orders ON order_items.id_order = orders.id_order
+                                WHERE products.id_user = '$id_user' AND order_items.status = 'pending'");
+        $data = $result->fetch_assoc();
+        return $data["total"];
+    }
+
+    function kirimProduk($connect, $id_item) {
+        $connect->query("UPDATE order_items SET status = 'dikirim' WHERE id_item = '$id_item'");
+    }
+
+    function terimaProduk($connect, $id_item, $id_order) {
+    $connect->query("UPDATE order_items SET status = 'selesai' WHERE id_item = '$id_item'");
+
+    // Cek apakah semua item di order ini sudah selesai
+    $result = $connect->query("SELECT COUNT(*) as total FROM order_items 
+                            WHERE id_order = '$id_order' AND status != 'selesai'");
+    $data   = $result->fetch_assoc();
+
+    // Kalau semua sudah selesai update status order jadi selesai
+    if ($data["total"] == 0) {
+        $connect->query("UPDATE orders SET status = 'selesai' WHERE id_order = '$id_order'");
+    }
+}
 ?>

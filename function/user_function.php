@@ -26,8 +26,11 @@
 
     // Fungsi buat login user
     function loginUser($connect, $username, $password) {
-        $sql = "SELECT * FROM users WHERE username='$username'";
-        $result = $connect->query($sql);
+        $sql = "SELECT * FROM users WHERE username= ? ";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
         // Verifikasi password pakek password_verify
