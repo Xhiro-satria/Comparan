@@ -60,8 +60,8 @@ $pesan   = $_GET["pesan"] ?? "";
 
                             <?php if ($p["status"] === "pending"): ?>
                                 <a href="logic/kirim_produk_logic.php?id_item=<?= $p["id_item"] ?>"
-                                   class="btn btn-primary btn-sm ms-2"
-                                   onclick="return confirm('Konfirmasi kirim produk ini?')">
+                                    class="btn btn-primary btn-sm ms-2"
+                                    onclick="return confirm('Konfirmasi kirim produk ini?')">
                                     Kirim
                                 </a>
                             <?php elseif ($p["status"] === "dikirim"): ?>
