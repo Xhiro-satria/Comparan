@@ -81,8 +81,12 @@
 
     /* DASHBOARD */
 @keyframes flicker{
-        50% {color: var(--primary-accent);}
-    }
+    50% {color: var(--primary-accent);}
+}
+
+@keyframes flicker-bg{
+    50% {background-color: #303030;}
+}
 
 ::selection {
     background: var(--primary-accent) !important;
@@ -140,6 +144,7 @@
 --text-light: #FDFDF8;
 
 --overlay-dark-more: #0000009a;
+--overlay-dark-lm: #0000006f;
 --overlay-dark: #00000045;
 --shadow-dark: #28460A40;
 --glow-green: #6FB40059;
@@ -250,7 +255,7 @@
 }
 
 .logo:hover{
-    animation: float 3s ease-in-out infinite;
+    animation: float 1s ease-in-out infinite;
 }
 
 .loginButton {
@@ -277,11 +282,21 @@
     /* DASHBOARD */
 .containerItemNav a{
     font-family: 'LT', sans-serif;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     color: var(--black);
     margin-top: 5px;
-    padding: 0px 0px;
+    border-radius: 50px;
+    padding: 4px;
 }
+
+.containerItemNav a:hover{
+    color: var(--primary-dark2);
+    background-color: var(--glow-green);
+    border-radius: 50px;
+    padding: 4px 10px;
+}
+
+
 
 .cartIcon{
     font-size: 24px;
@@ -295,7 +310,7 @@
     left: 0;
     width: 100%; 
     height: 100%;
-    background: var(--overlay-dark);
+    background: var(--overlay-dark-lm);
     z-index: 9999; 
 }
 
@@ -316,31 +331,23 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    background-color: var(--white);
+    background-color: var(--glow-green);
+    backdrop-filter: blur(16px);
+    -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .showProfile{
     width: 100%;
     gap: 10px;
-    color: var(--black);
+    color: var(--white);
     text-align: start;
 }
 
 .showProfile a{
-    color: var(--black);
+    color: var(--white);
     text-decoration: none;
 }
-
-/* .arah_back{
-    -webkit-animation: slide_right2 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite;
-            animation: slide_right2 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both infinite;
-} */
-
-/* #dashboard{ */
-    /* margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    margin-top: 75px !important; */
-/* } */
 
 video{
     color: var(--black);
@@ -624,7 +631,7 @@ video{
 .heroTitle {
     color: var(--white);
     font-family: 'Catchye', sans-serif;
-    letter-spacing: 2px; /* Atau font California Stelline jika ingin senada logo */
+    letter-spacing: 2px;
     text-shadow: 0 0 5px var(--overlay-dark);
 }   
 
@@ -681,7 +688,7 @@ video{
     font-weight: 500;
     font-size: 16px;
     letter-spacing: 1px;
-    color: var(--hover-soft);
+    color: var(--white);
 }
 
 .overlay2 {
@@ -691,7 +698,7 @@ video{
     left: 0;
     width: 100%; 
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: var(--overlay-dark-lm);
     z-index: 9999; 
 }
 
@@ -966,8 +973,8 @@ video{
 
     .bungkusKananKiri{
         display: flex;
-        flex-direction: column !important;
-        /* columns: ; */
+        flex-direction: column-reverse !important;
+        margin-top: 10px;
     }
 
     .navKiri{
@@ -976,8 +983,89 @@ video{
         justify-content: start !important;
     }
 
+    .containerItemNav a{ margin: 1px !important; }
+
     .navKanan{
-        padding: 10px 0 20px 25px !important;
+        width: 24%;
+        gap: 10px;
+        padding: 5px 0 10px 25px !important;
+    }
+
+    .isiKanan{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .isiKanan .divider{
+        display: none !important;
+    }
+
+    .fotoProfileNav{
+        text-align: start !important;
+    }
+
+    .overlay1.show {
+        display: flex !important;
+        justify-content: end !important;
+        align-items: start !important;
+        padding-top: 50px;
+    }
+
+    .containerShowProfile {
+        width: 60% !important;
+        min-width: 280px !important;
+        margin: 0 !important;
+        padding: 1.2rem !important;
+        border-radius: 20px 0px 0px 20px !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+        box-shadow: 0 8px 30px var(--overlay-dark) !important;
+        -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .fotoProfilContent img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 50% !important;
+    }
+
+    .showProfile p {
+        text-align: start !important;
+        font-size: 0.95rem !important;
+        margin: 0 !important;
+    }
+
+    .showProfile p span {
+        font-size: 0.85rem !important;
+    }
+
+    .showProfile a {
+        font-size: 0.9rem !important;
+        margin-bottom: 2px !important;
+        background-color: transparent !important;
+        border-radius: 8px !important;
+    }
+
+    .showProfile a:hover {
+        background-color: var(--primary-accent) !important;
+    }
+
+    .editProfile a {
+        background-color: var(--hover-soft) !important;
+        color: var(--primary-dark2) !important;
+        padding: 4px 15px !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .editProfile a:hover {
+        color: var(--primary-accent) !important;
+    }
+
+    .showProfile hr {
+        margin: 0 !important;
     }
 
     video{
@@ -1038,10 +1126,6 @@ video{
 
     .visionText{ font-size: 10px; padding: 4px; bottom: 10px; letter-spacing: 1px;}
 
-    /* .visionBody, .imageVisionCard{ height: 20vh; } */
-
-    /* .imageVisionCard{ object-fit: cover !important; width: 100%; } */
-
     .heroShop{
         background-size: cover;
         margin-top: 10px !important;
@@ -1080,7 +1164,40 @@ video{
         height: fit-content;
         padding: 4px;
     }
+
+    .footer-comparan {
+        padding-top: 24px !important;
+        border-top: 5px solid var(--primary-accent) !important;
+        border-top-right-radius: 16px !important;
+        border-top-left-radius: 16px !important;
+    }
+
+    .footer-text, .footer-links a{
+        font-size: 12px !important;
+    }
     /* TAMPILAN HOME */
+
+    .btn-kembali{
+        padding: 3px 8px;
+        font-size: 12px;
+        border-radius: 5px;
+    }
+
+
+    /* TAMPILAN PESANAN MASUK */
+
+    .bungkusBadge{
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .badge1, .badge2, .badge3 {
+        font-size: 0.75rem !important;
+        padding: 5px 8px !important;
+        width: fit-content !important;
+    }
+
+    /* TAMPILAN PESANAN MASUK */
 
 }
 /* TAMPILAN MOBILE */
