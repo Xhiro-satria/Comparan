@@ -40,7 +40,9 @@
     <style>
         .bodyHome, nav{ background-color: var(--hover-soft); }
 
-        .logoNav{ width: 120px; }
+        .logoNav{ width: 120px; animation: float 3s ease-in-out infinite; transition: all 1s ease-in-out;}
+
+        .logoNav:hover{ animation: float 1s ease-in-out infinite;}
 
         .containerFotoProfilNav{
             width: 40px;
@@ -70,12 +72,20 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .showProfile a:hover {
+            color: var(--primary-accent);
+        }
+
         .editProfile a{
-            /* border: solid 1.75px var(--black); */
-            background-color: var(--soft-black);
-            color: var(--white);
+            background-color: var(--hover-soft);
+            color: var(--primary-dark2);
             font-size: 14px;
             font-weight: 600;
+        }
+
+        .editProfile a:hover {
+            color: var(--primary-main);
         }
 
         #p-nama{ text-transform: capitalize; }
@@ -153,13 +163,13 @@
             color: var(--card-bg);
             padding: 60px 0 20px 0;
             margin-top: 80px;
-            border-top: 5px solid var(--primary-accent);
-            border-top-right-radius: 20px;
-            border-top-left-radius: 20px;
+            border-top: 8px solid var(--primary-accent);
+            border-top-right-radius: 36px;
+            border-top-left-radius: 36px;
+            animation: flicker-bg 5s infinite;
         }
 
         .footer-brand .logoNav {
-
             width: 150px;
             margin-bottom: 15px;
         }
@@ -259,17 +269,18 @@
                 <div class="bungkusKananKiri row w-100 align-items-between">
                     <div class="navKiri col-11 d-flex justify-content-center">
                         <div class="containerItemNav navbar-nav d-flex justify-content-center">
-                            <a class="nav-link rounded-start-pill px-3" aria-current="page" href="#">Dashboard</a>
-                            <a class="nav-link px-3" href="#about">About</a>
-                            <a class="nav-link rounded-end-pill px-3" href="#shop">Shop</a>
+                            <a class="nav-link" aria-current="page" href="#">Dashboard</a>
+                            <a class="nav-link" href="#about">About</a>
+                            <a class="nav-link" href="#shop">Shop</a>
+                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                         </div>
                     </div>
                     <div class="navKanan col-1 text-lg-end p-0">
-                        <div class="d-flex justify-content-between">
+                        <div class="isiKanan d-flex justify-content-between align-content-center mt-1">
                             <a class="nav-link d-flex align-items-center" aria-disabled="true" href="cart.php" id="navbarNavAltMarkup">
                                 <i class="cartIcon bi bi-cart d-flex align-items-center fs-2"></i>
                             </a>
-                            <span class="d-flex align-items-center">|</span>
+                            <span class="divider d-flex align-items-center">|</span>
                             <div id="buka_profil" onclick="bukaProfil(
                                 '<?= $dataUser['nama'] ?>',
                                 '<?= $dataUser['username'] ?>',
@@ -309,6 +320,7 @@
                                         <p class="m-0"><i class="bi bi-c-circle"></i> <span id="p-poin"></span><br><span class="m-0"><i class="bi bi-envelope-at"> <span id="p-email"></span></i></span></p>
                                         <hr>
                                         <a href="my_product.php"><i class="bi bi-bag"></i> My Product</a>
+                                        <a href="pesanan_masuk.php"><i class="bi bi-send"></i> Incoming Orders</a>
                                         <a href="riwayat_order.php"><i class="bi bi-clock-history"></i> Order History</a>
                                         <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
@@ -570,7 +582,7 @@
         </div>
     </section>
 
-    <footer class="footer-comparan">
+    <footer class="footer-comparan mx-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">

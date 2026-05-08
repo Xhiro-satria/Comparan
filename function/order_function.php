@@ -79,6 +79,12 @@
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function jumlah_riwayat_order($connect, $id_user){
+        $sql = "SELECT COUNT(*) as jumlah_order FROM orders WHERE id_user = '$id_user'";
+        $result = $connect->query($sql);
+        return $result->fetch_assoc();
+    }
+
     function detailOrder($connect, $id_order) {
     $result = $connect->query("SELECT order_items.*, products.nama_produk, products.gambar,
                                 orders.tanggal_order, orders.alamat_pengiriman
@@ -111,7 +117,8 @@
         return $data["total"];
     }
 
-    function kirimProduk($connect, $id_item) {
+    function kirimProduk($connect, $id_item, $id_order) {
+        $connect->query("UPDATE orders SET status = 'dikirim' WHERE id_order = '$id_order'");
         $connect->query("UPDATE order_items SET status = 'dikirim' WHERE id_item = '$id_item'");
     }
 
