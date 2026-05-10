@@ -40,10 +40,10 @@ while ($row = $result_rank->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard Premium</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <title>Leaderboard | Comparan</title>
     <style>
         :root {
             --gold: linear-gradient(45deg, #ff9d00, #ffeb3b);
@@ -156,54 +156,55 @@ while ($row = $result_rank->fetch_assoc()) {
     </style>
 </head>
 <body>
-
-<div class="container-leaderboard">
-    <a href="home.php" class="btn-kembali btn-sm position-fixed mt-2"><i class="bi bi-arrow-left"></i> Home</a>
-
-    <h2 class="judul-form mb-4">LEADERBOARD</h2>
     
-    <div class="my-rank-card">
-        <div class="text-center">
-            <small class="d-block opacity-75">Your Rank</small>
-            <h4 class="m-0 fw-bold">#<?= $my_rank ?></h4>
+
+    <div class="container-leaderboard">
+        <a href="home.php" class="btn-kembali btn-sm position-fixed mt-2"><i class="bi bi-arrow-left"></i> Home</a>
+
+        <h2 class="judul-form mb-4">LEADERBOARD</h2>
+        
+        <div class="my-rank-card">
+            <div class="text-center">
+                <small class="d-block opacity-75">Your Rank</small>
+                <h4 class="m-0 fw-bold">#<?= $my_rank ?></h4>
+            </div>
+            <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.3);"></div>
+            <div class="text-center">
+                <small class="d-block opacity-75">Status</small>
+                <h6 class="m-0 fw-bold"><?= $my_rank <= 10 ? 'Pro Buyer' : 'Elite' ?></h6>
+            </div>
         </div>
-        <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.3);"></div>
-        <div class="text-center">
-            <small class="d-block opacity-75">Status</small>
-            <h6 class="m-0 fw-bold"><?= $my_rank <= 10 ? 'Pro Buyer' : 'Elite' ?></h6>
-        </div>
+
+        <?php 
+        $current_rank = 1; 
+        foreach($leaders as $l): 
+            $total_poin = $l['total'] / 1000;
+            
+            $top_class = '';
+            if ($current_rank == 1) $top_class = 'top-1';
+            elseif ($current_rank == 2) $top_class = 'top-2';
+            elseif ($current_rank == 3) $top_class = 'top-3';
+            
+            $me_class = ($l['id_user'] == $id_user) ? 'me' : '';
+            $foto = !empty($l['foto_profile']) ? 'uploads/profil/'.$l['foto_profile'] : 'uploads/profil/default.png';
+        ?>
+            <div class="card-rank <?= $me_class ?>">
+                <div class="rank-number <?= $top_class ?>">
+                    <?= $current_rank ?>
+                </div>
+                <img src="<?= $foto ?>" class="user-avatar shadow-sm">
+                <div class="user-info">
+                    <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>"><?= htmlspecialchars($l['nama']) ?></b>
+                    <span class="text-muted">Collector Status</span>
+                </div>
+                <div class="points">
+                    <?= number_format($total_poin, 1) ?> <small class="fw-light">pts</small>
+                </div>
+            </div>
+            <?php $current_rank++; ?>
+        <?php endforeach; ?>
+
     </div>
-
-    <?php 
-    $current_rank = 1; 
-    foreach($leaders as $l): 
-        $total_poin = $l['total'] / 1000;
-        
-        $top_class = '';
-        if ($current_rank == 1) $top_class = 'top-1';
-        elseif ($current_rank == 2) $top_class = 'top-2';
-        elseif ($current_rank == 3) $top_class = 'top-3';
-        
-        $me_class = ($l['id_user'] == $id_user) ? 'me' : '';
-        $foto = !empty($l['foto_profile']) ? 'uploads/profil/'.$l['foto_profile'] : 'uploads/profil/default.png';
-    ?>
-        <div class="card-rank <?= $me_class ?>">
-            <div class="rank-number <?= $top_class ?>">
-                <?= $current_rank ?>
-            </div>
-            <img src="<?= $foto ?>" class="user-avatar shadow-sm">
-            <div class="user-info">
-                <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>"><?= htmlspecialchars($l['nama']) ?></b>
-                <span class="text-muted">Collector Status</span>
-            </div>
-            <div class="points">
-                <?= number_format($total_poin, 1) ?> <small class="fw-light">pts</small>
-            </div>
-        </div>
-        <?php $current_rank++; ?>
-    <?php endforeach; ?>
-
-</div>
 
 </body>
 </html>

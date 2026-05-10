@@ -37,14 +37,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Add New Product | Comparan</title>
     <style>
         /* *{outline: solid red 2px;} */
 
@@ -60,15 +59,15 @@
         .containerProfil{ height: 100vh; width: 100%; }
 
         .card-body p, .card-body p span a{ color: var(--primary-main); }
-
-        .buttonCheckout{ font-family: 'safira'; }
     </style>
 </head>
 <body>
-    <div class="containerProfil d-flex justify-content-center align-items-center">
-        <div class="card w-25 p-4 pt-1 rounded-5 shadow">
+    <div class="containerProfil d-flex justify-content-center align-items-start p-5">
+        <div class="card p-4 pt-1 rounded-5 shadow">
             <div class="card-body d-flex flex-column align-items-center">
-                <a href="my_product.php" class=" w-100 text-end text-decoration-none text-black"><i class="bi bi-x-lg"></i></a>
+                <div class="w-100 text-end">
+                    <a href="my_product.php" class="text-decoration-none text-black"><i class="bi bi-x-lg"></i></a>
+                </div>
                 <h2 class="judul-form profile mb-3">Add Product</h2>
                 <?php if ($pesan === "Berhasil"): ?>
                     <p class="mb-2">Add Product Success! <span><a href="my_product.php" class="fw-bold">See Your Product</a></span></p>
@@ -84,7 +83,7 @@
                     <textarea type="text" class="form-control mb-3" name="deskripsi" placeholder="Description" required></textarea>
                     <label class="w-100 text-center">Add Product Image</label>    
                     <input type="file" class="form-control mb-3" name="gambar" required>
-                    <button type="submit" class="buttonCheckout btn form-control ">Add Product</button>
+                    <button type="submit" class="buttonGeser">Add Product</button>
                 </form>
             </div>
         </div>

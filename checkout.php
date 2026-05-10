@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Checkout</title>
+    <title>Checkout | Comparan</title>
     <style>
         body{ background-color: var(--hover-soft); font-family: 'Inter';}
 

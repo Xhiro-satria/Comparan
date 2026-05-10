@@ -45,7 +45,6 @@
             margin: 60px auto 0 auto;
         }
 
-        /* Header Poin Full Width */
         .poin-card {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
             color: var(--white);
@@ -63,21 +62,13 @@
 
         .poin-card b { font-size: 30px; }
 
-        /* Grid Layout Utama */
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Membagi 2 kolom sama besar */
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
             align-items: start;
         }
 
-        /* Responsive: Jadi 1 kolom kalau di HP */
-        @media (max-width: 850px) {
-            .main-layout { grid-template-columns: 1fr; }
-            .container { margin-top: 80px; }
-        }
-
-        /* Gaya Tiket */
         .ticket {
             display: flex;
             background: var(--bg-soft);
@@ -151,22 +142,23 @@
         }
 
         .status-badge {
-            font-size: 10px;
+            text-transform: uppercase;
+            font-size: 12px;
             font-weight: bold;
-            color: var(--success);
-            border: 1px solid var(--success);
-            padding: 2px 6px;
-            border-radius: 4px;
+            color: var(--primary-main);
+            border: 2px solid var(--primary-main);
+            padding: 2px 8px;
+            border-radius: 6px;
         }
 
-        .alert {
+        .alert{
+            background-color: var(--primary-accent);
             grid-column: span 2;
             padding: 12px;
             border-radius: 10px;
             margin-bottom: 10px;
             text-align: center;
         }
-        @media (max-width: 850px) { .alert { grid-column: span 1; } }
 
         .alert-success { background: var(--hover-success); color: var(--primary-accent); }
 
@@ -181,11 +173,94 @@
             border-bottom: 2px solid rgba(0,0,0,0.05);
         }
         
-        p{
+        .kosong{
             text-align: start;
             font-family: 'Belgiano';
             font-size: 18px;
             color: var(--red);
+        }
+
+        #overlay-logout{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: var(--overlay-dark);
+            z-index:9999;
+        }
+
+        .bg-redeem{
+            background:white;
+            width:300px;
+            margin:200px auto;
+            padding:20px;
+            border-radius:10px;
+            text-align:center;
+        }
+
+        .bg-redeem div{
+            display:flex;
+            gap:10px;
+            justify-content:center;
+        }
+
+        @media (max-width: 768px){
+            .main-layout { grid-template-columns: 1fr; }
+            
+            .container { margin-top: 80px; }
+
+            .alert { grid-column: span 1; }
+            .poin-card{
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 18px;
+                border-radius: 16px;
+            }
+
+            .poin-card span{ font-size: 16px; }
+
+            .poin-card b{ font-size: 24px; }
+
+            .main-layout{ grid-template-columns: 1fr; gap: 20px; }
+
+            .ticket{ flex-direction: row; align-items: stretch; }
+
+            .ticket-left{ padding: 14px; }
+
+            .ticket-right{ width: 90px; padding: 10px; }
+
+            .ticket::before, .ticket::after{ left: calc(100% - 45px); }
+
+            .ticket-name{ font-size: 14px; }
+
+            .ticket-val{ font-size: 13px; }
+
+            .ticket-cost{ font-size: 10px; }
+
+            .btn-tukar{ font-size: 10px; padding: 6px 8px; text-align: center; }
+
+            .status-badge{ font-size: 10px; padding: 4px 6px; text-align: center; }
+
+            h3{ font-size: 16px; margin-bottom: 15px; }
+
+            .kosong{ font-size: 15px; }
+
+            .bg-redeem{ width: 90%; margin: 180px auto; padding: 18px; }
+
+            .bg-redeem div{ flex-direction: column; }
+
+            .bg-redeem a, .bg-redeem button{ width: 100%; }
+
+            /* tombol back */
+            .btn-kembali{
+                top: 15px;
+                left: 15px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -195,32 +270,32 @@
 
 <div class="container">
     <div class="poin-card">
-        <span style="font-weight: bold; font-size: 20px;">Saldo Poin Anda:</span>
-        <b>🪙 <?= number_format($poin, 0, ',', '.') ?></b>
+        <span>Your Points : </span>
+        <b><i class="bi bi-c-circle text-warning"></i> <?= number_format($poin, 0, ',', '.') ?></b>
     </div>
 
     <div class="main-layout">
         <?php if ($pesan === "berhasil"): ?>
-            <div class="alert alert-success">✨ Berhasil menukar voucher!</div>
+            <div class="alert alert-success">✨ Redeem Success!</div>
         <?php elseif ($pesan === "poin_kurang"): ?>
-            <div class="alert alert-danger">❌ Poin tidak cukup.</div>
+            <div class="alert alert-danger">❌ Not enough points.</div>
         <?php endif; ?>
 
         <div class="section">
-            <h3>🎟️ Tukar Voucher</h3>
+            <h3><i class="bi bi-tags"></i> Redeem Voucher</h3>
             <?php if (count($vouchers) === 0): ?>
-                <p style="color: #64748b;">Belum ada voucher tersedia.</p>
+                <p class="kosong">Nothing available vouchers yet.</p>
             <?php else: ?>
                 <?php foreach ($vouchers as $v): ?>
                     <div class="ticket">
                         <div class="ticket-left">
                             <span class="ticket-name"><?= $v["nama"] ?></span>
-                            <span class="ticket-val">Potongan Rp <?= number_format($v["nilai"], 0, ',', '.') ?></span>
-                            <span class="ticket-cost">Biaya: <?= $v["poin_diperlukan"] ?> Poin</span>
+                            <span class="ticket-val">Rp <?= number_format($v["nilai"], 0, ',', '.') ?> Discount</span>
+                            <span class="ticket-cost">Cost: <?= $v["poin_diperlukan"] ?> Points</span>
                         </div>
                         <div class="ticket-right">
                             <a href="#" 
-                                class="btn-tukar" onclick="konfirmasiTukar(<?= $v['id_voucher'] ?>); return false;">TUKAR</a>
+                                class="btn-tukar" onclick="konfirmasiTukar(<?= $v['id_voucher'] ?>); return false;">REDEEM</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -228,27 +303,27 @@
         </div>
 
         <!-- Modal Konfirmasi -->
-    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
-        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
-            <h5>Konfirmasi Tukar Voucher</h5>
-            <p>Apakah kamu yakin ingin menukar Voucher ini?</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn btn-primary" >Ya, Tukar</a>
-                <button onclick="tutupLogout()" class="btn btn-danger">Batal</button>
+    <div id="overlay-logout">
+        <div class="bg-redeem">
+            <h5>Confirm Redeem</h5>
+            <p class="text-center">Are you sure you want to redeem this voucher?</p>
+            <div>
+                <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn-outline-success" >Yes</a>
+                <button onclick="tutupLogout()" class="btn btn-outline-danger mx-1">Cancel</button>
             </div>
         </div>
     </div>
 
         <div class="section">
-            <h3>🎁 Voucher Saya</h3>
+            <h3><i class="bi bi-tags-fill"></i> My Vouchers</h3>
             <?php if (count($milik) === 0): ?>
-                <p style="color: #64748b;">Kamu belum memiliki voucher.</p>
+                <p class="kosong">You don't have any vouchers yet.</p>
             <?php else: ?>
                 <?php foreach ($milik as $v): ?>
-                    <div class="ticket" style="opacity: 0.95;">
+                    <div class="ticket">
                         <div class="ticket-left">
                             <span class="ticket-name"><?= $v["nama"] ?></span>
-                            <span class="ticket-val">Potongan Rp <?= number_format($v["nilai"], 0, ',', '.') ?></span>
+                            <span class="ticket-val">Rp<?= number_format($v["nilai"], 0, ',', '.') ?> Discount</span>
                         </div>
                         <div class="ticket-right">
                             <span class="status-badge"><?= $v["status"] ?></span>

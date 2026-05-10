@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
-    <title>FAQ & Help Center - Comparan</title>
+    <title>FAQ & Help Center | Comparan</title>
     <style>
         body, nav{ background-color: var(--hover-soft); }
 
@@ -184,28 +184,29 @@
 </head>
 <body class="mx-4 m-0 p-0">
     <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center mx-3" href="home.php">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="assets/logo-fix.png" alt="Logo Comparan" class="logoNav">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler mx-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="row w-100 align-items-center">
-                    <div class="col-11 d-flex justify-content-center">
+                <div class="bungkusKananKiri row w-100 align-items-between">
+                    <div class="navKiri col-11 d-flex justify-content-center">
                         <div class="containerItemNav navbar-nav d-flex justify-content-center">
-                            <a class="nav-link rounded-start-pill px-3" aria-current="page" href="home.php#dashboard">Dashboard</a>
-                            <a class="nav-link px-3" href="home.php#about">About</a>
-                            <a class="nav-link rounded-end-pill px-3" href="home.php#shop">Shop</a>
+                            <a class="nav-link" aria-current="page" href="home.php#dashboard">Dashboard</a>
+                            <a class="nav-link" href="home.php#about">About</a>
+                            <a class="nav-link" href="home.php#shop">Shop</a>
+                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                         </div>
                     </div>
-                    <div class="col-1 text-lg-end p-0">
-                        <div class="d-flex justify-content-between">
+                    <div class="navKanan col-1 text-lg-end p-0">
+                        <div class="isiKanan d-flex justify-content-between align-content-center mt-1">
                             <a class="nav-link d-flex align-items-center" aria-disabled="true" href="cart.php" id="navbarNavAltMarkup">
                                 <i class="cartIcon bi bi-cart d-flex align-items-center fs-2"></i>
                             </a>
-                            <span class="d-flex align-items-center">|</span>
+                            <span class="divider d-flex align-items-center">|</span>
                             <div id="buka_profil" onclick="bukaProfil(
                                 '<?= $dataUser['nama'] ?>',
                                 '<?= $dataUser['username'] ?>',
@@ -245,8 +246,9 @@
                                         <p class="m-0"><i class="bi bi-c-circle"></i> <span id="p-poin"></span><br><span class="m-0"><i class="bi bi-envelope-at"> <span id="p-email"></span></i></span></p>
                                         <hr>
                                         <a href="my_product.php"><i class="bi bi-bag"></i> My Product</a>
+                                        <a href="pesanan_masuk.php"><i class="bi bi-send"></i> Incoming Orders</a>
                                         <a href="riwayat_order.php"><i class="bi bi-clock-history"></i> Order History</a>
-                                        <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
+                                        <a href="add_product.php"><i class="bi bi-upload"></i> Upload New Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
                                         <hr>
                                         <a href="#" onclick="konfirmasiSignOut(); return false;"><i class="bi bi-box-arrow-right"></i> Sign Out</a>

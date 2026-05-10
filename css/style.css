@@ -349,6 +349,18 @@
     text-decoration: none;
 }
 
+.btn-outline-success{
+    border: solid 1px var(--primary-main);
+    background-color: var(--white);
+    color: var(--primary-main);
+    padding: 6px;
+    border-radius: 6px;
+    transition: all .2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-outline-success:hover{ background-color:  var(--primary-main); border: solid 1px var(--primary-main);  color: var(--white);}
+
 video{
     color: var(--black);
     opacity: 36%;
@@ -649,6 +661,7 @@ video{
     /* margin-left: -1rem;
     margin-right: -1rem; */
     margin-bottom: 2rem;
+    min-width: 0;
 }
 
 .productBody{
@@ -836,47 +849,24 @@ video{
     margin: 0;
 }
 
-.buttonCart {
+.buttonGeser {
     font-family: 'Safira', sans-serif;
     letter-spacing: 1px;
     width: 100%;
-    border-radius: 50px;
-    border: 1px solid var(--primary-main);
-    color: var(--white);
-    margin: 16px 0px;
-    background: linear-gradient(to left, var(--primary-main) 50%, transparent 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: all 0.4s ease-out;
-    border-radius: 50rem !important; 
-    overflow: hidden !important;
-}
-
-.buttonCart:hover {
-    border: 1px solid var(--primary-main);
-    color: var(--primary-main);
-    background-position: left bottom;
-}
-.buttonCheckout {
-    font-family: 'Safira', sans-serif;
-    letter-spacing: 1px;
-    width: 100%;
-    border-radius: 50px;
+    padding: 10px 18px;
+    border-radius: 999px;
     border: 1px solid var(--primary-main);
     color: var(--primary-main);
     background: linear-gradient(to right, var(--primary-main) 50%, transparent 50%);
     background-size: 200% 100%;
     background-position: right bottom;
-    transition: all 0.4s ease-out;
-    border-radius: 50rem !important; 
-    overflow: hidden !important;
+    cursor: pointer;
+    transition: color 0.4s ease, background-position 0.4s ease, transform 0.2s ease;
 }
 
-.buttonCheckout:hover {
-    border: 1px solid var(--primary-main);
-    color: var(--white);
-    background-position: left bottom;
-}
+.buttonGeser:hover { color: var(--card-bg); background-position: left bottom; }
+
+.buttonGeser:active { transform: scale(0.98); }
 
 .btn-kembali {
     position: absolute;
@@ -906,6 +896,18 @@ video{
 
 /* TAMPILAN MOBILE */
 @media(max-width: 768px){
+    /* global */
+    .judul-form{
+        font-size: 18px !important;
+    }
+    
+    .btn-kembali{
+        padding: 3px 8px;
+        font-size: 10px !important;
+        border-radius: 5px;
+    }
+    /* global */
+
     /* TAMPILAN LOGIN */
     .kolom-kiri{
         height: 50vh !important;
@@ -950,7 +952,7 @@ video{
         padding: 0px !important;
     }
 
-    .navbar-collapse{ border-bottom : 1px var(--primary-dark2) solid; margin-bottom: 10px;}
+    .navbar-collapse{ border-bottom : 1px var(--primary-dark2) solid; margin-bottom: 10px; }
 
     .navbar-toggler{
         padding: 0px 0px !important;
@@ -975,6 +977,7 @@ video{
         display: flex;
         flex-direction: column-reverse !important;
         margin-top: 10px;
+        padding: 0px 12px !important;
     }
 
     .navKiri{
@@ -983,17 +986,23 @@ video{
         justify-content: start !important;
     }
 
-    .containerItemNav a{ margin: 1px !important; }
+    .containerItemNav a{ margin: 1px !important; font-size: 12px !important; padding: 1px;}
+
+    .containerItemNav a:hover{
+        padding: 1px;
+        background-color: var(--transparent) !important;
+    }
 
     .navKanan{
         width: 24%;
-        gap: 10px;
-        padding: 5px 0 10px 25px !important;
+        gap: 20px;
+        padding: 5px 0 5px 18px !important;
     }
 
     .isiKanan{
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column-reverse;
+        gap: 10px;
     }
 
     .isiKanan .divider{
@@ -1001,6 +1010,8 @@ video{
     }
 
     .fotoProfileNav{
+        display: flex;
+        justify-content: flex-start !important;
         text-align: start !important;
     }
 
@@ -1094,7 +1105,7 @@ video{
         display: none;
     }
 
-    .aboutTitle{ font-size: 14px !important; margin-bottom: 16px; }
+    .aboutTitle{ font-size: 12px !important; margin-bottom: 16px; padding: 4px 6px;}
 
     .taglineAboutContent{ font-size: 30px !important; }
 
@@ -1137,33 +1148,46 @@ video{
 
     .heroTitle{ font-size: 20px; margin-bottom: 0 !important; }
 
-    .ourProduct{ font-size: 24px; }
+    .ourProduct{ font-size: 20px !important; }
 
-    /* .heroSubtitle{ font-size: 7px; } */
-
-    .carousel-right {
-        /* grid-auto-flow: row;
-        grid-template-rows: none;
-        grid-template-columns: repeat(2, 1fr); */
-        overflow-x: hidden !important;
+    .carousel-right{
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: unset;
+        grid-auto-flow: row;
+        gap: 12px;
+        overflow-x: hidden;
+        width: 100%;
     }
 
-    .productCard{ padding: 10px !important; margin-bottom: 8px !important; }
-    
-    .productBody{
-        border-radius: 16px ;
-        padding: 12px !important;
+    .carousel-right .productCard{
+        width: 100%;
+        min-width: 0;
+        margin-bottom: 0px !important;
     }
 
-    .productCard img{
-        border-radius: 8px;
+    .productCard{
+        margin-bottom: 0 !important;
+        padding: 4px 12px !important;
+        border-radius: 14px !important;
     }
 
-    .showDetails{
-        font-size: 14px;
-        height: fit-content;
-        padding: 4px;
+    .productBody{ padding: 8px; border-radius: 14px !important; }
+
+    .productBody img{
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 12px;
     }
+
+    .productBody b{ font-size: 12px !important; display: block; margin-top: 8px; }
+
+    .productHarga{ font-size: 12px !important; margin-bottom: 8px !important;}
+
+    .showDetails{ font-size: 13px; padding: 4px; height: 24px; }
+
+    .ourProduct{ font-size: 26px; margin-bottom: 20px !important; }
 
     .footer-comparan {
         padding-top: 24px !important;
@@ -1172,24 +1196,12 @@ video{
         border-top-left-radius: 16px !important;
     }
 
-    .footer-text, .footer-links a{
-        font-size: 12px !important;
-    }
+    .footer-text, .footer-links a{ font-size: 12px !important; }
     /* TAMPILAN HOME */
-
-    .btn-kembali{
-        padding: 3px 8px;
-        font-size: 12px;
-        border-radius: 5px;
-    }
-
 
     /* TAMPILAN PESANAN MASUK */
 
-    .bungkusBadge{
-        display: flex;
-        flex-direction: column !important;
-    }
+    .bungkusBadge{ display: flex; flex-direction: column !important; }
 
     .badge1, .badge2, .badge3 {
         font-size: 0.75rem !important;
@@ -1198,6 +1210,53 @@ video{
     }
 
     /* TAMPILAN PESANAN MASUK */
+
+    /* TAMPILAN ADD PRODUCT */
+    .containerProfil{ padding-top: 100px !important; }
+
+    .containerProfil input, textarea, label{ font-size: 10px !important; }
+
+    .containerProfil textarea{ margin-bottom: 10px !important; }
+
+    .containerProfil button{ padding: 4px; font-size: 12px; }
+
+    /* TAMPILAN ADD PRODUCT */
+
+    /* TAMPILAN MY PRODUCT */
+    .my_produk .grid{ gap: 8px; justify-content: center; }
+
+    .my_produk .card{
+        width: 115px !important;
+        min-width: 115px !important;
+        border-radius: 16px !important;
+    }
+
+    .my_produk .card-body{ padding: 6px; }
+
+    .my_produk .card img{
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 10px !important;
+    }
+
+    .my_produk .card-title{
+        font-size: 11px;
+        line-height: 1.2;
+        margin: 4px 0;
+    }
+
+    .my_produk .card-price{ font-size: 11px; }
+
+    .my_produk small{ font-size: 9px; }
+
+    .my_produk .tombol-group button{ font-size: 7px; padding: 5px 1px; }
+
+    .my_produk .buttonGeser{ font-size: 11px; padding: 6px 10px; }
+
+    .my_produk .judul-form{ font-size: 20px !important; }
+
+    /* TAMPILAN MY PRODUCT */
 
 }
 /* TAMPILAN MOBILE */

@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Home</title>
+    <title>Dashobard | Comparan</title>
     <style>
         .bodyHome, nav{ background-color: var(--hover-soft); }
 
@@ -104,18 +104,33 @@
 
         .ourProduct{
             margin: 16px !important;
-            font-family: 'Aesthetic';
+            font-family: 'Voguella';
             color: var(--primary-main);
             font-style: italic;
         }
 
-        .carousel-right {
+        .carousel-right{
             display: grid;
-            grid-auto-flow: column; /* isi ke samping */
-            grid-template-rows: repeat(2, auto); /* 2 baris */
-            grid-auto-columns: 210px;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(2, auto);
+
             gap: 16px;
-            overflow-x: auto; /* scroll aktif */
+
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            padding-bottom: 10px;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-right::-webkit-scrollbar{
+            display: none;
+        }
+
+        .carousel-right .productCard{
+            width: 210px;
         }
 
         /* .carousel-right{
@@ -153,10 +168,6 @@
             border-radius: 10px;
             text-align: center;
         }
-
-        .btn-outline-success{ border: solid 1px var(--primary-main); color: var(--primary-main); }
-
-        .btn-outline-success:hover{ background-color:  var(--primary-dark); border: solid 1px var(--primary-dark);  }
 
         .footer-comparan {
             background-color: var(--soft-black);
@@ -254,6 +265,59 @@
             font-size: 13px;
             color: var(--gray);
         }
+
+        @media (max-width: 768px){
+            .modal-konten{
+                display: flex !important;
+                flex-direction: column !important;
+                border-radius: 16px;
+                padding: 8px 16px !important;
+            }
+
+            .col-5{
+                width: 100% !important;
+                height: 270px;
+                padding: 8px 12px !important;
+            }
+
+            .col-5 img{
+                width: 100%;
+                object-fit: cover !important;
+                border-radius: 16px;
+            }
+
+            /* .productInfo{  } */
+
+            #m-nama{ font-size: 16px; }
+
+            .pemilik{ font-size: 12px; margin: 0; }
+
+            .hargaProduct{ font-size: 16px !important; margin: 0; }
+
+            .col-7{ width: 100%; display: flex; justify-content: space-between !important; }
+
+            .productInfo hr{ margin: 2px; }
+
+            .spesifikasi{ font-size: 14px !important; }
+
+            .productData{ font-size: 12px !important; margin: 0 !important; }
+
+            .buyOption{ width: 50%; margin-right: 0 !important; }
+
+            .buyOptionItems{ padding: 4px 8px; border-radius: 8px; }
+
+            .buyOptionItems label{ font-size: 16px !important; }
+
+            .buttonQuantity{ width: 100% !important; height: 30px !important; }
+
+            .btn-qty{ font-size: 16px; }
+
+            #m-jumlah{ font-size: 12px; }
+
+            .productStock{ margin-top: 4px; font-size: 16px; }
+
+            .buttonGeser{ font-size: 11px !important; padding: 4px 4px;}
+        }
     </style>
 </head>
 <body class="bodyHome mx-4 m-0 p-0">
@@ -322,7 +386,7 @@
                                         <a href="my_product.php"><i class="bi bi-bag"></i> My Product</a>
                                         <a href="pesanan_masuk.php"><i class="bi bi-send"></i> Incoming Orders</a>
                                         <a href="riwayat_order.php"><i class="bi bi-clock-history"></i> Order History</a>
-                                        <a href="add_product.php"><i class="bi bi-upload"></i> Upload Product</a>
+                                        <a href="add_product.php"><i class="bi bi-upload"></i> Upload New Product</a>
                                         <a href="voucher.php"><i class="bi bi-tag"></i> My Voucher</a>
                                         <hr>
                                         <a href="#" onclick="konfirmasiSignOut(); return false;"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
@@ -343,7 +407,7 @@
             <p>Do you want to logout?</p>
             <div class="d-flex justify-content-center">
                 <a href="logout.php" class="btn btn-outline-danger mx-1">Yes</a>
-                <button onclick="tutupLogout()" class="btn btn-outline-success mx-1">Cancel</button>
+                <button onclick="tutupLogout()" class="btn-outline-success mx-1">Cancel</button>
             </div>
         </div>
     </div>
@@ -465,7 +529,7 @@
             </div>
         </div>
         <div class="d-flex ">
-            <h1 class="ourProduct text-start mx-3 mt-5 mb-5"><u>Our products✦</u></h1>
+            <h1 class="ourProduct text-start mx-3 mt-5 mb-5"><u>Our products</u></h1>
             <!-- <form method="GET">
                 <input type="text" 
                     name="keyword" 
@@ -484,37 +548,11 @@
         <?php if (count($produk) === 0): ?>
             <p>Belum ada produk tersedia.</p>
             <?php else: ?>
-                <?php if (count($produk) > 12 ) {?>
-                <div class="row m-0 w-100 justify-content-start">
-                    <?php foreach ($produk as $p): ?>
-                        <div class="productCard col-6 col-md-2">
-                            <div class="productBody card-body">
-                                <img src="uploads/produk/<?= $p["gambar"] ?>">
-                                <b class="mt-2"><?= $p["nama_produk"] ?></b>
-                                <div class="productHarga mb-3">
-                                    Rp<?= number_format($p["harga"], 0, ',', '.') ?>
-                                </div>
-                                <button class="showDetails w-100 rounded-pill" onclick="bukaModal(
-                                '<?= $p['gambar'] ?>',
-                                '<?= $p['nama_pemilik'] ?>',
-                                '<?= htmlspecialchars(addslashes($p['nama_produk'])) ?>',
-                                '<?= $p['harga'] ?>',
-                                '<?= $p['stok'] ?>',
-                                '<?= $p['kategori'] ?>',
-                                '<?= htmlspecialchars(addslashes(preg_replace('/\s+/', ' ', $p['deskripsi']))) ?>',
-                                '<?= $p['status'] ?>',
-                                '<?= $p['id_produk'] ?>'
-                                )">
-                                show details
-                                </button>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                <?php 
+                $isScroll = count($produk) > 19;
+                ?>
 
-                <!-- scroll kanan ketika item kurang dari 12 -->
-                <?php } else { ?>
-                <div class="carousel-right m-0 justify-content-start">
+                <div class="<?= $isScroll ? 'carousel-right' : 'row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3' ?>">
                     <?php foreach ($produk as $p): ?>
                         <div class="productCard">
                             <div class="productBody card-body">
@@ -539,13 +577,15 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-                <?php } ?>
+                </div>
             <?php endif; ?>
     
         <!-- Modal -->
         <div class="overlay2" id="overlay2" onclick="tutupModal()">
             <div class="modal-konten row w-75" onclick="event.stopPropagation()">
-                <span class="tutup p-0 text-end" onclick="tutupModal()"><i class="bi bi-x"></i></span><br>
+                <div class="w-100 text-end p-0  ">
+                    <span class="tutup p-0 text-end" onclick="tutupModal()"><i class="bi bi-x"></i></span><br>
+                </div>
                 <div class="modalCol col-5 p-3"> 
                     <img id="m-gambar" src="" class="img-fluid"><br><br>
                 </div>
@@ -572,8 +612,8 @@
                             </div>
                             <h5 class="productStock mb-3">Stock : <span id="m-stok"></span></h5>
                             <div class="row m-0">
-                                <button class="buttonCart btn" onclick="tambahKeranjang()">+ Add to cart <i class="bi bi-cart-fill"></i></button>
-                                <button class="buttonCheckout btn" onclick="beliSekarang()">Checkout now</button>
+                                <button class="buttonGeser mb-2" onclick="tambahKeranjang()">+ Add to cart <i class="bi bi-cart-fill"></i></button>
+                                <button class="buttonGeser mb-2" onclick="beliSekarang()">Checkout now</button>
                             </div>
                         </div>
                     </div>
@@ -614,10 +654,10 @@
                     <h4 class="footer-title">Customer Care</h4>
                     <ul class="footer-links">
                         <li><a href="faq.php"><i class="bi bi-question-circle"></i> FAQ & Help Center</a></li>
-                        <li><a href="#"><i class="bi bi-box-seam"></i> Shipping & Delivery</a></li>
-                        <li><a href="#"><i class="bi bi-arrow-counterclockwise"></i> Return Policy</a></li>
-                        <li><a href="#"><i class="bi bi-shield-check"></i> Terms & Privacy</a></li>
-                        <li><a href=""><i class="bi bi-headset"></i> Contact Us</a></li>
+                        <li><a href="shipping_delivery.php"><i class="bi bi-box-seam"></i> Shipping & Delivery</a></li>
+                        <li><a href="return_policy.php"><i class="bi bi-arrow-counterclockwise"></i> Return Policy</a></li>
+                        <li><a href="terms_privacy.php"><i class="bi bi-shield-check"></i> Terms & Privacy</a></li>
+                        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=cndrmhrdka@gmail.com&su=Customer Support Comparan&body=Hello Comparan Team," target="_blank"><i class="bi bi-headset"></i> Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">

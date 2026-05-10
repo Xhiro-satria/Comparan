@@ -23,6 +23,7 @@ $pesan   = $_GET["pesan"] ?? "";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
+    <title>Incoming Orders | Comparan</title>
     <style>
         @keyframes muter {
             from {

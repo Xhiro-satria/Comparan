@@ -16,7 +16,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-        <!-- Bootstrap 5 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -30,16 +31,15 @@
             background: var(--hover-soft);
         }
 
-        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;}
 
-        h2{
+        .judul{
             font-family: 'Safira';
             font-weight: bold;
             color: var(--primary-main);
             margin: 0px 0px 20px;
         }
-
-        .buttonCheckout{
+        .buttonGeser{
             text-decoration: none;
             padding: 10px 15px;
             border-radius: 50px;
@@ -56,7 +56,7 @@
         }
         .card:hover { transform: translateY(-5px); }
 
-        .card img { width: 100%; height: 150px; object-fit: cover; }
+        .card img { width: 100%; object-fit: cover; aspect-ratio: 1/1;}
 
         .card-body { padding: 12px; }
 
@@ -71,7 +71,6 @@
         
         .card-price { color: var(--primary-main); font-weight: bold; }
         
-        /* Button Group */
         .tombol-group { 
             display: flex; 
             border-top: 1px solid var(--gray); 
@@ -147,31 +146,36 @@
         .form-control, label, p{
             font-family: 'Inter', sans-serif;
         }
+
+        .bungkusJudul .judul-form{
+            font-size: 28px;
+        }
+
     </style>
 </head>
-<body>
+<body class="my_produk">
     <div class="w-100 d-flex justify-content-start align-items-center">
         <a href="home.php" class="btn-kembali"><i class="bi bi-arrow-left"></i> Back to Home</a>
     </div>
-    <div class="w-100 d-flex justify-content-center align-content-center mt-5">
-        <h2>My Products <i class="bi bi-bag-heart-fill"></i></h2>
+    <div class="bungkusJudul w-100 d-flex justify-content-center align-content-center mt-5">
+        <h2 class="judul-form">My Products <i class="bi bi-bag-heart-fill"></i></h2>
     </div>
     <hr>
-    <div class="m-5">
+    <div class="m-1">
         <?php if (count($produk) === 0): ?>
             <div class="w-100 d-flex flex-column justify-content-center align-items-center">
                 <p class="produkKosong">You haven't uploaded any products yet</p>
-                <div class="container-fluid w-100 text-center px-5">
-                    <a href="add_product.php" class="buttonCheckout fw-semibold">+ Add product</a>
+                <div class="container-fluid w-100 text-center">
+                    <a href="add_product.php" class="buttonGeser fw-semibold">+ Add product</a>
                 </div>
             </div>
         <?php else: ?>
-            <div class="container-fluid w-100 text-start">
-                <a href="add_product.php" class="buttonCheckout fw-semibold">+ Add product</a>
+            <div class="container-fluid w-100 text-start px-0">
+                <a href="add_product.php" class="buttonGeser fw-semibold">+ Add product</a>
             </div>
             <div class="grid mt-5 justify-content-center align-items-center">
                 <?php foreach ($produk as $p): ?>
-                <div class="card rounded-5 mb-4 mx-1">
+                <div class="card rounded-5">
                     <div class="card-body">
                         <img src="uploads/produk/<?= $p['gambar'] ?> " class="rounded-4">
                         <span class="card-title my-2"><?= htmlspecialchars($p['nama_produk']) ?></span>
@@ -241,7 +245,7 @@
                 <textarea name="deskripsi" class="form-control" id="e-deskripsi" rows="4"></textarea>
                 <label>Change Image (Optional)</label>
                 <input type="file" class="form-control" name="gambar">
-                <button type="submit" class="buttonCheckout mt-2 py-2">Save Change</button>
+                <button type="submit" class="buttonGeser mt-2 py-2">Save Change</button>
             </form>
         </div>
     </div>

@@ -30,18 +30,16 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Cart</title>
+    <title>Cart | Comparan</title>
     <style>
-        body{
-            background-color: var(--hover-soft);
-            margin: 20px;
-        }
+        body{ background-color: var(--hover-soft); margin: 20px; }
         .item {
             background-color: var(--card-bg);
             border-radius: 16px;
@@ -54,8 +52,10 @@
         }
         .item img {
             width: 80px;
-            height: 80px;
+            aspect-ratio: 1/1;
             object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 0 8px var(--overlay-dark);
         }
         .overlayy {
             display: none;
@@ -92,14 +92,6 @@
             text-decoration: none;
         }
 
-        h2{
-            font-family: 'Safira';
-            font-weight: bold;
-            font-size: 36px;
-            color: var(--primary-main);
-            margin: 50px 0px 25px;
-        }
-
         .emptyCart{
             font-family: 'Belgiano';
             font-size: 18px;
@@ -111,12 +103,45 @@
         .bungkusData b{ text-transform: capitalize; }
 
         form{ font-family: 'Inter', sans-serif; }
+
+        @media (max-width: 768px){
+            .container-button-data{
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+            }
+
+            .bungkus-img{ height: 100% !important; }
+
+            .bungkus-img img{ width: 100px; border-radius: 8px; }
+
+            b{ font-size: 13px; }
+
+            td{ font-size: 12px; }
+
+            button, .button2 {
+                margin-top: 4px;
+                font-size: 12px;
+                padding: 4px 8px;
+                border-radius: 5px;
+            }
+
+            .overlayy{ padding: 20px; }
+
+            .modal-content{ width: 360px; }
+            
+            .judul-form{ font-size: 20px !important; }
+
+            p, label{ font-size: 14px !important; margin-bottom: 4px; }
+
+            .text-voucher, input{ font-size: 12px !important; }
+        }
     </style>
 </head>
 <body>
     <a href="home.php" class="btn-kembali"><i class="bi bi-arrow-left"></i> Back to Home</a>
     <div class="w-100 d-flex justify-content-center align-items-center">
-        <h2>Your Seedlings <i class="bi bi-cart"></i></h2>
+        <h2 class="judul-form mt-5 mb-3">Your Seedlings <i class="bi bi-cart"></i></h2>
     </div>
 
     <?php if (count($items) === 0): ?>
@@ -126,41 +151,45 @@
 
         <?php foreach ($items as $item): ?>
             <div class="item">
-                <img src="uploads/produk/<?= $item["gambar"] ?>">
-                <div class="bungkusData">
-                    <b><?= $item["nama_produk"] ?></b><br>
-                    <table>
-                        <tr>
-                            <td>Price per item</td>
-                            <td>‎ ‎  :</td>
-                            <td>‎ Rp<?= number_format($item["harga"], 0, ',', '.') ?></td>
-                        </tr>
-                        <tr>
-                            <td>Quantity</td>
-                            <td>‎ ‎  :</td>
-                            <td>‎ <?= $item["jumlah"] ?></td>
-                        </tr>
-                        <tr>
-                            <td>Subtotal</td>
-                            <td>‎ ‎  :</td>
-                            <td>‎ Rp<?= number_format($item["harga"] * $item["jumlah"], 0, ',', '.') ?></td>
-                        </tr>
-                    </table>
+                <div class="bungkus-img">
+                    <img src="uploads/produk/<?= $item["gambar"] ?>">
                 </div>
-                <div>
-                    <button onclick="bukaModal(
-                        '<?= $item['id_item'] ?>',
-                        '<?= $item['id_produk'] ?>',
-                        '<?= $item['jumlah'] ?>',
-                        '<?= $item['harga'] * $item['jumlah'] ?>'
-                    )">checkout</button>
-                    <a href="logic/hapus_item.php?id_item=<?= $item["id_item"] ?>" class="button2">delete</a>
+                <div class="container-button-data d-flex justify-content-between w-100">
+                    <div class="bungkusData">
+                        <b><?= $item["nama_produk"] ?></b><br>
+                        <table>
+                            <tr>
+                                <td>Price per item</td>
+                                <td>:</td>
+                                <td>Rp<?= number_format($item["harga"], 0, ',', '.') ?></td>
+                            </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>:</td>
+                                <td><?= $item["jumlah"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>:</td>
+                                <td>Rp<?= number_format($item["harga"] * $item["jumlah"], 0, ',', '.') ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="text-start d-flex align-items-center">
+                        <button onclick="bukaModal(
+                            '<?= $item['id_item'] ?>',
+                            '<?= $item['id_produk'] ?>',
+                            '<?= $item['jumlah'] ?>',
+                            '<?= $item['harga'] * $item['jumlah'] ?>'
+                        )">Checkout</button>
+                        <a href="logic/hapus_item.php?id_item=<?= $item["id_item"] ?>" class="button2 mx-2">Delete</a>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
 
-        <b>Total All Items : Rp<?= number_format($total, 0, ',', '.') ?></b><br><br>
-        <button onclick="bukaModalSemua()">Checkout All Items</button>
+        <b>Total All Items : Rp<?= number_format($total, 0, ',', '.') ?></b><br>
+        <button class="mt-3" onclick="bukaModalSemua()">Checkout All Items</button>
 
     <?php endif; ?>
 
@@ -188,17 +217,16 @@
                             value="<?= $v["id"] ?>"
                             data-nilai="<?= $v["nilai"] ?>"
                             onchange="hitungDiskon()">
-                        <?= $v["nama"] ?> — Rp<?= number_format($v["nilai"], 0, ',', '.') ?> Discount Voucher<br>
+                        <span class="text-voucher"><?= $v["nama"] ?> — Rp<?= number_format($v["nilai"], 0, ',', '.') ?> Discount Voucher</span><br>
                     <?php endforeach; ?>
-                    <br>
                 <?php endif; ?>
 
-                <p>Discount      : Rp <span id="m-diskon">0</span></p>
+                <p class="mt-3 mb-0">Discount      : Rp <span id="m-diskon">0</span></p>
                 <p>Total Payment : Rp <span id="m-total-bayar"></span></p>
 
-                <input type="text" class="form-control" name="alamat" placeholder="Shipping Address" required><br>
-
-                <button type="submit">Buy</button>
+                <input type="text" class="form-control mb-3" name="alamat" placeholder="Shipping Address" required>
+                
+                <button type="submit" class="text-end">Buy</button>
             </form>
         </div>
     </div>
