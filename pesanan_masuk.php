@@ -36,22 +36,14 @@ $pesan   = $_GET["pesan"] ?? "";
 
         body { background-color: var(--hover-soft); padding: 20px; }
 
-        .badge-pending  { background: #6c757d; }
-        .badge-dikirim  { background: #ffc107; color: #000; }
-        .badge-selesai  { background: #198754; }
-
         .judul-form{ margin-top: 5rem; }
 
-        .alert{ background-color: var(--primary-light); border: 2px solid var(--primary-main); color: var(--primary-dark);}
+        .alert{ background-color: var(--title-glow); border: 2px solid var(--primary-main); border-radius: 12px; color: var(--primary-main);}
 
         .card {
             background-color: var(--card-bg);
             border-radius: 16px;
             padding: 10px 20px;
-            margin-bottom: 10px;
-            /* display: flex; */
-            /* gap: 10px; */
-            /* align-items: start; */
             box-shadow: 0 0 10px var(--glow-green);
         }
 
@@ -128,6 +120,12 @@ $pesan   = $_GET["pesan"] ?? "";
             .judul-form {
                 font-size: 1.4rem !important;
                 margin-top: 3rem !important;
+            }
+
+            .alert{
+                font-size: 12px;
+                padding: 6px 10px;
+                border-radius: 10px;
             }
 
             .card{ padding: 0 !important; }

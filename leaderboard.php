@@ -45,11 +45,20 @@ while ($row = $result_rank->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+
     <title>Leaderboard | Comparan</title>
+
     <style>
+
         :root {
             --gold: linear-gradient(45deg, #ff9d00, #ffeb3b);
             --silver: linear-gradient(45deg, #757f9a, #d7dde8);
@@ -68,18 +77,28 @@ while ($row = $result_rank->fetch_assoc()) {
         }
 
         .judul-form {
-            font-family: 'Aesthetic', sans-serif; /* Sesuaikan dengan font catchye kamu */
+            font-family: 'Safira', sans-serif;
             letter-spacing: 2px;
+
             text-align: center;
+
             margin-top: 5rem !important;
+            margin-bottom: 2rem;
+
             background: var(--primary-main);
+
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .btn-home{
+            position: fixed;
+            margin-top: 8px;
+        }
+
         .my-rank-card {
             background: var(--primary-main);
-            color: white;
+            color: var(--white);
             border-radius: 20px;
             padding: 15px;
             display: flex;
@@ -88,6 +107,12 @@ while ($row = $result_rank->fetch_assoc()) {
             margin-bottom: 25px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+
+        .rank-item{ text-align: center; }
+
+        .rank-item small{ display: block; opacity: 0.75; }
+
+        .divider-rank{ width: 1px; height: 30px; background: rgba(255,255,255,0.3); }
 
         .card-rank {
             background: var(--white);
@@ -117,10 +142,15 @@ while ($row = $result_rank->fetch_assoc()) {
             margin-right: 15px;
         }
 
-        /* Top 3 Stylings */
-        .top-1 { background: var(--gold); color: #fff; box-shadow: 0 5px 15px rgba(255, 157, 0, 0.3); }
-        .top-2 { background: var(--silver); color: #fff; }
-        .top-3 { background: var(--bronze); color: #fff; }
+        .top-1 {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(255, 157, 0, 0.3);
+        }
+
+        .top-2 { background: var(--silver); color: var(--white); }
+
+        .top-3 { background: var(--bronze); color: var(--white); }
 
         .user-avatar {
             width: 45px;
@@ -132,7 +162,13 @@ while ($row = $result_rank->fetch_assoc()) {
         }
 
         .user-info { flex-grow: 1; }
-        .user-info b { font-size: 0.95rem; display: block; text-transform: capitalize; }
+
+        .user-info b {
+            font-size: 0.95rem;
+            display: block;
+            text-transform: capitalize;
+        }
+
         .user-info span { font-size: 0.75rem; opacity: 0.8; }
 
         .points {
@@ -152,61 +188,119 @@ while ($row = $result_rank->fetch_assoc()) {
             top: -10px;
             right: 20px;
             background: var(--primary-main);
-            color: white;
+            color: var(--white);
             font-size: 0.6rem;
+            font-weight: bold;
             padding: 2px 8px;
             border-radius: 10px;
-            font-weight: bold;
         }
+
+        @media (max-width: 576px){
+
+            body{ padding: 14px; }
+
+            .container-leaderboard{ max-width: 100%; }
+
+            .judul-form{ font-size: 2rem; }
+
+            .my-rank-card{ padding: 14px 10px; }
+
+            .rank-number{
+                width: 35px;
+                height: 35px;
+                font-size: 0.95rem;
+                margin-right: 10px;
+            }
+
+            .user-avatar{
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            .user-info b{ font-size: 0.85rem; }
+
+            .points{ font-size: 0.9rem; }
+        }
+
     </style>
 </head>
 <body>
-    
 
     <div class="container-leaderboard">
-        <a href="home.php" class="btn-kembali btn-sm position-fixed mt-2"><i class="bi bi-arrow-left"></i> Home</a>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="home.php" class="btn-kembali btn-sm position-fixed mt-2"><i class="bi bi-arrow-left"></i> Back to Home</a>
+        </div>
 
-        <h2 class="judul-form mb-4">LEADERBOARD</h2>
-        
+        <h2 class="judul-form">Leaderboard</h2>
+
         <div class="my-rank-card">
-            <div class="text-center">
-                <small class="d-block opacity-75">Your Rank</small>
+            <div class="rank-item">
+                <small>Your Rank</small>
                 <h4 class="m-0 fw-bold">#<?= $my_rank ?></h4>
             </div>
-            <div style="width: 1px; height: 30px; background: rgba(255,255,255,0.3);"></div>
-            <div class="text-center">
-                <small class="d-block opacity-75">Status</small>
-                <h6 class="m-0 fw-bold"><?= $my_rank <= 10 ? 'Pro Buyer' : 'Elite' ?></h6>
+
+            <div class="divider-rank"></div>
+
+            <div class="rank-item">
+                <small>Status</small>
+                <h6 class="m-0 fw-bold">
+                    <?= $my_rank <= 10 ? 'Pro Buyer' : 'Elite' ?>
+                </h6>
             </div>
+
         </div>
 
         <?php 
         $current_rank = 1; 
+
         foreach($leaders as $l): 
+
             $total_poin = $l['total'] / 1000;
-            
+
             $top_class = '';
-            if ($current_rank == 1) $top_class = 'top-1';
-            elseif ($current_rank == 2) $top_class = 'top-2';
-            elseif ($current_rank == 3) $top_class = 'top-3';
-            
+
+            if ($current_rank == 1){
+                $top_class = 'top-1';
+            } elseif ($current_rank == 2){
+                $top_class = 'top-2';
+            } elseif ($current_rank == 3){
+                $top_class = 'top-3';
+            }
+
             $me_class = ($l['id_user'] == $id_user) ? 'me' : '';
-            $foto = !empty($l['foto_profile']) ? 'uploads/profil/'.$l['foto_profile'] : 'uploads/profil/default.png';
+
+            $foto = !empty($l['foto_profile']) 
+                ? 'uploads/profil/'.$l['foto_profile'] 
+                : 'uploads/profil/default.png';
         ?>
-            <div class="card-rank <?= $me_class ?>">
-                <div class="rank-number <?= $top_class ?>">
-                    <?= $current_rank ?>
-                </div>
-                <img src="<?= $foto ?>" class="user-avatar shadow-sm">
-                <div class="user-info">
-                    <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>"><?= htmlspecialchars($l['nama']) ?></b>
-                    <span class="text-muted">Collector Status</span>
-                </div>
-                <div class="points">
-                    <?= number_format($total_poin, 1) ?> <small class="fw-light">pts</small>
-                </div>
+
+        <div class="card-rank <?= $me_class ?>">
+
+            <div class="rank-number <?= $top_class ?>">
+                <?= $current_rank ?>
             </div>
-            <?php $current_rank++; ?>
+
+            <img src="<?= $foto ?>" class="user-avatar shadow-sm">
+
+            <div class="user-info">
+                <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>">
+                    <?= htmlspecialchars($l['nama']) ?>
+                </b>
+
+                <span class="text-muted">
+                    Collector Status
+                </span>
+            </div>
+
+            <div class="points">
+                <?= number_format($total_poin, 1) ?>
+                <small class="fw-light">pts</small>
+            </div>
+
+        </div>
+
+        <?php $current_rank++; ?>
         <?php endforeach; ?>
 
     </div>

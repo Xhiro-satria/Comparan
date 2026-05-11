@@ -66,7 +66,7 @@
         }
         .modal-content {
             background: white;
-            width: 400px;
+            width: 420px;
             max-height: 540px;
             margin: 80px auto;
             padding: 20px;
