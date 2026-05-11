@@ -267,6 +267,13 @@
         }
 
         @media (max-width: 768px){
+            .overlay2.show{
+                display: flex;
+                justify-content: center;
+                align-items: start;
+                padding-top: 100px;
+            }
+
             .modal-konten{
                 display: flex !important;
                 flex-direction: column !important;
@@ -285,8 +292,6 @@
                 object-fit: cover !important;
                 border-radius: 16px;
             }
-
-            /* .productInfo{  } */
 
             #m-nama{ font-size: 16px; }
 
@@ -622,7 +627,7 @@
         </div>
     </section>
 
-    <footer class="footer-comparan mx-4">
+    <footer id="footer" class="footer-comparan mx-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
@@ -633,10 +638,10 @@
                             Penyedia bibit tanaman dan produk ramah lingkungan untuk mendukung gaya hidup yang lebih hijau dan berkelanjutan.
                         </p>
                         <div class="social-icons mt-4">
-                            <a href="#"><i class="bi bi-instagram"></i></a>
-                            <a href="#"><i class="bi bi-tiktok"></i></a>
-                            <a href="#"><i class="bi bi-twitter-x"></i></a>
-                            <a href="#"><i class="bi bi-youtube"></i></a>
+                            <a href="on_progress_footer.php"><i class="bi bi-instagram"></i></a>
+                            <a href="on_progress_footer.php"><i class="bi bi-tiktok"></i></a>
+                            <a href="on_progress_footer.php"><i class="bi bi-twitter-x"></i></a>
+                            <a href="on_progress_footer.php"><i class="bi bi-youtube"></i></a>
                         </div>
                     </div>
                 </div>

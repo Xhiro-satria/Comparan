@@ -25,7 +25,7 @@
         }
 
         .returnTitle{
-            font-family: 'Alphazet', sans-serif;
+            font-family: 'Safira', sans-serif;
             color: var(--primary-main);
             font-size: 48px;
         }
@@ -103,7 +103,7 @@
             </p>
         </div>
 
-        <a href="home.php" class="btnBack">
+        <a href="home.php#footer" class="btnBack">
             <i class="bi bi-arrow-left"></i> Back to Home
         </a>
 
