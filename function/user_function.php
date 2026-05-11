@@ -3,8 +3,11 @@
     function tambahUser($connect, $nama, $username, $password, $email) {
 
         // cek email
-        $cek = "SELECT * FROM users WHERE email = '$email'";
-        $result = $connect->query($cek);
+        $cek = "SELECT * FROM users WHERE email = ?";
+        $stmt = $connect->prepare($cek);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             return "email_sudah_ada";
@@ -12,15 +15,18 @@
     
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);          //hashing (BCRYPT) agar tidak tersimpan dalam teks biasa
 
-        $sql = "INSERT INTO users (nama, username, password, role, poin, email) VALUES ('$nama', '$username', '$passwordHash', 'user', 0, '$email')";
-        $connect->query($sql);
+        $sql = "INSERT INTO users (nama, username, password, role, poin, email) VALUES (?, ?, ?, 'user', 0, ?)";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("ssss", $nama, $username, $passwordHash, $email);
+        $stmt->execute();
         // Mengambil ID terakhir yang baru saja dibuat secara otomatis (auto-increment)
         $id_user = $connect->insert_id;
         
         //stlah buat user, langsung buat cart kosong untuk user tsb
-        $sql = "INSERT INTO cart (id_user) VALUES ('$id_user')";
-        $connect->query($sql);
-        // Mengembalikan ID user yang baru saja didaftarkan
+        $sql = "INSERT INTO cart (id_user) VALUES (?)";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
         return $id_user;
     }
 
@@ -53,17 +59,17 @@
     function editProfil($connect, $id_user, $nama, $username, $password, $foto_profile){
         if ($password) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        if ($foto_profile) {
-            $connect->query("UPDATE users SET nama = '$nama', username = '$username', password = '$passwordHash', foto_profile = '$foto_profile' WHERE id_user = '$id_user'");
-        } else {
-            $connect->query("UPDATE users SET nama = '$nama', username = '$username', password = '$passwordHash' WHERE id_user = '$id_user'");
+            if ($foto_profile) {
+                $connect->query("UPDATE users SET nama = '$nama', username = '$username', password = '$passwordHash', foto_profile = '$foto_profile' WHERE id_user = '$id_user'");
+            } else {
+                $connect->query("UPDATE users SET nama = '$nama', username = '$username', password = '$passwordHash' WHERE id_user = '$id_user'");
+            }
+            } else {
+                if ($foto_profile) {
+                    $connect->query("UPDATE users SET nama = '$nama', username = '$username', foto_profile = '$foto_profile' WHERE id_user = '$id_user'");
+                } else {
+                    $connect->query("UPDATE users SET nama = '$nama', username = '$username' WHERE id_user = '$id_user'");
+            }
         }
-    } else {
-        if ($foto_profile) {
-            $connect->query("UPDATE users SET nama = '$nama', username = '$username', foto_profile = '$foto_profile' WHERE id_user = '$id_user'");
-        } else {
-            $connect->query("UPDATE users SET nama = '$nama', username = '$username' WHERE id_user = '$id_user'");
-        }
-    }
     }
 ?>

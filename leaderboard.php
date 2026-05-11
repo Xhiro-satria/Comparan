@@ -2,6 +2,11 @@
 session_start();
 require "server.php";
 
+if (!isset($_SESSION["id_user"])) {
+    header("Location: login.php");
+    exit;
+}
+
 $id_user = $_SESSION['id_user'] ?? 0;
 
 // 🔹 Ambil Top 10

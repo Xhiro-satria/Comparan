@@ -2,9 +2,13 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    // Opsional: Panggil koneksi dan fungsi jika di halaman FAQ butuh data user (misal untuk foto profil di navbar)
     require_once 'server.php';
     require_once 'function/user_function.php';
+
+    if(!isset($_SESSION["id_user"])){
+        header("Location: login.php");
+        exit();
+    }
 
     $id_user = $_SESSION["id_user"] ?? null; 
     $dataUser = $id_user ? tampilDataUser($connect, $id_user) : null;

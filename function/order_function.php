@@ -54,7 +54,7 @@
             }
         }
 
-        // 7. Kalau checkout semua kosongkan kranjang sekaligus
+        // 7. Kalau checkout semua kosongkan kranjang skaligus
         if ($checkout_semua == 1) {
             $sql = "DELETE FROM cart_items WHERE id_cart = '$id_cart'";
             $connect->query($sql);

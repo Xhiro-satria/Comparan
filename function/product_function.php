@@ -1,16 +1,29 @@
 <?php
     // Fungsi buat tambah produk baru
     function tambahProduk($connect, $id_user, $nama_produk, $harga, $stok, $deskripsi, $kategori, $gambar) {
-        $sql = "INSERT INTO products (id_user, nama_produk, harga, stok, deskripsi, kategori, gambar, status) 
-                    VALUES ('$id_user', '$nama_produk', '$harga', '$stok', '$deskripsi', '$kategori', '$gambar', 'open')";
-        $connect->query($sql);
-        return $connect->insert_id;
-    }
+    $sql = "INSERT INTO products (id_user, nama_produk, harga, stok, deskripsi, kategori, gambar, status) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'open')";
+    $stmt = $connect->prepare($sql);
+    $stmt->bind_param("isiisss", 
+        $id_user,      
+        $nama_produk,  
+        $harga,        
+        $stok,         
+        $deskripsi,    
+        $kategori,     
+        $gambar,       
+    );
+    $stmt->execute();
+    return $stmt->insert_id;
+}
 
     // Fungsi buat ambil produk berdasarkan id_user
     function produkSaya($connect, $id_user){
-        $sql = "SELECT * FROM products WHERE id_user = '$id_user'";
-        $result = $connect->query($sql);
+        $sql = "SELECT * FROM products WHERE id_user = ?";
+        $stmt = $connect->prepare($sql);
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
+        $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
