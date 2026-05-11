@@ -3,7 +3,6 @@
     require_once 'server.php';
     require_once 'function/user_function.php';
 
-    $pesan = "";
     $cek_login = true;
     $cek_kuki = false;
     
@@ -11,6 +10,7 @@
         $cek_kuki = true;
     }
 
+    $pesan = "";
     // Proses login
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $username = $_POST["username"];
@@ -49,9 +49,7 @@
             }
 
         } else {
-            $_SESSION['error'] = "Akun tidak ditemukan";
-            header("Location: login.php");
-            exit();
+            $pesan = "Username atau password salah!";
         }
     }
 
@@ -80,9 +78,7 @@
 </head>
 <body>
     <div class="container-fluid m-0 p-0">
-        <?php if(isset($_SESSION['error'])): ?>
-            <h5 class="fixed-top bg-danger text-light fw-lighter text-center fs-6 p-1"><?= $_SESSION['error'] ?></h5>
-        <?php unset($_SESSION['error']); endif; ?>
+        
         <div class="row align-items-center text-center p-0 m-0 vh-100">
             <div class="kolom-kiri col-12 col-md-7 h-100 px-5 pt-3 d-flex flex-column justify-content-between">
                 <div class="kiri">
@@ -105,6 +101,11 @@
                                 <a href="" class="signInButton col p-2 rounded-pill">Sign In</a>
                                 <a href="add_user.php" class="signUpButton col p-2 rounded-pill">Sign Up</a>
                             </div>
+
+                            <?php if($pesan !== ""): ?>
+                                <h5 class="fixed-top bg-danger text-light fw-lighter text-center fs-6 p-1"><?= $pesan ?></h5>
+                            <?php endif; ?>
+
                             <form action="" method="POST">
                                 <div class="mt-4 text-start w-100 px-5">
                                     <label for="exampleFormControlInput1" class="form-label fw-semibold">Username</label>

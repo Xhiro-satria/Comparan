@@ -5,6 +5,11 @@
     require_once 'function/voucher_function.php';
     require_once 'function/product_function.php';
 
+    if(!isset($_SESSION["id_user"])){
+        header("Location: login.php");
+        exit();
+    }
+
     $id_user  = $_SESSION["id_user"];
     $vouchers = voucherSaya($connect, $id_user);
 
