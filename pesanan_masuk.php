@@ -201,33 +201,21 @@ $pesan   = $_GET["pesan"] ?? "";
                             <small class="text-muted">Address : <?= $p["alamat_pengiriman"] ?></small>
                             <small class="text-muted">Date : <?= date('d M Y, H:i', strtotime($p["tanggal_order"])) ?></small>
                             <small class="text-muted"><b>Subtotal : Rp<?= number_format($p["subtotal"], 0, ',', '.') ?></b></small>
+                            <span class="badge badge-<?= $p["status"] ?>">
+                                <?= $p["status"] ?>
+                            </span>
 
-                            <?php if ($p["status_order"] === "pending"): ?>
-                                <div class="bungkusBadge">
-                                    <span class="badge1 badge-<?= $p["status_order"] ?>">
-                                        <?= $p["status_order"] ?>
-                                    </span>
-                                    <div class="d-flex">
-                                        <a href="logic/kirim_produk_logic.php?id_item=<?= $p["id_item"] ?>&id_order=<?= $p['id_order'] ?>"
-                                            class="badge3"
-                                            onclick="return confirm('Konfirmasi kirim produk ini?')">
-                                            Send <i class="bi bi-send-fill"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php elseif ($p["status_order"] === "dikirim"): ?>
-                                <div class="bungkusBadge">
-                                    <span class="badge1 badge-<?= $p["status_order"] ?>">
-                                        <?= $p["status_order"] ?>
-                                    </span>
-                                    <div class="d-flex">
-                                        <span class="badge2">Waiting for confirmation...<i class="bi bi-hourglass-split"></i></span>
-                                    </div>
-                                </div>
-                            <?php elseif ($p["status_order"] === "selesai"): ?>
-                                <div class="d-flex">
-                                    <span class="badge1"><i class="bi bi-check-circle-fill"></i> Completed</span>
-                                </div>
+                            <?php if ($p["status"] === "pending"): ?>
+                                <a href="logic/kirim_produk_logic.php?id_item=<?= $p["id_item"] ?>"
+                                    class="btn btn-primary btn-sm ms-2"
+                                    onclick="return confirm('Konfirmasi kirim produk ini?')">
+                                    Kirim
+                                </a>
+                            <?php elseif ($p["status"] === "dikirim"): ?>
+                                <span class="text-warning ms-2">Menunggu konfirmasi pembeli</span>
+                            <?php elseif ($p["status"] === "selesai"): ?>
+                                <span class="text-success ms-2">Selesai</span>
+
                             <?php endif; ?>
                         </div>
                     </div>
