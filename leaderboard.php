@@ -152,7 +152,7 @@ while ($row = $result_rank->fetch_assoc()) {
 
         .top-3 { background: var(--bronze); color: var(--white); }
 
-        .user-avatar {
+        .userFotoProfil {
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -212,7 +212,7 @@ while ($row = $result_rank->fetch_assoc()) {
                 margin-right: 10px;
             }
 
-            .user-avatar{
+            .userFotoProfil{
                 width: 40px;
                 height: 40px;
                 margin-right: 10px;
@@ -239,25 +239,20 @@ while ($row = $result_rank->fetch_assoc()) {
                 <small>Your Rank</small>
                 <h4 class="m-0 fw-bold">#<?= $my_rank ?></h4>
             </div>
-
             <div class="divider-rank"></div>
-
             <div class="rank-item">
                 <small>Status</small>
                 <h6 class="m-0 fw-bold">
                     <?= $my_rank <= 10 ? 'Pro Buyer' : 'Elite' ?>
                 </h6>
             </div>
-
         </div>
 
         <?php 
-        $current_rank = 1; 
+        $current_rank = 1;
 
         foreach($leaders as $l): 
-
             $total_poin = $l['total'] / 1000;
-
             $top_class = '';
 
             if ($current_rank == 1){
@@ -274,36 +269,28 @@ while ($row = $result_rank->fetch_assoc()) {
                 ? 'uploads/profil/'.$l['foto_profile'] 
                 : 'uploads/profil/default.png';
         ?>
+            <div class="card-rank <?= $me_class ?>">
+                <div class="rank-number <?= $top_class ?>">
+                    <?= $current_rank ?>
+                </div>
 
-        <div class="card-rank <?= $me_class ?>">
+                <img src="<?= $foto ?>" class="userFotoProfil shadow-sm">
 
-            <div class="rank-number <?= $top_class ?>">
-                <?= $current_rank ?>
+                <div class="user-info">
+                    <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>">
+                        <?= htmlspecialchars($l['nama']) ?>
+                    </b>
+                    <span class="text-muted">
+                        Collector Status
+                    </span>
+                </div>
+                <div class="points">
+                    <?= number_format($total_poin, 1) ?>
+                    <small class="fw-light">pts</small>
+                </div>
             </div>
-
-            <img src="<?= $foto ?>" class="user-avatar shadow-sm">
-
-            <div class="user-info">
-                <b class="<?= ($current_rank <= 3) ? 'fw-bold' : '' ?>">
-                    <?= htmlspecialchars($l['nama']) ?>
-                </b>
-
-                <span class="text-muted">
-                    Collector Status
-                </span>
-            </div>
-
-            <div class="points">
-                <?= number_format($total_poin, 1) ?>
-                <small class="fw-light">pts</small>
-            </div>
-
-        </div>
-
-        <?php $current_rank++; ?>
+            <?php $current_rank++; ?>
         <?php endforeach; ?>
-
     </div>
-
 </body>
 </html>

@@ -13,10 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $id = tambahUser($connect, $nama, $username, $password, $email);
 
-    if ($id === "email_sudah_ada") {
+    if ($id === "email_sudah_ada" || $id === "username_sudah_ada") {
         $check = true;
         $_SESSION['cek_email'] = $check;
-        $pesan = "Email sudah digunakan!";
+        
+        if ($id === "email_sudah_ada"){
+            $pesan = "Email sudah digunakan!";
+        } elseif($id === "username_sudah_ada"){
+            $pesan = "Username sudah digunakan!";    
+        }
     } elseif ($id) {
         $pesan = "Registrasi berhasil!";
         header("Location: home.php");

@@ -12,6 +12,16 @@
         if ($result->num_rows > 0) {
             return "email_sudah_ada";
         }
+
+        $cek = "SELECT * FROM users WHERE username = ?";
+        $stmt = $connect->prepare($cek);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return "username_sudah_ada";
+        }
     
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);          //hashing (BCRYPT) agar tidak tersimpan dalam teks biasa
 

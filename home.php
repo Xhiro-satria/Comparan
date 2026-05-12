@@ -338,10 +338,10 @@
                 <div class="bungkusKananKiri row w-100 align-items-between">
                     <div class="navKiri col-11 d-flex justify-content-center">
                         <div class="containerItemNav navbar-nav d-flex justify-content-center">
-                            <a class="nav-link" aria-current="page" href="#">Dashboard</a>
-                            <a class="nav-link" href="#about">About</a>
-                            <a class="nav-link" href="#shop">Shop</a>
-                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
+                            <a class="nav-link pt-2" aria-current="page" href="#">Dashboard</a>
+                            <a class="nav-link pt-2" href="#about">About</a>
+                            <a class="nav-link pt-2" href="#shop">Shop</a>
+                            <a class="nav-link pt-2" href="leaderboard.php">Leaderboard</a>
                         </div>
                     </div>
                     <div class="navKanan col-1 text-lg-end p-0">
