@@ -17,39 +17,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola User | Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Manage User - Admin | Comparan</title>
     <style>
         body {
-            background-color: rgb(215, 231, 192);
+            background-color: var(--hover-soft);
             font-family: 'Inter', sans-serif;
-            color: #2f3e46;
             padding: 40px 0;
         }
 
         .manage-container {
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--bg-soft);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px var(--overlay-dark);
         }
 
         h2 {
             font-weight: 700;
-            color: #1b4332;
+            color: var(--text-main);
             margin: 0;
         }
 
-        /* Styling Tabel */
         .table-responsive-custom {
             border-radius: 15px;
             overflow: hidden;
             background: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 12px var(--overlay-dark);
         }
 
         .table {
@@ -57,8 +55,7 @@
         }
 
         .table thead {
-            background-color: #2d6a4f;
-            color: white;
+            color: var(--white);
             border: none;
         }
 
@@ -67,15 +64,16 @@
             padding: 15px;
             border: none;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--gray);
         }
 
         .table tbody td {
-            padding: 15px;
+            padding: 16px;
             vertical-align: middle;
-            color: #495057;
-            border-bottom: 1px solid #f1f3f5;
+            color: var(--soft-black);
+            border-bottom: 1px solid var(--gray);
         }
 
         /* Badge untuk Role */
@@ -85,22 +83,11 @@
             font-weight: 600;
             font-size: 0.75rem;
         }
-        .bg-admin { background-color: #d8f3dc; color: #1b4332; }
-        .bg-user { background-color: #e9ecef; color: #495057; }
+        .bg-admin { background-color: var(--glow-green); color: var(--primary-dark); }
+        .bg-user { background-color: var(--gray); color: var(--soft-black); }
 
-        /* Button Custom */
-        .btn-back {
-            background-color: white;
-            color: #2d6a4f;
-            border: 2px solid #2d6a4f;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-back:hover {
-            background-color: #2d6a4f;
-            color: white;
+        .btn-outline-success{
+            background-color: var(--transparent);
         }
 
         .btn-delete {
@@ -113,6 +100,112 @@
         .btn-delete:hover {
             transform: scale(1.05);
         }
+
+                #overlay-logout{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-dark-more);
+            z-index: 9999;
+        }
+
+        .containerConfirm{
+            background: var(--white);
+            width: 300px;
+            margin: 200px auto;
+            padding: 20px;  
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+
+            body{
+                padding: 20px 10px;
+            }
+
+            .manage-container{
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+
+            .manage-container .d-flex{
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 15px;
+            }
+
+            h2{
+                font-size: 1.5rem;
+            }
+
+            .manage-container p{
+                font-size: 0.9rem;
+            }
+
+            .table-responsive-custom{
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table{
+                min-width: 700px;
+            }
+
+            .table thead th{
+                font-size: 0.75rem;
+                padding: 12px 10px;
+                white-space: nowrap;
+            }
+
+            .table tbody td{
+                font-size: 0.8rem;
+                padding: 12px 10px;
+                white-space: nowrap;
+            }
+
+            .badge-role{
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
+
+            .btn-delete{
+                padding: 4px 10px;
+                font-size: 0.75rem;
+            }
+
+            .btn-outline-success{
+                font-size: 0.8rem;
+                padding: 6px 14px !important;
+            }
+
+            .containerConfirm{
+                width: 90%;
+                margin: 150px auto;
+                padding: 20px 15px;
+            }
+
+            .containerConfirm h5{
+                font-size: 1rem;
+            }
+
+            .containerConfirm p{
+                font-size: 0.85rem;
+            }
+
+            .containerConfirm .d-flex{
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .containerConfirm a,
+            .containerConfirm button{
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -121,10 +214,10 @@
     <div class="manage-container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2>Kelola User</h2>
-                <p class="text-muted mb-0">Manajemen data akun dan hak akses</p>
+                <h2>Manage User</h2>
+                <p class="text-muted mb-0">User account and access control management</p>
             </div>
-            <a href="index.php" class="btn btn-back btn-sm">
+            <a href="index.php" class="btn-outline-success btn-sm rounded-pill px-3">
                 <i class="bi bi-arrow-left me-1"></i> Dashboard
             </a>
         </div>
@@ -134,16 +227,16 @@
                 <thead>
                     <tr>
                         <th class="text-center">No</th>
-                        <th>Nama Lengkap</th>
+                        <th>Name</th>
                         <th>Username</th>
                         <th>Role</th>
-                        <th class="text-center">Poin</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="text-center">Point</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (count($users) === 0): ?>
-                        <tr><td colspan="6" class="text-center py-5 text-muted">Belum ada user yang terdaftar.</td></tr>
+                        <tr><td colspan="6" class="text-center py-5 text-muted">There are no registered users.</td></tr>
                     <?php else: ?>
                         <?php $i = 1; ?>
                         <?php foreach ($users as $u): ?>
@@ -165,10 +258,10 @@
                                         <a href="#"
                                             onclick="konfirmasiHapus(); return false;"
                                             class="btn btn-danger btn-sm btn-delete">
-                                            <i class="bi bi-trash3 me-1"></i> Hapus
+                                            <i class="bi bi-trash3 me-1"></i> Delete
                                         </a>
                                     <?php else: ?>
-                                        <span class="text-muted small italic">Sistem Terkunci</span>
+                                        <span class="text-muted small italic">System Locked</span>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -180,13 +273,13 @@
     </div>
 </div>
 
-    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
-        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
-            <h5>Konfirmasi Hapus</h5>
-            <p>Apakah kamu yakin ingin Hapus user ini ?</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <a href="../logic/hapus_user_logic.php?id_user=<?= $u["id_user"] ?>" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Hapus</a>
-                <button onclick="tutupHapus();" class="btn btn-primary">Batal</button>
+    <div id="overlay-logout">
+        <div class="containerConfirm d-flex flex-column align-middle">
+            <h5>Delete Confirmation</h5>
+            <p>Do you want to delete this user?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center w-100">
+                <a href="../logic/hapus_user_logic.php?id_user=<?= $u["id_user"] ?>" class="btn btn-outline-danger mx-1">Delete</a>
+                <button onclick="tutupHapus();" class="btn-outline-success">Cancel</button>
             </div>
         </div>
     </div>

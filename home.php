@@ -133,10 +133,6 @@
             width: 210px;
         }
 
-        /* .carousel-right{
-            display: flex;
-            overflow-x: auto;
-        } */
 
         .productBody b, .productHarga{
             font-size: 14px;

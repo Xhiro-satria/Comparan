@@ -17,16 +17,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin | Modern UI</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Dashboard Admin | Comparan</title>
     <style>
         body {
-            background-color: rgb(215, 231, 192);;
-            font-family: 'Inter', sans-serif;
-            color: #334155;
+            background-color: var(--black);
+            background-image: url(../assets/backgroundd.jpeg);
+            background-repeat: none;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .container-fluid{
+            background-color: var(--overlay-dark-lm);
+            height: 100%;
         }
 
         .dashboard-container {
@@ -34,27 +41,35 @@
             padding-bottom: 50px;
         }
 
+        .logoNav{ width: 120px; animation: float 3s ease-in-out infinite; transition: all 1s ease-in-out;}
+
+        .logoNav:hover{ animation: float 1s ease-in-out infinite;}
+
         .header-section {
             margin-bottom: 40px;
         }
 
-        .header-section h2 {
+        .header-section h2, .header-section p {
             font-weight: 700;
-            color: #1e293b;
+            color: var(--hover-soft);
             letter-spacing: -0.5px;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Styling Kartu Custom */
         .card-custom {
             border: none;
             border-radius: 16px;
             transition: all 0.3s ease;
             overflow: hidden;
             position: relative;
+            background-color: var(--shadow-white);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 12px var(--overlay-dark-lm);
         }
 
-        .card-custom:hover {
+        .card-custom:hover{
             transform: translateY(-5px);
+            background-color: var(--glow-green);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
         }
 
@@ -73,110 +88,133 @@
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             opacity: 0.9;
+            font-family: 'Chocolate';
+            letter-spacing: 1.5px;
         }
 
         .stat-value {
             font-size: 2.5rem;
             font-weight: 700;
             margin: 10px 0;
+            font-family: 'Chocolate';
+            letter-spacing: 1px;
         }
 
         .card-link {
             text-decoration: none;
             font-size: 0.85rem;
-            font-weight: 600;
             display: inline-flex;
             align-items: center;
             transition: gap 0.3s;
+            background-color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-family: 'Chocolate';
+            letter-spacing: 1px;
         }
-
+        
         .card-link:hover {
             gap: 8px;
             color: white;
-            text-decoration: underline;
+            font-style: italic;
         }
 
-        .bg-gradient-primary { background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); }
-        .bg-gradient-success { background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%); }
-        .bg-gradient-warning { background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%); }
+        #overlay-logout{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-dark-more);
+            z-index: 9999;
+        }
 
-        .btn-logout {
+        .containerConfirm{
+            background: var(--white);
+            width: 300px;
+            margin: 200px auto;
+            padding: 20px;  
             border-radius: 10px;
-            padding: 8px 20px;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2);
+            text-align: center;
         }
     </style>
 </head>
 <body>
-
-<div class="container dashboard-container">
-    <div class="header-section d-flex justify-content-between align-items-center">
-        <div>
-            <h2>Dashboard Admin</h2>
-            <p class="text-muted">Selamat datang kembali, admin! Berikut ringkasan hari ini.</p>
+    <div class="container-fluid m-0 px-5 p-0">
+        <div class="w-100 d-flex justify-content-between align-items-center pt-4 mb-3">
+            <a class="bungkusLogo d-flex justify-content-lg-start align-items-center w-100" href="#">
+                <img src="../assets/logo-fix.png" alt="Logo Comparan" class="logoNav">
+            </a>
+            <a href="#" class="btn-kembali text-end position-static" onclick="konfirmasiSignOut(); return false;">
+                <span class="d-flex"><i class="bi bi-box-arrow-right me-2"></i> Logout</span>
+            </a>
         </div>
-        <a href="#" class="btn btn-danger btn-logout"  onclick="konfirmasiSignOut(); return false;">
-            <i class="bi bi-box-arrow-right me-2"></i>Logout
-        </a>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card card-custom text-white bg-gradient-primary shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-people card-icon"></i>
-                    <div class="stat-label">Total User</div>
-                    <div class="stat-value"><?= number_format($total_user ?? 0) ?></div>
-                    <a href="users.php" class="text-white card-link">
-                        Lihat User <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
+        <div class="dashboard-container m-0 p-0">
+            <div class="header-section d-flex justify-content-between align-items-center">
+                <div>
+                    <h2>Dashboard Admin</h2>
+                    <p class="opacity-50 fw-semibold">Welcome back, Admin! Here is today's summary.</p>
+                </div>
+            </div>
+        
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom text-white">
+                        <div class="card-body">
+                            <i class="bi bi-people card-icon"></i>
+                            <div class="stat-label">Total Users</div>
+                            <div class="stat-value"><?= number_format($total_user ?? 0) ?></div>
+                            <a href="users.php" class="text-white card-link">
+                                See Users <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-md-4">
+                    <div class="card card-custom text-white">
+                        <div class="card-body">
+                            <i class="bi bi-cart-check card-icon"></i>
+                            <div class="stat-label">Total Orders</div>
+                            <div class="stat-value"><?= number_format($total_order ?? 0) ?></div>
+                            <a href="orders.php" class="text-white card-link">
+                                See Orders <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-md-4">
+                    <div class="card card-custom text-white">
+                        <div class="card-body">
+                            <i class="bi bi-ticket-perforated card-icon"></i>
+                            <div class="stat-label">Total Vouchers</div>
+                            <div class="stat-value"><?= number_format($total_voucher ?? 0) ?></div>
+                            <a href="voucher.php" class="text-white card-link">
+                                See Vouchers <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card card-custom text-white bg-gradient-success shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-cart-check card-icon"></i>
-                    <div class="stat-label">Total Order</div>
-                    <div class="stat-value"><?= number_format($total_order ?? 0) ?></div>
-                    <a href="orders.php" class="text-white card-link">
-                        Lihat Order <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
+        
+            <div id="overlay-logout">
+                <div class="containerConfirm">
+                    <h5>Logout Confirmation</h5>
+                    <p>Do you want to logout?</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="../logout.php" class="btn btn-outline-danger mx-1">Yes</a>
+                        <button onclick="tutupLogout();" class="btn-outline-success">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card card-custom text-white bg-gradient-warning shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-ticket-perforated card-icon"></i>
-                    <div class="stat-label">Total Voucher</div>
-                    <div class="stat-value"><?= number_format($total_voucher ?? 0) ?></div>
-                    <a href="voucher.php" class="text-white card-link"">
-                        Lihat Voucher <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
-        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
-            <h5>Konfirmasi Logout</h5>
-            <p>Apakah kamu yakin ingin keluar?</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <a href="../logout.php" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Ya, Logout</a>
-                <button onclick="tutupLogout();" class="btn btn-primary">Batal</button>
-            </div>
-        </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

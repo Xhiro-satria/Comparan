@@ -16,24 +16,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($id === "email_sudah_ada" || $id === "username_sudah_ada") {
         $check = true;
         $_SESSION['cek_email'] = $check;
-        
-        if ($id === "email_sudah_ada"){
+
+        if ($id === "email_sudah_ada") {
             $pesan = "Email sudah digunakan!";
-        } elseif($id === "username_sudah_ada"){
-            $pesan = "Username sudah digunakan!";    
+        } elseif ($id === "username_sudah_ada") {
+            $pesan = "Username sudah digunakan!";
         }
     } elseif ($id) {
         $pesan = "Registrasi berhasil!";
         header("Location: home.php");
         exit();
-        } else {
-            $pesan = "Registrasi gagal.";
-        }
+    } else {
+        $pesan = "Registrasi gagal.";
     }
-    ?>
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="css/style.css">
     <title>Sign Up | Comparan</title>
     <style>
-        body{
+        body {
             background-color: var(--black);
             background-image: url(assets/backgroundd.jpeg);
             background-repeat: none;
@@ -50,9 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             height: 100vh;
         }
 
-        .container-fluid{ background-color: var(--overlay-dark); }
-        
-        .signUpButton{
+        .container-fluid {
+            background-color: var(--overlay-dark);
+        }
+
+        .signUpButton {
             background-color: var(--primary-main);
             color: white;
             transition: .3s all ease-in-out;
@@ -60,12 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-weight: 500;
         }
 
-        .signUpButton:hover{
+        .signUpButton:hover {
             background-color: var(--primary-dark);
             color: var(--white);
         }
 
-        .signInButton{
+        .signInButton {
             background-color: var(--white);
             transition: .3s all ease-in-out;
             color: var(--primary-main);
@@ -73,12 +76,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-weight: 500;
         }
 
-        .signInButton:hover{
+        .signInButton:hover {
             background-color: var(--primary-main);
             color: white;
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid m-0 p-0">
         <div class="row align-items-center text-center p-0 m-0 vh-100">
@@ -94,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             </div>
             <div class="kolom-kanan-up col-12 col-md-5 bg-white rounded-start-4 h-100 m-0 p-0">
-                <?php if($check): ?>
+                <?php if ($check): ?>
                     <h5 class="fixed-top bg-danger text-light fw-lighter text-center fs-6 p-1"><?= $pesan ?></h5>
                 <?php endif; ?>
                 <div>
@@ -133,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

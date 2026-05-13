@@ -148,6 +148,7 @@
 --overlay-dark: #00000045;
 --shadow-dark: #28460A40;
 --glow-green: #6FB40059;
+--shadow-white: #ffffff40;
 
 --black: #000000;
 --soft-black: #383838;
@@ -295,8 +296,6 @@
     border-radius: 50px;
     padding: 4px 10px;
 }
-
-
 
 .cartIcon{
     font-size: 24px;
