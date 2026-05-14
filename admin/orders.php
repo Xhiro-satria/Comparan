@@ -45,7 +45,6 @@
             background-color: var(--transparent);
         }
 
-        /* Table Styling */
         .table-responsive-custom {
             border-radius: 15px;
             overflow: hidden;

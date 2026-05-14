@@ -16,57 +16,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Voucher | Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Manage Vouchers - Admin | Comparan</title>
     <style>
         body {
-            background-color: rgb(215, 231, 192); /* Sage Green Pilihan Anda */
+            background-color: var(--hover-soft);
             font-family: 'Inter', sans-serif;
-            color: #2f3e46;
             padding: 40px 0;
         }
 
         .main-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
+            background: var(--bg-soft);
             border-radius: 20px;
             border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px var(--overlay-dark);
             padding: 30px;
         }
 
         h2, h5 {
             font-weight: 700;
-            color: #1b4332;
+            color: var(--text-main);
         }
 
-        /* Form Styling */
+        .btn-outline-success{
+            background-color: var(--transparent);
+        }
+
         .form-section {
-            background: #ffffff;
+            background: var(--white);
             border-radius: 15px;
             padding: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid var(--gray);
             margin-bottom: 30px;
         }
 
         .form-control {
             border-radius: 10px;
-            border: 1px solid #ced4da;
+            border: 1px solid var(--gray);
             padding: 10px 15px;
             transition: all 0.3s;
         }
 
         .form-control:focus {
-            border-color: #52796f;
-            box-shadow: 0 0 0 0.25rem rgba(82, 121, 111, 0.25);
+            border-color: var(--gray);
+            box-shadow: 0 0 0 0.25rem var(--title-glow);
         }
-
-        /* Button Custom */
+        
         .btn-success-custom {
-            background-color: #2d6a4f;
+            background-color: var(--primary-main);
             border: none;
             border-radius: 10px;
             padding: 10px 25px;
@@ -75,28 +75,14 @@
         }
 
         .btn-success-custom:hover {
-            background-color: #1b4332;
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
         }
 
-        .btn-back {
-            background-color: transparent;
-            color: #2d6a4f;
-            border: 2px solid #2d6a4f;
-            border-radius: 10px;
-            font-weight: 600;
-        }
-
-        /* Table Styling */
         .table-container {
             border-radius: 15px;
             overflow: hidden;
             background: white;
-        }
-
-        .table thead {
-            background-color: #52796f;
-            color: white;
         }
 
         .table th {
@@ -105,17 +91,18 @@
             letter-spacing: 0.5px;
             border: none;
             padding: 15px;
+            border-bottom: 1px solid var(--gray);
         }
 
         .table td {
             vertical-align: middle;
             padding: 15px;
-            border-bottom: 1px solid #f1f3f5;
+            border-bottom: 1px solid var(--gray);
         }
 
         .badge-poin {
-            background-color: #d8f3dc;
-            color: #1b4332;
+            background-color: var(--glow-green);
+            color: var(--primary-main);
             font-weight: 700;
             padding: 5px 12px;
             border-radius: 6px;
@@ -124,8 +111,88 @@
         .alert-berhasil {
             border-radius: 12px;
             border: none;
-            background-color: #40916c;
+            background-color: var(--primary-accent);
             color: white;
+        }
+
+        #overlay-logout{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-dark-more);
+            z-index: 9999;
+        }
+
+        .containerConfirm{
+            background: var(--white);
+            width: 300px;
+            margin: 200px auto;
+            padding: 20px;  
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+
+            .main-card {
+                padding: 18px;
+                border-radius: 15px;
+            }
+
+            h2 { font-size: 1.4rem; }
+
+            h5 { font-size: 1rem; }
+
+            .d-flex.justify-content-between {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 15px;
+            }
+
+            .btn-outline-success {
+                width: 100%;
+                text-align: center;
+                padding: 8px 12px;
+            }
+
+            .form-section { padding: 15px; }
+
+            .form-label { font-size: 0.85rem; }
+
+            .form-control { font-size: 0.9rem; padding: 10px; }
+
+            .btn-success-custom { padding: 10px; font-size: 0.9rem; }
+
+            .table-container { overflow-x: auto; }
+
+            .table { min-width: 650px; }
+
+            .table th, .table td {
+                padding: 10px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            .badge-poin { font-size: 0.75rem; padding: 4px 8px; }
+
+            .btn-outline-success{ font-size: 0.8rem; padding: 6px 14px !important; }
+
+            .containerConfirm{
+                width: 90%;
+                margin: 150px auto;
+                padding: 20px 15px;
+            }
+
+            .containerConfirm h5{ font-size: 1rem; }
+
+            .containerConfirm p{ font-size: 0.85rem; }
+
+            .containerConfirm .d-flex{ flex-direction: column; gap: 10px; }
+
+            .containerConfirm a, .containerConfirm button{ width: 100%; }
         }
     </style>
 </head>
@@ -135,39 +202,39 @@
     <div class="main-card">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2>Kelola Voucher</h2>
-                <p class="text-muted mb-0">Buat dan atur reward untuk user setia</p>
+                <h2>Manage Vouchers</h2>
+                <p class="mb-0">Create and manage rewards for loyal users</p>
             </div>
-            <a href="index.php" class="btn btn-back btn-sm">
+            <a href="index.php" class="btn-outline-success rounded-pill px-2 btn-sm">
                 <i class="bi bi-arrow-left me-1"></i> Dashboard
             </a>
         </div>
 
         <?php if ($pesan === "berhasil"): ?>
             <div class="alert alert-berhasil alert-dismissible fade show" role="alert">
-                <i class="bi bi-check-circle-fill me-2"></i> Voucher baru telah ditambahkan!
+                <i class="bi bi-check-circle-fill me-2"></i> New voucher has been added successfully!
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
 
         <div class="form-section">
-            <h5 class="mb-3"><i class="bi bi-plus-circle me-2"></i>Tambah Voucher</h5>
+            <h5 class="mb-3"><i class="bi bi-plus-circle me-2"></i>Add Voucher</h5>
             <form method="POST" action="../logic/tambah_voucher_logic.php">
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label class="form-label small fw-bold">Nama Voucher</label>
+                        <label class="form-label small fw-bold">Voucher Name</label>
                         <input type="text" name="nama" class="form-control" placeholder="Contoh: Diskon Kopi" required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-bold">Nilai Potongan (Rp)</label>
+                        <label class="form-label small fw-bold">Discount Value (Rp)</label>
                         <input type="number" name="nilai" class="form-control" placeholder="10000" required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-bold">Poin Diperlukan</label>
+                        <label class="form-label small fw-bold">Required Points</label>
                         <input type="number" name="poin_diperlukan" class="form-control" placeholder="50" required>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-success-custom text-light w-100">Simpan</button>
+                        <button type="submit" class="btn btn-success-custom text-light w-100">Save</button>
                     </div>
                 </div>
             </form>
@@ -178,15 +245,15 @@
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
-                        <th>Nama Voucher</th>
-                        <th>Nilai Potongan</th>
-                        <th>Kebutuhan Poin</th>
-                        <th class="text-center">Aksi</th>
+                        <th>Voucher Name</th>
+                        <th>Discount Value</th>
+                        <th>Required Points</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (count($vouchers) === 0): ?>
-                        <tr><td colspan="5" class="text-center py-5 text-muted">Belum ada voucher aktif.</td></tr>
+                        <tr><td colspan="5" class="text-center py-5 text-muted">No active vouchers available.</td></tr>
                     <?php else: ?>
                         <?php $i = 1 ?>
                         <?php foreach ($vouchers as $v): ?>
@@ -199,7 +266,7 @@
                                     <a href="#"
                                         onclick="konfirmasiHapus(); return false;"
                                         class="btn btn-outline-danger btn-sm border-0">
-                                        <i class="bi bi-trash3"></i> Hapus
+                                        <i class="bi bi-trash3"></i> Delete
                                     </a>
                                 </td>
                                 <?php $i++ ?>
@@ -212,13 +279,13 @@
     </div>
 </div>
 
-<div id="overlay-logout" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
-        <div style="background:white; width:300px; margin:200px auto; padding:20px; border-radius:10px; text-align:center;">
-            <h5>Konfirmasi Hapus</h5>
-            <p>Apakah kamu yakin ingin Hapus Voucher ini ?</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <a href="../logic/hapus_vocher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" style="background:red; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">Hapus</a>
-                <button onclick="tutupHapus();" class="btn btn-primary">Batal</button>
+    <div id="overlay-logout">
+        <div class="containerConfirm d-flex flex-column align-middle">
+            <h5>Delete Confirmation</h5>
+            <p>Do you want to delete this voucher?</p>
+            <div class="d-flex justify-content-center  align-items-center w-100">
+                <a href="../logic/hapus_vocher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn btn-outline-danger mx-1">Delete</a>
+                <button onclick="tutupHapus();" class="btn-outline-success">Cancel</button>
             </div>
         </div>
     </div>

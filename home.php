@@ -6,14 +6,13 @@
     require_once 'function/product_function.php';
     require_once 'function/user_function.php';
 
-    // Proteksi Login
     if (!isset($_SESSION["id_user"])) {
         
         header("Location: login.php");
         exit();
     }
-    // Mengambil ID user yang sedang login dari data session
-    $id_user = $_SESSION["id_user"];        //Agar fungsi tahu data milik siapa yang harus diambil.
+
+    $id_user = $_SESSION["id_user"];
     $dataUser = tampilDataUser($connect, $id_user);
 
     $keyword = $_GET["keyword"] ?? "";
@@ -30,11 +29,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <title>Dashobard | Comparan</title>
     <style>
@@ -401,7 +397,6 @@
         </div>
     </nav>
 
-    <!-- Modal Konfirmasi -->
     <div id="overlay-logout">
         <div class="containerConfirm">
             <h5>Logout Confirmation</h5>
@@ -686,7 +681,6 @@
     let stokTersedia    = 0;
 
     function bukaProfil(nama, username, poin, email){
-        // document.getElementById("p-gambar").src = 
         document.getElementById("p-nama").innerText = nama;
         document.getElementById("p-username").innerText = username;
         document.getElementById("p-poin").innerText = poin;

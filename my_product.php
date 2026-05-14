@@ -45,7 +45,6 @@
             border-radius: 50px;
         }
         
-        /* Card Style */
         .card { 
             background: var(--white); 
             border-radius: 10px; 
@@ -97,7 +96,6 @@
 
         .tombol-group button:hover { background: var(--card-bg); font-weight: bold; }
 
-        /* Modal Style */
         .overlay-bg { 
             display: none; 
             position: fixed; 

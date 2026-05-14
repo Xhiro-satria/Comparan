@@ -24,11 +24,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <title>Voucher Saya</title>
     <style>
@@ -254,7 +251,6 @@
 
             .bg-redeem a, .bg-redeem button{ width: 100%; }
 
-            /* tombol back */
             .btn-kembali{
                 top: 15px;
                 left: 15px;
@@ -337,7 +333,6 @@
 
 <script>
     function konfirmasiTukar(id_voucher) {
-        // Set the voucher ID in the modal
         document.getElementById("overlay-logout").setAttribute("data-voucher-id", id_voucher);
         document.getElementById("overlay-logout").style.display = "block";
     }

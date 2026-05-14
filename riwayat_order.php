@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Order History</title>
     <style>
-        body { background-color: var(--hover-soft); padding: 15px; } /* Diperkecil dari 20px */
+        body { background-color: var(--hover-soft); padding: 15px; }
 
         .alert{
             background-color: var(--white);
@@ -82,7 +82,7 @@
             color: var(--gray);
         }
 
-        .badge{ background-color: var(--primary-main); text-transform: capitalize; font-size: 12px; padding: 4px 8px;} /* Font diperkecil dari 15px */
+        .badge{ background-color: var(--primary-main); text-transform: capitalize; font-size: 12px; padding: 4px 8px;}
 
         .nama-produk{ text-transform: capitalize; font-family: 'Inter'; font-size: 0.95rem; }
         .text-muted{ font-family: 'Inter'; font-size: 0.8rem; }

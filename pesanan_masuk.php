@@ -19,9 +19,7 @@ $pesan   = $_GET["pesan"] ?? "";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <title>Incoming Orders | Comparan</title>
     <style>
@@ -135,7 +133,7 @@ $pesan   = $_GET["pesan"] ?? "";
             .container-body { gap: 12px !important; align-items: flex-start !important; }
 
             .bungkusGambar {
-                width: 85px !important; /* Diperkecil sedikit lagi agar teks luas */
+                width: 85px !important;
                 height: 85px !important;
                 min-width: 85px !important;
                 border-radius: 12px !important;

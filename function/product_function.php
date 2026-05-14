@@ -29,7 +29,7 @@
 
     // Fungsi buat ambil semua produk kecuali produk milik user
     function tampilSemuaProduk($connect, $id_user){
-        $sql = "SELECT p.*, u.nama as nama_pemilik FROM products as p INNER JOIN users as u ON p.id_user = u.id_user WHERE p.id_user != '$id_user' && p.stok > 0";
+        $sql = "SELECT p.*, u.username as nama_pemilik FROM products as p INNER JOIN users as u ON p.id_user = u.id_user WHERE p.id_user != '$id_user' && p.stok > 0";
         $result = $connect->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
         //fetch_all() digunakan untuk mengambil semua baris hasil query. 
@@ -81,7 +81,8 @@
 
     // Fungsi buat hapus produk
     function hapusProduk($connect, $id_produk) {
-        $sql = "DELETE FROM products WHERE id_produk = '$id_produk'";
-        $connect->query($sql);  
+        $connect->query("DELETE FROM order_items WHERE id_produk = '$id_produk'");
+        $connect->query("DELETE FROM products WHERE id_produk = '$id_produk'");
+
     }
 ?>

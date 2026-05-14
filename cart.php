@@ -9,15 +9,15 @@
         exit;
     }
 
-    $id_user = $_SESSION["id_user"];        // Mengambil ID user dari session yang sedang aktif
+    $id_user = $_SESSION["id_user"];
     $sql = "SELECT id_cart FROM cart WHERE id_user = '$id_user'";
     $result = $connect->query($sql);
 
-    $cart = $result->fetch_assoc();         // Mengambil hasil query dalam bentuk array asosiatif
-    $id_cart = $cart["id_cart"];            // Menyimpan ID keranjang ke dalam variabel
+    $cart = $result->fetch_assoc();
+    $id_cart = $cart["id_cart"];
 
-    $items    = tampilKeranjang($connect, $id_cart);    // Mengambil daftar barang yang ada di dalam keranjang
-    $vouchers = voucherSaya($connect, $id_user);        // Mengambil daftar voucher yang dimiliki oleh user tersebut
+    $items    = tampilKeranjang($connect, $id_cart);
+    $vouchers = voucherSaya($connect, $id_user);
 
 
     $total = 0;
@@ -31,11 +31,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <title>Cart | Comparan</title>
     <style>

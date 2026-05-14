@@ -76,7 +76,6 @@
             border-bottom: 1px solid var(--gray);
         }
 
-        /* Badge untuk Role */
         .badge-role {
             padding: 6px 12px;
             border-radius: 8px;
@@ -84,6 +83,7 @@
             font-size: 0.75rem;
         }
         .bg-admin { background-color: var(--glow-green); color: var(--primary-dark); }
+        
         .bg-user { background-color: var(--gray); color: var(--soft-black); }
 
         .btn-outline-success{
@@ -97,11 +97,9 @@
             transition: transform 0.2s;
         }
 
-        .btn-delete:hover {
-            transform: scale(1.05);
-        }
+        .btn-delete:hover { transform: scale(1.05); }
 
-                #overlay-logout{
+        #overlay-logout{
             display: none;
             position: fixed;
             top: 0;
@@ -123,14 +121,9 @@
 
         @media (max-width: 768px) {
 
-            body{
-                padding: 20px 10px;
-            }
+            body{ padding: 20px 10px; }
 
-            .manage-container{
-                padding: 20px 15px;
-                border-radius: 16px;
-            }
+            .manage-container{ padding: 20px 15px; border-radius: 16px; }
 
             .manage-container .d-flex{
                 flex-direction: column;
@@ -138,49 +131,23 @@
                 gap: 15px;
             }
 
-            h2{
-                font-size: 1.5rem;
-            }
+            h2{ font-size: 1.5rem; }
 
-            .manage-container p{
-                font-size: 0.9rem;
-            }
+            .manage-container p{ font-size: 0.9rem; }
 
-            .table-responsive-custom{
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
+            .table-responsive-custom{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-            .table{
-                min-width: 700px;
-            }
+            .table{ min-width: 700px; }
 
-            .table thead th{
-                font-size: 0.75rem;
-                padding: 12px 10px;
-                white-space: nowrap;
-            }
+            .table thead th{ font-size: 0.75rem; padding: 12px 10px; white-space: nowrap; }
 
-            .table tbody td{
-                font-size: 0.8rem;
-                padding: 12px 10px;
-                white-space: nowrap;
-            }
+            .table tbody td{ font-size: 0.8rem; padding: 12px 10px; white-space: nowrap; }
 
-            .badge-role{
-                font-size: 0.7rem;
-                padding: 5px 10px;
-            }
+            .badge-role{ font-size: 0.7rem; padding: 5px 10px; }
 
-            .btn-delete{
-                padding: 4px 10px;
-                font-size: 0.75rem;
-            }
+            .btn-delete{ padding: 4px 10px; font-size: 0.75rem; }
 
-            .btn-outline-success{
-                font-size: 0.8rem;
-                padding: 6px 14px !important;
-            }
+            .btn-outline-success{ font-size: 0.8rem; padding: 6px 14px !important; }
 
             .containerConfirm{
                 width: 90%;
@@ -188,23 +155,13 @@
                 padding: 20px 15px;
             }
 
-            .containerConfirm h5{
-                font-size: 1rem;
-            }
+            .containerConfirm h5{ font-size: 1rem; }
 
-            .containerConfirm p{
-                font-size: 0.85rem;
-            }
+            .containerConfirm p{ font-size: 0.85rem; }
 
-            .containerConfirm .d-flex{
-                flex-direction: column;
-                gap: 10px;
-            }
+            .containerConfirm .d-flex{ flex-direction: column; gap: 10px; }
 
-            .containerConfirm a,
-            .containerConfirm button{
-                width: 100%;
-            }
+            .containerConfirm a, .containerConfirm button{ width: 100%; }
         }
     </style>
 </head>
@@ -221,7 +178,6 @@
                 <i class="bi bi-arrow-left me-1"></i> Dashboard
             </a>
         </div>
-
         <div class="table-responsive table-responsive-custom">
             <table class="table">
                 <thead>

@@ -9,7 +9,6 @@ if (!isset($_SESSION["id_user"])) {
 
 $id_user = $_SESSION['id_user'] ?? 0;
 
-// 🔹 Ambil Top 10
 $sql = "SELECT u.id_user, u.username as nama, u.foto_profile, SUM(o.total_bayar) as total 
         FROM orders o 
         JOIN users u ON o.id_user = u.id_user 
@@ -20,7 +19,6 @@ $sql = "SELECT u.id_user, u.username as nama, u.foto_profile, SUM(o.total_bayar)
 $result = $connect->query($sql);
 $leaders = $result->fetch_all(MYSQLI_ASSOC);
 
-// 🔹 Cari ranking user login
 $sql_rank = "SELECT id_user, SUM(total_bayar) as total 
             FROM orders 
             GROUP BY id_user 
@@ -45,20 +43,11 @@ while ($row = $result_rank->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
-
     <title>Leaderboard | Comparan</title>
-
     <style>
-
         :root {
             --gold: linear-gradient(45deg, #ff9d00, #ffeb3b);
             --silver: linear-gradient(45deg, #757f9a, #d7dde8);
@@ -79,14 +68,10 @@ while ($row = $result_rank->fetch_assoc()) {
         .judul-form {
             font-family: 'Safira', sans-serif;
             letter-spacing: 2px;
-
             text-align: center;
-
             margin-top: 5rem !important;
             margin-bottom: 2rem;
-
             background: var(--primary-main);
-
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
