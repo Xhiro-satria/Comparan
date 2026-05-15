@@ -57,7 +57,7 @@
 
         .poin-card span{ font-weight: bold; font-size: 20px; }
 
-        .poin-card b { font-size: 30px; }
+        .poin-card b { font-size: 30px; font-family:'Courier New';}
 
         .main-layout {
             display: grid;
@@ -155,9 +155,10 @@
             border-radius: 10px;
             margin-bottom: 10px;
             text-align: center;
+            border-color: var(--primary-dark);
         }
 
-        .alert-success { background: var(--hover-success); color: var(--primary-accent); }
+        .alert-success { background: var(--glow-green); color: var(--primary-dark); }
 
         .alert-danger { background: var(--white); color: var(--red); }
 
@@ -272,9 +273,9 @@
 
     <div class="main-layout">
         <?php if ($pesan === "berhasil"): ?>
-            <div class="alert alert-success">✨ Redeem Success!</div>
+            <div class="alert alert-success"><i class="bi bi-bookmark-check-fill"></i> Redeem Success!</div>
         <?php elseif ($pesan === "poin_kurang"): ?>
-            <div class="alert alert-danger">❌ Not enough points.</div>
+            <div class="alert alert-danger"><i class="bi bi-bookmark-x-fill"></i> Not enough points.</div>
         <?php endif; ?>
 
         <div class="section">
@@ -299,16 +300,16 @@
         </div>
 
         <!-- Modal Konfirmasi -->
-    <div id="overlay-logout">
-        <div class="bg-redeem">
-            <h5>Confirm Redeem</h5>
-            <p class="text-center">Are you sure you want to redeem this voucher?</p>
-            <div>
-                <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn-outline-success" >Yes</a>
-                <button onclick="tutupLogout()" class="btn btn-outline-danger mx-1">Cancel</button>
+        <div id="overlay-logout">
+            <div class="bg-redeem">
+                <h5>Confirm Redeem</h5>
+                <p class="text-center">Are you sure you want to redeem this voucher?</p>
+                <div>
+                    <a href="logic/tukar_voucher_logic.php?id_voucher=<?= $v["id_voucher"] ?>" class="btn-outline-success" >Yes</a>
+                    <button onclick="tutupLogout()" class="btn btn-outline-danger mx-1">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="section">
             <h3><i class="bi bi-tags-fill"></i> My Vouchers</h3>
