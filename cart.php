@@ -257,7 +257,7 @@
         document.getElementById("m-id-produk").value       = "";
         document.getElementById("m-jumlah").value          = "";
         document.getElementById("m-total").value           = totalSemua;
-        document.getElementById("m-cart").value           = 0;
+        document.getElementById("m-cart").value           = 1;
         document.getElementById("m-semua").value           = 1;
         document.getElementById("m-tampil-total").innerText = totalSemua.toLocaleString("id-ID");
         document.getElementById("m-total-bayar").innerText  = totalSemua.toLocaleString("id-ID");

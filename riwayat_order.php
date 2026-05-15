@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Order History</title>
+    <title>Order History | Comparan</title>
     <style>
         body { background-color: var(--hover-soft); padding: 15px; }
 
@@ -50,6 +50,11 @@
             transition: 0.2s;
             box-shadow: 0 2px 5px var(--overlay-dark);
         }
+
+        .card-order b{ font-size: 0.85rem;}
+
+        .text-truncate{ max-width: 90%; }
+
         .card-order:hover { transform: scale(1.01); }
 
         .overlay {
@@ -84,12 +89,44 @@
 
         .badge{ background-color: var(--primary-main); text-transform: capitalize; font-size: 12px; padding: 4px 8px;}
 
-        .nama-produk{ text-transform: capitalize; font-family: 'Inter'; font-size: 0.95rem; }
+        .nama_produk{ font-size:13px; line-height:1.2; text-transform: capitalize;}
+
         .text-muted{ font-family: 'Inter'; font-size: 0.8rem; }
+
         .sub-total{ color: var(--primary-main); font-family: 'Inter'; font-size: 0.9rem; }
         
         .d-block{ text-transform: capitalize; font-size: 0.9rem; }
+
         b { font-size: 0.9rem; }
+
+        .container-js{ display:flex; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--text-light); padding-bottom:12px;}
+
+        .container-js img{ object-fit:cover; border-radius:6px; }
+
+        .btn-outline-success{
+            font-size: 11px;
+            padding: 4px 8px;
+        }
+
+        .text-success{ color: var(--primary-dark2) !important; font-size: 12px; }
+
+        .badge1{
+            background-color: var(--primary-main);
+            color: var(--white);
+            padding: 4px 8px;
+            margin-top: 2px;
+            border-radius:8px;
+            font-size: 12px;
+        }
+
+        .badge2{
+            background-color: var(--yellow);
+            color: var(--white);
+            padding: 4px 8px;
+            margin-top: 2px;
+            border-radius:8px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -106,12 +143,12 @@
         <?php $no = $jumlah['jumlah_order']; foreach ($orders as $order): ?>
             <div class="card-order" onclick="bukaDetail('<?= $order['id_order'] ?>')">
                 <div class="d-flex justify-content-between align-items-center">
-                    <b style="font-size: 0.85rem;">Order #<?= $no-- ?></b>
+                    <b>Order #<?= $no-- ?></b>
                     <span class="badge"><?= $order['status'] ?></span>
                 </div>
                 <small class="text-muted"><?= date('d M Y, H:i', strtotime($order["tanggal_order"])) ?></small><br>
                 <span class="d-block mt-1">Total Payment : <b>Rp<?= number_format($order["total_bayar"], 0, ',', '.') ?></b></span>
-                <small class="text-truncate d-block" style="max-width: 90%;">Address : <?= $order["alamat_pengiriman"] ?></small>
+                <small class="text-truncate d-block">Address : <?= $order["alamat_pengiriman"] ?></small>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
@@ -120,7 +157,7 @@
 <div class="overlay" id="overlay" onclick="tutupModal()">
     <div class="modal-custom" onclick="event.stopPropagation()">
         <span class="tutup" onclick="tutupModal()">&times;</span>
-        <h5 class="mb-3">Detail Item Order</h5> <!-- Diperkecil dari h4 -->
+        <h5 class="mb-3">Detail Item Order</h5>
         <div id="isi-detail text-center">
             <p id="loading-text" class="small">Fetching data...</p>
         </div>
@@ -150,24 +187,24 @@
                         let tombol = "";
                         if (item.status === "dikirim") {
                             tombol = `<a href="logic/terima_produk_logic.php?id_item=${item.id_item}&id_order=${item.id_order}" 
-                                        class="btn btn-success btn-sm mt-2" style="font-size:11px; padding:2px 8px;"
+                                        class="btn-outline-success btn-sm mt-2"
                                         onclick="return confirm('Confirm recieve this product?')">
                                         Confirm Receipt
                                     </a>`;
                         } else if (item.status === "selesai") {
-                            tombol = `<span class="badge bg-primary mt-2" style="font-size:10px;">Completed</span>`;
+                            tombol = `<span class="badge1 mt-2">Completed</span>`;
                         } else {
-                            tombol = `<span class="badge bg-secondary mt-2" style="font-size:10px;">Waiting for Courier</span>`;
+                            tombol = `<span class="badge2 mt-2">Waiting for Courier</span>`;
                         }
 
                         html += `
-                            <div style="display:flex; gap:10px; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:12px;">
-                                <img src="uploads/produk/${item.gambar}" width="65" height="65" style="object-fit:cover; border-radius:6px;">
+                            <div class="container-js">
+                                <img src="uploads/produk/${item.gambar}" width="65" height="65">
                                 <div style="flex:1;">
-                                    <b class="d-block" style="font-size:13px; line-height:1.2;">${item.nama_produk}</b>
-                                    <small class="text-muted" style="font-size:11px;">Harga: Rp ${parseInt(item.harga_satuan).toLocaleString("id-ID")}</small><br>
-                                    <small class="text-muted" style="font-size:11px;">Jumlah: ${item.jumlah}</small><br>
-                                    <b class="text-success d-block" style="font-size:12px;">Subtotal: Rp ${parseInt(item.subtotal).toLocaleString("id-ID")}</b>
+                                    <b class="nama_produk d-block">${item.nama_produk}</b>
+                                    <small class="text-muted">Price : Rp ${parseInt(item.harga_satuan).toLocaleString("id-ID")}</small><br>
+                                    <small class="text-muted">Quantity : ${item.jumlah}</small><br>
+                                    <b class="text-success d-block">Subtotal : Rp ${parseInt(item.subtotal).toLocaleString("id-ID")}</b>
                                     ${tombol}
                                 </div>
                             </div>`;

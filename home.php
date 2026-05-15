@@ -268,9 +268,11 @@
 
             .modal-konten{
                 display: flex !important;
-                flex-direction: column !important;
+                flex-direction: row !important;
                 border-radius: 16px;
                 padding: 8px 16px !important;
+                overflow-y: auto;
+                max-height: 640px;
             }
 
             .col-5{
@@ -586,7 +588,7 @@
                     <img id="m-gambar" src="" class="img-fluid"><br><br>
                 </div>
                 <div class="modalCol col-7 p-3 d-flex justify-content-between">
-                    <div class="productInfo">
+                    <div class="productInfo col-6">
                         <b id="m-nama";"></b> 
                         <h5 class="pemilik"><span id="m-namaPemilik"></span>'s product</h5>
                         <div class="hargaProduct">
@@ -598,7 +600,7 @@
                         <h5 class="productData"><i class="bi bi-check-circle"></i> Status : <span id="m-status"></span></h5>
                         <h5 class="productData"><i class="bi bi-bookmark"></i> Description : <br><span id="m-deskripsi"></span></h5>
                     </div>
-                    <div class="buyOption mx-2">
+                    <div class="buyOption mx-2 col-6">
                         <div class="buyOptionItems col">
                             <label class="fw-semibold mb-2 fs-5">Set quantity</label>
                             <div class="buttonQuantity">

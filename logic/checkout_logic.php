@@ -10,6 +10,7 @@
     $alamat      = $_POST["alamat"];
     $id_vouchers = $_POST["id_vouchers"] ?? [];
     $dari_cart   = $_POST["dari_cart"];
+    $checkout_semua   = $_POST["checkout_semua"];
 
     $sql = "SELECT id_cart FROM cart WHERE id_user = '$id_user'";
     $result  = $connect->query($sql);
@@ -17,8 +18,24 @@
     $id_cart = $cart["id_cart"];
 
     if ($dari_cart == 1) {
-        $items          = tampilKeranjang($connect, $id_cart);
-        $checkout_semua = 1;
+
+        if ($checkout_semua == 1){
+            $items = tampilKeranjang($connect, $id_cart);
+        } else {
+            $id_produk   = $_POST["id_produk"];
+            $jumlah      = $_POST["jumlah"];
+
+            $result = $connect->query("SELECT * FROM products WHERE id_produk = '$id_produk'");
+            $produk = $result->fetch_assoc();
+
+            $items = [[
+                "id_produk"   => $id_produk,
+                "nama_produk" => $produk["nama_produk"],
+                "harga"       => $produk["harga"],
+                "jumlah"      => $jumlah,
+                "gambar"      => $produk["gambar"],
+            ]];
+        }
     } else {
         $beli           = $_SESSION["beli_sekarang"];
         $id_produk      = $beli["id_produk"];

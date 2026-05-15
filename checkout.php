@@ -95,7 +95,7 @@
     </style>
 </head>
 <body>
-    <a href="cart.php" class="btn-kembali">← Back to Cart</a>
+    <a href="home.php" class="btn-kembali">← Back to Home</a>
     <h2 class="judul-form text-center mt-5">Checkout</h2>
 
     <div class="container-content">
